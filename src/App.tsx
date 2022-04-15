@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // COMPONENT IMPORTS
 import Header from "./components/header/";
-import Card from "./components/card/";
+import Quiz from "./components/quiz/quiz";
 
 function App() {
   const [count, setCount] = useState(0);
+
+  // useEffect(async () => {
+  //   const data = await fetchData();
+  //   setData(data);
+  // }, []);
+
+  // const fetchData = () => {
+  //   return JSON.parse(data);
+  // };
 
   return (
     <div className="flex-col min-h-screen font-headings bg-gradient-to-bl from-purple-700 via-fucshia-700 to-pink-700">
@@ -14,7 +23,7 @@ function App() {
         {/* <h2 className="mb-8 font-bold leading-6 text-center text-white">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </h2> */}
-        <Card />
+        <Quiz />
       </div>
     </div>
   );

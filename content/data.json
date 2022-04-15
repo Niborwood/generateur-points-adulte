@@ -1,0 +1,48 @@
+[
+  {
+    "_id": 1,
+    "title": "Question 1",
+    "category": "Daily Life",
+    "answers": [
+      {
+        "value": 8,
+        "answer": "Answer 1"
+      },
+      {
+        "value": 1,
+        "answer": "Answer 2"
+      },
+      {
+        "value": 0,
+        "answer": "Answer 3"
+      },
+      {
+        "value": 4,
+        "answer": "Answer 4"
+      }
+    ]
+  },
+  {
+    "_id": 2,
+    "title": "Question 1",
+    "category": "Daily Life",
+    "answers": [
+      {
+        "value": 8,
+        "answer": "Answer 1"
+      },
+      {
+        "value": 1,
+        "answer": "Answer 2"
+      },
+      {
+        "value": 0,
+        "answer": "Answer 3"
+      },
+      {
+        "value": 4,
+        "answer": "Answer 4"
+      }
+    ]
+  }
+]

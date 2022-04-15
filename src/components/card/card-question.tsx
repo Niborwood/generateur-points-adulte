@@ -1,11 +1,14 @@
-import React from "react";
+// DEFINITIONS
+import { CardQuestionProps } from "../../../definitions/definitions";
 
-export default function CardQuestion() {
+export default function CardQuestion({
+  _id,
+  title,
+  category,
+}: CardQuestionProps) {
   return (
     <h3 className="px-6 mb-8 text-2xl font-bold">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea repudiandae
-      doloribus ullam optio beatae officiis unde ipsum iusto sit. Nobis dolore
-      earum repudiandae debitis.
+      {_id}/ {title}
     </h3>
   );
 }

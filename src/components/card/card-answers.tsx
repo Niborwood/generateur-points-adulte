@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 
-// COMPONENT IMPORTS
-import Answer from "./card-answer";
+// DEFINITIONS
+import { CardAnswersProps } from "../../../definitions/definitions";
 
-export default function CardAnswers() {
-  const [answer, setAnswer] = useState("startup");
+// COMPONENT IMPORTS
+import CardAnswer from "./card-answer";
+
+export default function CardAnswers({ answers }: CardAnswersProps) {
+  const [answer, setAnswer] = useState("");
   return (
     <RadioGroup className="px-4 space-y-2" value={answer} onChange={setAnswer}>
-      <RadioGroup.Option value="startup">
-        {({ checked }) => <Answer checked={checked}>Startup</Answer>}
-      </RadioGroup.Option>
-      <RadioGroup.Option value="business">
-        {({ checked }) => <Answer checked={checked}>Business</Answer>}
-      </RadioGroup.Option>
-      <RadioGroup.Option value="enterprise">
-        {({ checked }) => <Answer checked={checked}>Enterprise</Answer>}
-      </RadioGroup.Option>
+      {answers.map((answer) => (
+        <RadioGroup.Option value={answer.score}>
+          {({ checked }) => (
+            <CardAnswer checked={checked} answer={answer.answer} />
+          )}
+        </RadioGroup.Option>
+      ))}
     </RadioGroup>
   );
 }
