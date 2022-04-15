@@ -14,7 +14,12 @@ export default function Card({ question, goToNextQuestion }: CardProps) {
         category={question.category}
       />
       <CardAnswers answers={question.answers} />
-      <button onClick={goToNextQuestion}>Valider</button>
+      <button
+        className="flex justify-center w-full p-4 mt-16 mb-2 font-bold text-white transition-all ease-in-out rounded-xl drop-shadow-lg hover:drop-shadow-sm bg-fuchsia-600 hover:bg-green-600 shadow-blue-700"
+        onClick={goToNextQuestion}
+      >
+        Question suivante
+      </button>
     </div>
   );
 }

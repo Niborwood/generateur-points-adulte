@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RadioGroup } from "@headlessui/react";
 
 // DEFINITIONS
@@ -9,6 +9,12 @@ import CardAnswer from "./card-answer";
 
 export default function CardAnswers({ answers }: CardAnswersProps) {
   const [answer, setAnswer] = useState("");
+
+  // Reset answers
+  useEffect(() => {
+    setAnswer("");
+  }, [answers]);
+
   return (
     <RadioGroup className="px-4 space-y-2" value={answer} onChange={setAnswer}>
       {answers.map((answer) => (
