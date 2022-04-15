@@ -17,7 +17,7 @@ export default function CardAnswers({ answers }: CardAnswersProps) {
 
   return (
     <RadioGroup
-      className="flex flex-row flex-wrap gap-4 px-4"
+      className="flex flex-row flex-wrap justify-start gap-4 px-4"
       value={answer}
       onChange={setAnswer}
     >
