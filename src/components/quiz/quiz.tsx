@@ -46,16 +46,45 @@ const rawData = [
       },
     ],
   },
+  {
+    _id: 2,
+    title: "Avec quelle régularité allez-vous au restaurant ?",
+    helper:
+      "Sont entendues les sorties au restaurant physique. Les commandes à emporter ne sont pas comptabilisées.",
+    category: "Daily Life",
+    answers: [
+      {
+        score: 1,
+        answer: "Jamais",
+      },
+      {
+        score: 5,
+        answer: "Une fois par mois ou moins",
+      },
+      {
+        score: 4,
+        answer: "A fois par semaine, parfois plus, parfois moins",
+      },
+      {
+        score: 8,
+        answer: "Un peu tout le temps, parfois le midi",
+      },
+    ],
+  },
 ];
 
 const Quiz = () => {
   const [questionIndex, setQuestionIndex] = useState(1);
 
-  const currentQuestion: Question = rawData.find(
-    (data) => data._id === questionIndex
-  );
+  const currentQuestion: Question =
+    rawData.find((data) => data._id === questionIndex) || null;
 
-  const goToNextQuestion = () => {
+  const goToNextQuestion = ({ reset = false }: { reset: boolean }) => {
+    if (reset) {
+      setQuestionIndex((prev) => 1);
+      return;
+    }
+
     setQuestionIndex((prev) => prev + 1);
   };
 

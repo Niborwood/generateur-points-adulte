@@ -16,7 +16,11 @@ export default function CardAnswers({ answers }: CardAnswersProps) {
   }, [answers]);
 
   return (
-    <RadioGroup className="px-4 space-y-2" value={answer} onChange={setAnswer}>
+    <RadioGroup
+      className="flex flex-row flex-wrap gap-4 px-4"
+      value={answer}
+      onChange={setAnswer}
+    >
       {answers.map((answer) => (
         <RadioGroup.Option value={answer.score}>
           {({ checked }) => (

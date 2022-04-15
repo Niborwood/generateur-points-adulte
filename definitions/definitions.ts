@@ -6,6 +6,7 @@ export interface Answer {
 export interface Question {
   _id: number;
   title: string;
+  helper?: string;
   category: string;
   answers: [Answer];
 }
@@ -13,7 +14,7 @@ export interface Question {
 // PROPS DEFINITIONS
 export interface CardProps {
   question: Question;
-  goToNextQuestion: () => void
+  goToNextQuestion: ({reset}: {reset:boolean}) => void
 }
 
 export interface CardQuestionProps {
