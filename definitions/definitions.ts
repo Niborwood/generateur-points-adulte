@@ -28,7 +28,7 @@ export interface CardQuestionProps {
 export interface CardAnswersProps {
   answers: Answer[]
   selectedAnswer: Answer | null,
-  setSelectedAnswer: (answer: Answer) => {}
+  setSelectedAnswer: (answer: Answer | null) => {}
 }
 
 export interface CardAnswerProps {
