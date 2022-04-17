@@ -5,8 +5,6 @@ import Header from "./components/header/";
 import Quiz from "./components/quiz/quiz";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   // useEffect(async () => {
   //   const data = await fetchData();
   //   setData(data);

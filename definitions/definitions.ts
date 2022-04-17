@@ -1,5 +1,7 @@
 export interface Answer {
-  score: number,
+  _id: number,
+  adultScore: number,
+  respScore: number,
   answer: string,
 }
 
@@ -8,13 +10,13 @@ export interface Question {
   title: string;
   helper?: string;
   category: string;
-  answers: [Answer];
+  answers: Answer[];
 }
 
 // PROPS DEFINITIONS
 export interface CardProps {
   question: Question;
-  goToNextQuestion: ({reset}: {reset:boolean}) => void
+  goToNextQuestion: ({answer, reset}: goToNextQuestionProps) => void
 }
 
 export interface CardQuestionProps {
@@ -24,10 +26,17 @@ export interface CardQuestionProps {
 }
 
 export interface CardAnswersProps {
-  answers: [Answer]
+  answers: Answer[]
+  selectedAnswer: Answer | null,
+  setSelectedAnswer: (answer: Answer) => {}
 }
 
 export interface CardAnswerProps {
   answer: string,
   checked: boolean,
+}
+
+export interface goToNextQuestionProps {
+  answer: Answer | null,
+  reset?: boolean;
 }

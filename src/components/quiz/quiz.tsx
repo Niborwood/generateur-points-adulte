@@ -1,7 +1,10 @@
 import { useState } from "react";
 
 // DEFINITIONS
-import { Question } from "../../../definitions/definitions";
+import {
+  goToNextQuestionProps,
+  Question,
+} from "../../../definitions/definitions";
 
 // COMPONENT IMPORTS
 import Card from "../card/index";
@@ -13,11 +16,15 @@ const rawData = [
     category: "Daily Life",
     answers: [
       {
-        score: 9,
+        _id: 0,
+        adultScore: 9,
+        respScore: 9,
         answer: "Oui",
       },
       {
-        score: 1,
+        _id: 1,
+        adultScore: 1,
+        respScore: 7,
         answer: "Non",
       },
     ],
@@ -28,45 +35,28 @@ const rawData = [
     category: "Daily Life",
     answers: [
       {
-        score: 1,
+        _id: 0,
+        adultScore: 1,
+        respScore: 1,
         answer: "Jamais",
       },
       {
-        score: 5,
+        _id: 1,
+        adultScore: 5,
+        respScore: 5,
         answer: "Le week-end, occasionnellement",
       },
       {
-        score: 4,
+        _id: 2,
+        adultScore: 4,
+        respScore: 4,
         answer:
           "Le week-end, quelques soirs de semaine si l'occasion se présente",
       },
       {
-        score: 8,
-        answer: "Un peu tout le temps, parfois le midi",
-      },
-    ],
-  },
-  {
-    _id: 2,
-    title: "Avec quelle régularité allez-vous au restaurant ?",
-    helper:
-      "Sont entendues les sorties au restaurant physique. Les commandes à emporter ne sont pas comptabilisées.",
-    category: "Daily Life",
-    answers: [
-      {
-        score: 1,
-        answer: "Jamais",
-      },
-      {
-        score: 5,
-        answer: "Une fois par mois ou moins",
-      },
-      {
-        score: 4,
-        answer: "A fois par semaine, parfois plus, parfois moins",
-      },
-      {
-        score: 8,
+        _id: 3,
+        adultScore: 8,
+        respScore: 8,
         answer: "Un peu tout le temps, parfois le midi",
       },
     ],
@@ -74,17 +64,46 @@ const rawData = [
 ];
 
 const Quiz = () => {
+  // Handles currentQuestion
   const [questionIndex, setQuestionIndex] = useState(1);
+  const currentQuestion: Question | undefined = rawData.find(
+    (data) => data._id === questionIndex
+  );
 
-  const currentQuestion: Question =
-    rawData.find((data) => data._id === questionIndex) || null;
+  // Handles score
+  const [score, setScore] = useState({
+    adultScore: 0,
+    respScore: 0,
+  });
 
-  const goToNextQuestion = ({ reset = false }: { reset: boolean }) => {
+  console.log(score);
+
+  // Handle end of quiz
+  if (!currentQuestion) {
+    return null;
+  }
+
+  // Handles next question logic
+  const goToNextQuestion = ({
+    answer,
+    reset = false,
+  }: goToNextQuestionProps) => {
     if (reset) {
-      setQuestionIndex((prev) => 1);
+      setQuestionIndex(1);
       return;
     }
 
+    if (!answer) {
+      return;
+    }
+
+    // Update score
+    setScore((prev) => ({
+      adultScore: prev.adultScore + answer.adultScore,
+      respScore: prev.respScore + answer.respScore,
+    }));
+
+    // New question
     setQuestionIndex((prev) => prev + 1);
   };
 
