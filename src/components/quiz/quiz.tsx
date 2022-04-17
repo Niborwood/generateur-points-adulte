@@ -76,13 +76,6 @@ const Quiz = () => {
     respScore: 0,
   });
 
-  console.log(score);
-
-  // Handle end of quiz
-  if (!currentQuestion) {
-    return null;
-  }
-
   // Handles next question logic
   const goToNextQuestion = ({
     answer,
@@ -108,7 +101,11 @@ const Quiz = () => {
   };
 
   return (
-    <Card question={currentQuestion} goToNextQuestion={goToNextQuestion} />
+    <Card
+      question={currentQuestion}
+      goToNextQuestion={goToNextQuestion}
+      score={score}
+    />
   );
 };
 

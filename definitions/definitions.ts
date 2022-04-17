@@ -1,8 +1,15 @@
+import { SetStateAction } from "react";
+
 export interface Answer {
   _id: number,
   adultScore: number,
   respScore: number,
   answer: string,
+}
+
+export interface Score {
+  adultScore: number,
+  respScore: number,
 }
 
 export interface Question {
@@ -15,8 +22,9 @@ export interface Question {
 
 // PROPS DEFINITIONS
 export interface CardProps {
-  question: Question;
-  goToNextQuestion: ({answer, reset}: goToNextQuestionProps) => void
+  question: Question | undefined;
+  goToNextQuestion: ({answer, reset}: goToNextQuestionProps) => void,
+  score: Score
 }
 
 export interface CardQuestionProps {
@@ -28,12 +36,16 @@ export interface CardQuestionProps {
 export interface CardAnswersProps {
   answers: Answer[]
   selectedAnswer: Answer | null,
-  setSelectedAnswer: (answer: Answer | null) => {}
+  setSelectedAnswer: (answer: Answer) => {}
 }
 
 export interface CardAnswerProps {
   answer: string,
   checked: boolean,
+}
+
+export interface CardScoreProps {
+  score: Score
 }
 
 export interface goToNextQuestionProps {
