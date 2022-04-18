@@ -10,6 +10,8 @@ export interface Answer {
 export interface Score {
   adultScore: number,
   respScore: number,
+  adultQuote: number,
+  respQuote: number,
 }
 
 export interface Question {
