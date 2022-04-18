@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // DEFINITIONS
-import { CardProps } from "../../../definitions/definitions";
+import { CardProps, Answer } from "../../../definitions/definitions";
 
 // IMPORTS
 import CardQuestion from "./card-question";
@@ -9,7 +9,7 @@ import CardAnswers from "./card-answers";
 import CardScore from "./card-score";
 
 export default function Card({ question, goToNextQuestion, score }: CardProps) {
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
 
   return (
     <div className="relative max-w-lg px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl skew-y-1">

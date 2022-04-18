@@ -1,4 +1,4 @@
-import { SetStateAction } from "react";
+import { SetStateAction, Dispatch } from "react";
 
 export interface Answer {
   _id: number,
@@ -36,7 +36,7 @@ export interface CardQuestionProps {
 export interface CardAnswersProps {
   answers: Answer[]
   selectedAnswer: Answer | null,
-  setSelectedAnswer: (answer: Answer) => {}
+  setSelectedAnswer: Dispatch<SetStateAction<Answer | null>>
 }
 
 export interface CardAnswerProps {
