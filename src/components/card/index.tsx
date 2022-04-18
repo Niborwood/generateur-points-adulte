@@ -12,7 +12,7 @@ export default function Card({ question, goToNextQuestion, score }: CardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
 
   return (
-    <div className="relative max-w-lg px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl skew-y-1">
+    <div className="relative max-w-lg px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl skew-x-1">
       {!question ? (
         <CardScore score={score} />
       ) : (

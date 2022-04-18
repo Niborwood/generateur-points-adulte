@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   goToNextQuestionProps,
   Question,
+  Score,
 } from "../../../definitions/definitions";
 
 // COMPONENT IMPORTS
@@ -71,9 +72,11 @@ const Quiz = () => {
   );
 
   // Handles score
-  const [score, setScore] = useState({
+  const [score, setScore] = useState<Score>({
     adultScore: 0,
     respScore: 0,
+    adultQuote: 0,
+    respQuote: 0,
   });
 
   // Handles next question logic
@@ -94,6 +97,8 @@ const Quiz = () => {
     setScore((prev) => ({
       adultScore: prev.adultScore + answer.adultScore,
       respScore: prev.respScore + answer.respScore,
+      adultQuote: prev.adultQuote + (answer.adultScore === null ? 0 : 1),
+      respQuote: prev.respQuote + (answer.respScore === null ? 0 : 1),
     }));
 
     // New question
