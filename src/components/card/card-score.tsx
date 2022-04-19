@@ -1,11 +1,22 @@
 import { CardScoreProps } from "../../../definitions/definitions";
 
+const calculateScore = (score: number, quote: number) => {
+  console.log("score", score, "| quote", quote);
+  return (score / quote / 10).toFixed(2);
+};
+
 const CardScore = ({ score }: CardScoreProps) => {
   return (
     <div>
-      <p className="mb-4 font-bold">CardScore: </p>
-      <p>{score.adultScore / 20} - Indice d'adulte</p>
-      <p>{score.respScore / 20} - Indice de responsabilité</p>
+      <p className="mb-4 text-2xl font-bold">Score : </p>
+      <p>
+        <strong>{calculateScore(score.adultScore, score.adultQuote)}</strong> -
+        Indice d'adulte
+      </p>
+      <p>
+        <strong>{calculateScore(score.respScore, score.respQuote)}</strong> -
+        Indice de responsabilité
+      </p>
     </div>
   );
 };

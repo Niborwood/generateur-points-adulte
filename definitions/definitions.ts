@@ -2,8 +2,8 @@ import { SetStateAction, Dispatch } from "react";
 
 export interface Answer {
   _id: number,
-  adultScore: number,
-  respScore: number,
+  adultScore: number | null,
+  respScore: number | null,
   answer: string,
 }
 
@@ -33,6 +33,7 @@ export interface CardQuestionProps {
   _id: number,
   title: string,
   category: string,
+  helper?: string
 }
 
 export interface CardAnswersProps {

@@ -22,6 +22,7 @@ export default function Card({ question, goToNextQuestion, score }: CardProps) {
             _id={question._id}
             title={question.title}
             category={question.category}
+            helper={question.helper}
           />
 
           {/* Card Answers */}
