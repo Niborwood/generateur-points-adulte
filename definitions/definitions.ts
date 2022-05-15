@@ -18,6 +18,7 @@ export interface Question {
   _id: number;
   title: string;
   helper?: string;
+  condition?: [number, number]
   category: string;
   answers: Answer[];
 }
