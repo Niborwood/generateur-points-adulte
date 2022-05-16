@@ -1,6 +1,26 @@
 import { Question } from "../definitions/definitions";
 
 const rawData: Question[] = [
+  // Question 0
+  {
+    _id: 0,
+    title: "On se vouvoie ou on se tutoie ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 2,
+        respScore: null,
+        answer: "Tutoie-moi",
+      },
+      {
+        _id: 1,
+        adultScore: 8,
+        respScore: null,
+        answer: "Vouvoyez-moi",
+      },
+    ],
+  },
   // Question 1
   {
     _id: 1,
@@ -130,7 +150,7 @@ const rawData: Question[] = [
         _id: 0,
         adultScore: 0,
         respScore: 2,
-        answer: "Jamais",
+        answer: "Aucun de ceux-ci",
       },
       {
         _id: 1,
@@ -582,6 +602,128 @@ const rawData: Question[] = [
         adultScore: 9,
         respScore: 9,
         answer: "Plus d'une fois par semaine",
+      },
+    ],
+  },
+  // Question 24
+  {
+    _id: 24,
+    title: "Vous-êtes vous déjà plaint des jeunes ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: null,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 2,
+        respScore: null,
+        answer: "Non",
+      },
+    ],
+  },
+   // Question 25
+  {
+    _id: 25,
+    title: "Connaissez-vous la signification de l'acronyme PEL ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: 8,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 2,
+        respScore: 2,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 26
+  {
+    _id: 26,
+    title: "Connaissez-vous votre numéro de sécurité sociale ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 9,
+        respScore: 9,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 1,
+        respScore: 1,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 27
+  {
+    _id: 27,
+    title: "Connaissez-vous le nom et le prénom de votre conseiller bancaire ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: 8,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 2,
+        respScore: 2,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 28
+  {
+    _id: 28,
+    title: "Avez-vous un rythme fixe pour vos relations conjuguales ?",
+    // Selon 
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 7,
+        respScore: 9,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 3,
+        respScore: 1,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 29
+  {
+    _id: 29,
+    title: "Instinctivement, vouvoyez-vous les inconnus ?",
+    // Selon 
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: 8,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 2,
+        respScore: 2,
+        answer: "Non",
       },
     ],
   },
