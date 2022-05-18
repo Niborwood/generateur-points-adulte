@@ -165,13 +165,13 @@ const rawData: Question[] = [
         answer: "À la plaque",
       },
       {
-        _id: 2,
+        _id: 3,
         adultScore: 6,
         respScore: 8,
         answer: "Au four",
       },
       {
-        _id: 3,
+        _id: 4,
         adultScore: 8,
         respScore: 5,
         answer: "Au robot-cuiseur",
@@ -301,7 +301,7 @@ const rawData: Question[] = [
         answer: "En location",
       },
       {
-        _id: 2,
+        _id: 3,
         adultScore: 9,
         respScore: 9,
         answer: "Je suis propriétaire",
@@ -723,6 +723,451 @@ const rawData: Question[] = [
         _id: 1,
         adultScore: 2,
         respScore: 2,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 30
+  {
+    _id: 30,
+    title: "Faites-vous vous-même la vaisselle ?",
+    // Selon 
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 7,
+        respScore: 8,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 3,
+        respScore: 2,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 31
+  {
+    _id: 31,
+    title: "Repassez-vous vos vêtements ?",
+    // Selon 
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: 9,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 2,
+        respScore: 1,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 32
+  {
+    _id: 32,
+    title: "Portez-vous une grande importance à votre décoration d'intérieur ?",
+    // Selon 
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 6,
+        respScore: 7,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 4,
+        respScore: 3,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 33
+  {
+    _id: 33,
+    title: "À quelle régularité regardez-vous la météo ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 1,
+        respScore: null,
+        answer: "Jamais",
+      },
+      {
+        _id: 1,
+        adultScore: 6,
+        respScore: null,
+        answer: "Une fois par mois, ou moins",
+      },
+      {
+        _id: 2,
+        adultScore: 9,
+        respScore: null,
+        answer: "Une fois par semaine ou plus, en moyenne",
+      },
+    ],
+  },
+  // Question 34
+  {
+    _id: 34,
+    title: "Connaissez-vous les dates des vacances scolaires de tête ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 4,
+        respScore: 2,
+        answer: "Non",
+      },
+      {
+        _id: 1,
+        adultScore: 1,
+        respScore: 6,
+        answer: "Oui",
+      },
+      {
+        _id: 2,
+        adultScore: 9,
+        respScore: 10,
+        answer: "Oui, grâce à mon entourage",
+      },
+    ],
+  },
+  // Question 35
+  {
+    _id: 35,
+    title: "Si vous deviez écouter une station de radio parmi les suivantes, laquelle choisisseriez-vous ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 3,
+        respScore: 3,
+        answer: "NRJ",
+      },
+      {
+        _id: 1,
+        adultScore: 3,
+        respScore: 7,
+        answer: "Rires & Chansons",
+      },
+      {
+        _id: 2,
+        adultScore: 7,
+        respScore: 7,
+        answer: "France Culture",
+      },
+       {
+        _id: 3,
+        adultScore: 7,
+        respScore: 1,
+        answer: "RMC",
+      },
+    ],
+  },
+  // Question 36
+  {
+    _id: 36,
+    title: "Avez-vous un autocollant \"Stop Pub\" sur votre boîte aux lettres ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 10,
+        respScore: 10,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 0,
+        respScore: 0,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 37
+  {
+    _id: 37,
+    title: "Faites vous vous-mêmes vos courses ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: 8,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 8,
+        respScore: 3,
+        answer: "Oui, mais je me les fais livrer à domicile",
+      },
+      {
+        _id: 2,
+        adultScore: 2,
+        respScore: 2,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 38
+  {
+    _id: 38,
+    title: "Faites vous vous-mêmes vos courses ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: 8,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 8,
+        respScore: 3,
+        answer: "Oui, mais je me les fais livrer à domicile",
+      },
+      {
+        _id: 2,
+        adultScore: 2,
+        respScore: 2,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 39
+  {
+    _id: 39,
+    title: "Essayez-vous d'anticiper la circulation/le trafic lorsque vous faites un déplacement ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: 8,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 2,
+        respScore: 2,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 40
+  {
+    _id: 40,
+    title: "Avez-vous une paire de chaussures que vous devez cirer ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: null,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 2,
+        respScore: null,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 41
+  {
+    _id: 41,
+    title: "Avez-vous un animal de compagnie ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 9,
+        respScore: 7,
+        answer: "Oui, et c'est moi qui m'en occupe au quotidien",
+      },
+      {
+        _id: 1,
+        adultScore: 5,
+        respScore: 1,
+        answer: "Oui, mais d'autres s'en occupent",
+      },
+      {
+        _id: 2,
+        adultScore: null,
+        respScore: 4,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 42
+  {
+    _id: 42,
+    title: "Vous-êtes vous déjà justifié d'un achat par la phrase 'C'est pratique' ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 8,
+        respScore: 7,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 2,
+        respScore: 3,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 43
+  {
+    _id: 43,
+    title: "Ronflez-vous ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 9,
+        respScore: null,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 1,
+        respScore: null,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 44
+  {
+    _id: 44,
+    title: "Etes-vous bon bricoleur ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 9,
+        respScore: 9,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 1,
+        respScore: 1,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 45
+  {
+    _id: 45,
+    title: "Vous levez-vous tôt pour aller courir ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 9,
+        respScore: 9,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 1,
+        respScore: 1,
+        answer: "Non",
+      },
+    ],
+  },
+   // Question 46
+  {
+    _id: 46,
+    title: "Savez-vous lancer une machine de linge et de vaisselle ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 7,
+        respScore: 9,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 3,
+        respScore: 1,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 47
+  {
+    _id: 47,
+    title: "Payez-vous des impôts ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 10,
+        respScore: 9,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 0,
+        respScore: 1,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 48
+  {
+    _id: 48,
+    title: "Prévoyez-vous vos dépenses en fonction de vos rentrées d'argent ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 7,
+        respScore: 9,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 3,
+        respScore: 1,
+        answer: "Non",
+      },
+    ],
+  },
+  // Question 49
+  {
+    _id: 49,
+    title: "Avez-vous tenté de vous justifier en répondant à l'une des questions de ce questionnaire ?",
+    category: "Daily Life",
+    answers: [
+      {
+        _id: 0,
+        adultScore: 10,
+        respScore: null,
+        answer: "Oui",
+      },
+      {
+        _id: 1,
+        adultScore: 0,
+        respScore: null,
         answer: "Non",
       },
     ],

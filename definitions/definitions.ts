@@ -27,7 +27,8 @@ export interface Question {
 export interface CardProps {
   question: Question | undefined;
   goToNextQuestion: ({answer, reset}: goToNextQuestionProps) => void,
-  score: Score
+  score: Score,
+  scoreAlt: Score
 }
 
 export interface CardQuestionProps {
@@ -49,10 +50,12 @@ export interface CardAnswerProps {
 }
 
 export interface CardScoreProps {
-  score: Score
+  score: Score,
+  scoreAlt: Score,
 }
 
 export interface goToNextQuestionProps {
   answer: Answer | null,
+  answersRange: { adultMax: number | null; adultMin: number | null; respMax: number | null; respMin: number | null; },
   reset?: boolean;
 }
