@@ -21,6 +21,7 @@ export interface Question {
   condition?: [number, number]
   category: string;
   answers: Answer[];
+  color?: string;
 }
 
 // PROPS DEFINITIONS
@@ -42,6 +43,7 @@ export interface CardAnswersProps {
   answers: Answer[]
   selectedAnswer: Answer | null,
   setSelectedAnswer: Dispatch<SetStateAction<Answer | null>>
+  color: string
 }
 
 export interface CardAnswerProps {

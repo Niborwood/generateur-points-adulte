@@ -35,6 +35,7 @@ export default function Card({
             answers={question.answers}
             selectedAnswer={selectedAnswer}
             setSelectedAnswer={setSelectedAnswer}
+            color={question.color}
           />
 
           {/* Next Question Button */}

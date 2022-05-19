@@ -311,7 +311,7 @@ const rawData: Question[] = [
     // Question 11
   {
     _id: 11,
-    title: "Comment nommez-vous cette couleur (marron) ?",
+    title: "Comment nommez-vous cette couleur ?",
     category: "Daily Life",
     answers: [
       {
@@ -327,11 +327,12 @@ const rawData: Question[] = [
         answer: "Taupe",
       },
     ],
+    color: "#8d7268",
   },
       // Question 12
   {
     _id: 12,
-    title: "Comment nommez-vous cette couleur (rouge) ?",
+    title: "Comment nommez-vous cette couleur ?",
     category: "Daily Life",
     answers: [
       {
@@ -347,11 +348,12 @@ const rawData: Question[] = [
         answer: "Pourpre",
       },
     ],
+    color: "#DC143C",
   },
   // Question 13
   {
     _id: 13,
-    title: "Comment nommez-vous cette couleur (bleu) ?",
+    title: "Comment nommez-vous cette couleur ?",
     category: "Daily Life",
     answers: [
       {
@@ -367,6 +369,7 @@ const rawData: Question[] = [
         answer: "Cyan",
       },
     ],
+    color: "#00FFFF",
   },
     // Question 14
   {
@@ -793,7 +796,7 @@ const rawData: Question[] = [
   // Question 33
   {
     _id: 33,
-    title: "À quelle régularité regardez-vous la météo ?",
+    title: "À quelle régularité sortez-vous faire des brunchs ?",
     category: "Daily Life",
     answers: [
       {
@@ -923,7 +926,7 @@ const rawData: Question[] = [
   // Question 38
   {
     _id: 38,
-    title: "Faites vous vous-mêmes vos courses ?",
+    title: "Avez-vous déjà regardé le prix au kilo de vos achats au supermarché ?",
     category: "Daily Life",
     answers: [
       {
@@ -934,12 +937,6 @@ const rawData: Question[] = [
       },
       {
         _id: 1,
-        adultScore: 8,
-        respScore: 3,
-        answer: "Oui, mais je me les fais livrer à domicile",
-      },
-      {
-        _id: 2,
         adultScore: 2,
         respScore: 2,
         answer: "Non",

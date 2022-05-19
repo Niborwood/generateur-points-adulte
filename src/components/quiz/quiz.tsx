@@ -15,7 +15,7 @@ import rawData from "../../../content/data";
 
 const Quiz = () => {
   // Handles currentQuestion
-  const [questionIndex, setQuestionIndex] = useState(1);
+  const [questionIndex, setQuestionIndex] = useState(0);
   const currentQuestion: Question | undefined = rawData.find(
     (data) => data._id === questionIndex
   );
