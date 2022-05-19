@@ -43,7 +43,7 @@ export interface CardAnswersProps {
   answers: Answer[]
   selectedAnswer: Answer | null,
   setSelectedAnswer: Dispatch<SetStateAction<Answer | null>>
-  color: string
+  color: string | undefined
 }
 
 export interface CardAnswerProps {
