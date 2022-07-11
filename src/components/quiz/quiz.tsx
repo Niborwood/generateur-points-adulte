@@ -39,7 +39,22 @@ const Quiz = () => {
   // Randomize answers
   const randomizeQuiz = () => {
     console.log(rawData);
-    for (const answer of rawData) {
+    for (const question of rawData) {
+      // Choose randomly between one of the answers
+      const randomIndex = Math.floor(Math.random() * question.answers.length);
+      const answer = question.answers[randomIndex];
+      // Update scoreAlt
+      setScoreAlt((prev) => ({
+        adultScore:
+          prev.adultScore + (answer.adultScore ? answer.adultScore : 0),
+        respScore: prev.respScore + (answer.respScore ? answer.respScore : 0),
+        adultQuote:
+          prev.adultQuote +
+          (answersRange.adultMax === null ? 0 : answersRange.adultMax / 10),
+        respQuote:
+          prev.respQuote +
+          (answersRange.respMax === null ? 0 : answersRange.respMax / 10),
+      }));
     }
   };
 
