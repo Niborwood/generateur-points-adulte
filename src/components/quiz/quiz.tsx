@@ -43,6 +43,24 @@ const Quiz = () => {
       // Choose randomly between one of the answers
       const randomIndex = Math.floor(Math.random() * question.answers.length);
       const answer = question.answers[randomIndex];
+      const answerRange = {
+        adultMax: question
+          ? Math.max(...question.answers.map((answer) => answer.adultScore)) ??
+            null
+          : 0,
+        adultMin: question
+          ? Math.min(...question.answers.map((answer) => answer.adultScore)) ??
+            null
+          : 0,
+        respMax: question
+          ? Math.max(...question.answers.map((answer) => answer.respScore)) ??
+            null
+          : 0,
+        respMin: question
+          ? Math.min(...question.answers.map((answer) => answer.respScore)) ??
+            null
+          : null,
+      };
       // Update scoreAlt
       setScoreAlt((prev) => ({
         adultScore:
