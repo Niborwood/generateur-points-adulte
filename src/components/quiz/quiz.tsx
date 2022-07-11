@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 
 // DEFINITIONS
 import {
@@ -35,6 +35,13 @@ const Quiz = () => {
     adultQuote: 0,
     respQuote: 0,
   });
+
+  // Randomize answers
+  const randomizeQuiz = () => {
+    console.log(rawData);
+    for (const answer of rawData) {
+    }
+  };
 
   // Handles next question logic
   const goToNextQuestion = ({
@@ -76,12 +83,20 @@ const Quiz = () => {
   };
 
   return (
-    <Card
-      question={currentQuestion}
-      goToNextQuestion={goToNextQuestion}
-      score={score}
-      scoreAlt={scoreAlt}
-    />
+    <Fragment>
+      <Card
+        question={currentQuestion}
+        goToNextQuestion={goToNextQuestion}
+        score={score}
+        scoreAlt={scoreAlt}
+      />
+      <button
+        className="p-2 mt-8 text-sm text-center bg-white rounded-md"
+        onClick={randomizeQuiz}
+      >
+        🎲 Randomize answers
+      </button>
+    </Fragment>
   );
 };
 
