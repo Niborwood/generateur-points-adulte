@@ -69,26 +69,25 @@ const Quiz = () => {
 
   // Handles next question logic
   const goToNextQuestion = ({
-    answer,
-    answersRange,
-    reset = false,
+    questionId,
+    answerId,
   }: goToNextQuestionProps) => {
-    if (reset) {
-      setQuestionIndex(1);
-      return;
-    }
+    // if (reset) {
+    //   setQuestionIndex(1);
+    //   return;
+    // }
 
-    if (!answer) {
-      return;
-    }
+    // if (!answer) {
+    //   return;
+    // }
 
-    // Update score
-    setScore((prev) => ({
-      adultScore: prev.adultScore + (answer.adultScore ? answer.adultScore : 0),
-      respScore: prev.respScore + (answer.respScore ? answer.respScore : 0),
-      adultQuote: prev.adultQuote + (answer.adultScore === null ? 0 : 1),
-      respQuote: prev.respQuote + (answer.respScore === null ? 0 : 1),
-    }));
+    setAnswers((prev) => [
+      ...prev,
+      {
+        questionId: questionId,
+        answerId: answerId,
+      },
+    ]);
 
     // New question
     setQuestionIndex((prev) => prev + 1);
@@ -99,7 +98,6 @@ const Quiz = () => {
       <Card
         question={currentQuestion}
         goToNextQuestion={goToNextQuestion}
-        score={score}
         answers={answers}
       />
       <button

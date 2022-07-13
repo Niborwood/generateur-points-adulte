@@ -11,7 +11,6 @@ import CardScore from "./card-score";
 export default function Card({
   question,
   goToNextQuestion,
-  score,
   answers,
 }: CardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
@@ -19,7 +18,7 @@ export default function Card({
   return (
     <div className="relative max-w-lg px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl skew-x-1">
       {!question ? (
-        <CardScore score={score} answers={answers} />
+        <CardScore answers={answers} />
       ) : (
         <>
           {/* Card Question */}
@@ -43,21 +42,8 @@ export default function Card({
             className="flex justify-center w-full p-4 mt-16 mb-2 font-bold text-white transition-all ease-in-out rounded-xl drop-shadow-lg hover:drop-shadow-sm bg-fuchsia-600 hover:bg-emerald-700"
             onClick={() =>
               goToNextQuestion({
-                answer: selectedAnswer,
-                answersRange: {
-                  adultMax: Math.max(
-                    ...question.answers.map((answer) => answer.adultScore ?? 0)
-                  ),
-                  adultMin: Math.min(
-                    ...question.answers.map((answer) => answer.adultScore ?? 0)
-                  ),
-                  respMax: Math.max(
-                    ...question.answers.map((answer) => answer.respScore ?? 0)
-                  ),
-                  respMin: Math.min(
-                    ...question.answers.map((answer) => answer.respScore ?? 0)
-                  ),
-                },
+                questionId: question._id,
+                answerId: selectedAnswer?._id,
               })
             }
           >

@@ -33,7 +33,6 @@ export type AnswersGiven = {
 export interface CardProps {
   question: Question | undefined;
   goToNextQuestion: ({answer, reset}: goToNextQuestionProps) => void,
-  score: Score,
   answers: AnswersGiven
 }
 
@@ -57,12 +56,10 @@ export interface CardAnswerProps {
 }
 
 export interface CardScoreProps {
-  score: Score,
   answers: AnswersGiven
 }
 
 export interface goToNextQuestionProps {
-  answer: Answer | null,
-  answersRange: { adultMax: number | null; adultMin: number | null; respMax: number | null; respMin: number | null; },
-  reset?: boolean;
+  questionId: number,
+  answerId: number
 }
