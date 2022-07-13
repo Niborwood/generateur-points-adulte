@@ -24,11 +24,17 @@ export interface Question {
   color?: string;
 }
 
+export type AnswersGiven = {
+  questionId: number,
+  answerId: number
+}[]
+
 // PROPS DEFINITIONS
 export interface CardProps {
   question: Question | undefined;
   goToNextQuestion: ({answer, reset}: goToNextQuestionProps) => void,
   score: Score,
+  answers: AnswersGiven
 }
 
 export interface CardQuestionProps {
@@ -52,6 +58,7 @@ export interface CardAnswerProps {
 
 export interface CardScoreProps {
   score: Score,
+  answers: AnswersGiven
 }
 
 export interface goToNextQuestionProps {

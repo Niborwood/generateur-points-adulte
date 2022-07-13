@@ -8,13 +8,18 @@ import CardQuestion from "./card-question";
 import CardAnswers from "./card-answers";
 import CardScore from "./card-score";
 
-export default function Card({ question, goToNextQuestion, score }: CardProps) {
+export default function Card({
+  question,
+  goToNextQuestion,
+  score,
+  answers,
+}: CardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
 
   return (
     <div className="relative max-w-lg px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl skew-x-1">
       {!question ? (
-        <CardScore score={score} />
+        <CardScore score={score} answers={answers} />
       ) : (
         <>
           {/* Card Question */}
@@ -40,26 +45,18 @@ export default function Card({ question, goToNextQuestion, score }: CardProps) {
               goToNextQuestion({
                 answer: selectedAnswer,
                 answersRange: {
-                  adultMax: question
-                    ? Math.max(
-                        ...question.answers.map((answer) => answer.adultScore)
-                      ) ?? null
-                    : 0,
-                  adultMin: question
-                    ? Math.min(
-                        ...question.answers.map((answer) => answer.adultScore)
-                      ) ?? null
-                    : 0,
-                  respMax: question
-                    ? Math.max(
-                        ...question.answers.map((answer) => answer.respScore)
-                      ) ?? null
-                    : 0,
-                  respMin: question
-                    ? Math.min(
-                        ...question.answers.map((answer) => answer.respScore)
-                      ) ?? null
-                    : null,
+                  adultMax: Math.max(
+                    ...question.answers.map((answer) => answer.adultScore ?? 0)
+                  ),
+                  adultMin: Math.min(
+                    ...question.answers.map((answer) => answer.adultScore ?? 0)
+                  ),
+                  respMax: Math.max(
+                    ...question.answers.map((answer) => answer.respScore ?? 0)
+                  ),
+                  respMin: Math.min(
+                    ...question.answers.map((answer) => answer.respScore ?? 0)
+                  ),
                 },
               })
             }
