@@ -28,14 +28,6 @@ const Quiz = () => {
     respQuote: 0,
   });
 
-  // Handles score, variant
-  const [scoreAlt, setScoreAlt] = useState<Score>({
-    adultScore: 0,
-    respScore: 0,
-    adultQuote: 0,
-    respQuote: 0,
-  });
-
   // Randomize answers
   const randomizeQuiz = () => {
     console.log(rawData);
@@ -61,19 +53,20 @@ const Quiz = () => {
             null
           : null,
       };
-      // Update scoreAlt
-      setScoreAlt((prev) => ({
+      // Update scor
+      setScore((prev) => ({
         adultScore:
           prev.adultScore + (answer.adultScore ? answer.adultScore : 0),
         respScore: prev.respScore + (answer.respScore ? answer.respScore : 0),
         adultQuote:
           prev.adultQuote +
-          (answersRange.adultMax === null ? 0 : answersRange.adultMax / 10),
+          (answerRange.adultMax === null ? 0 : answerRange.adultMax / 10),
         respQuote:
           prev.respQuote +
-          (answersRange.respMax === null ? 0 : answersRange.respMax / 10),
+          (answerRange.respMax === null ? 0 : answerRange.respMax / 10),
       }));
     }
+    setQuestionIndex(rawData.length);
   };
 
   // Handles next question logic
@@ -99,18 +92,6 @@ const Quiz = () => {
       respQuote: prev.respQuote + (answer.respScore === null ? 0 : 1),
     }));
 
-    // Update scoreAlt
-    setScoreAlt((prev) => ({
-      adultScore: prev.adultScore + (answer.adultScore ? answer.adultScore : 0),
-      respScore: prev.respScore + (answer.respScore ? answer.respScore : 0),
-      adultQuote:
-        prev.adultQuote +
-        (answersRange.adultMax === null ? 0 : answersRange.adultMax / 10),
-      respQuote:
-        prev.respQuote +
-        (answersRange.respMax === null ? 0 : answersRange.respMax / 10),
-    }));
-
     // New question
     setQuestionIndex((prev) => prev + 1);
   };
@@ -121,7 +102,6 @@ const Quiz = () => {
         question={currentQuestion}
         goToNextQuestion={goToNextQuestion}
         score={score}
-        scoreAlt={scoreAlt}
       />
       <button
         className="p-2 mt-8 text-sm text-center bg-white rounded-md"

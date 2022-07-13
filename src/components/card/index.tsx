@@ -8,18 +8,13 @@ import CardQuestion from "./card-question";
 import CardAnswers from "./card-answers";
 import CardScore from "./card-score";
 
-export default function Card({
-  question,
-  goToNextQuestion,
-  score,
-  scoreAlt,
-}: CardProps) {
+export default function Card({ question, goToNextQuestion, score }: CardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
 
   return (
     <div className="relative max-w-lg px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl skew-x-1">
       {!question ? (
-        <CardScore score={score} scoreAlt={scoreAlt} />
+        <CardScore score={score} />
       ) : (
         <>
           {/* Card Question */}

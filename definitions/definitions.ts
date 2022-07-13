@@ -29,7 +29,6 @@ export interface CardProps {
   question: Question | undefined;
   goToNextQuestion: ({answer, reset}: goToNextQuestionProps) => void,
   score: Score,
-  scoreAlt: Score
 }
 
 export interface CardQuestionProps {
@@ -53,7 +52,6 @@ export interface CardAnswerProps {
 
 export interface CardScoreProps {
   score: Score,
-  scoreAlt: Score,
 }
 
 export interface goToNextQuestionProps {
