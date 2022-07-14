@@ -32,7 +32,7 @@ export type AnswersGiven = {
 // PROPS DEFINITIONS
 export interface CardProps {
   question: Question | undefined;
-  goToNextQuestion: ({answer, reset}: goToNextQuestionProps) => void,
+  goToNextQuestion: ({questionId, answerId}: goToNextQuestionProps) => void,
   answers: AnswersGiven
 }
 

@@ -43,7 +43,7 @@ export default function Card({
             onClick={() =>
               goToNextQuestion({
                 questionId: question._id,
-                answerId: selectedAnswer?._id,
+                answerId: selectedAnswer._id,
               })
             }
           >
