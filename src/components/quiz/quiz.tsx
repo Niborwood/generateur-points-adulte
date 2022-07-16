@@ -4,7 +4,6 @@ import { useState, Fragment } from "react";
 import {
   goToNextQuestionProps,
   Question,
-  Score,
   AnswersGiven,
 } from "../../../definitions/definitions";
 
@@ -21,14 +20,6 @@ const Quiz = () => {
     (data) => data._id === questionIndex
   );
 
-  // Handles score
-  const [score, setScore] = useState<Score>({
-    adultScore: 0,
-    respScore: 0,
-    adultQuote: 0,
-    respQuote: 0,
-  });
-
   // Handles save of answers
   const [answers, setAnswers] = useState<AnswersGiven>([]);
 
@@ -38,20 +29,6 @@ const Quiz = () => {
       // Choose randomly between one of the answers
       const randomIndex = Math.floor(Math.random() * question.answers.length);
       const answer = question.answers[randomIndex];
-      const answerRange = {
-        adultMax: Math.max(
-          ...question.answers.map((answer) => answer.adultScore ?? 0)
-        ),
-        adultMin: Math.min(
-          ...question.answers.map((answer) => answer.adultScore ?? 0)
-        ),
-        respMax: Math.max(
-          ...question.answers.map((answer) => answer.respScore ?? 0)
-        ),
-        respMin: Math.min(
-          ...question.answers.map((answer) => answer.respScore ?? 0)
-        ),
-      };
 
       // Update answers
       if (answers.length >= rawData.length) setAnswers([]);
@@ -72,15 +49,6 @@ const Quiz = () => {
     questionId,
     answerId,
   }: goToNextQuestionProps) => {
-    // if (reset) {
-    //   setQuestionIndex(1);
-    //   return;
-    // }
-
-    // if (!answer) {
-    //   return;
-    // }
-
     setAnswers((prev) => [
       ...prev,
       {

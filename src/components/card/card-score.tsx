@@ -50,10 +50,10 @@ const CardScore = ({ answers }: CardScoreProps) => {
         answerRange.adultMin === null ? 0 : answerRange.adultMin / 10;
       respQuote += answerRange.respMax === null ? 0 : answerRange.respMax / 10;
     }
-    const playerAdultScore = adultScore / adultQuote / 10;
-    const maxAdultScore = adultScoreMax / adultQuote / 10;
-    const playerRespScore = respScore / respQuote / 10;
-    const maxRespScore = respScoreMax / respQuote / 10;
+    const playerAdultScore = adultScore / rawData.length / 10;
+    const maxAdultScore = adultScoreMax / rawData.length / 10;
+    const playerRespScore = respScore / rawData.length / 10;
+    const maxRespScore = respScoreMax / rawData.length / 10;
 
     return {
       adultScore: (playerAdultScore / maxAdultScore).toFixed(2),
