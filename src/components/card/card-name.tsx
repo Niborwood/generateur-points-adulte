@@ -1,5 +1,4 @@
 import Button from "../ui/button";
-import { Answer } from "../../../definitions/definitions";
 
 const CardName = ({ setName, setHasSetName }: CardNameProps) => {
   return (

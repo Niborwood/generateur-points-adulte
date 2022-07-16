@@ -47,26 +47,17 @@ export default function Card({
           />
 
           {/* Next Question Button */}
-          {/* <button
-            className="flex justify-center w-full p-4 mt-16 mb-2 font-bold text-white transition-all ease-in-out rounded-xl drop-shadow-lg hover:drop-shadow-sm bg-fuchsia-600 hover:bg-emerald-700"
-            onClick={() =>
-              goToNextQuestion({
-                questionId: question._id,
-                answerId: selectedAnswer?._id || 0,
-              })
-            }
-          >
-            Question suivante
-          </button> */}
-          <Button
-            text="Question suivante"
-            onClick={() =>
-              goToNextQuestion({
-                questionId: question._id,
-                answerId: selectedAnswer?._id || 0,
-              })
-            }
-          />
+          <div className="mt-16">
+            <Button
+              text="Question suivante"
+              onClick={() =>
+                goToNextQuestion({
+                  questionId: question._id,
+                  answerId: selectedAnswer?._id || 0,
+                })
+              }
+            />
+          </div>
         </>
       );
   }
