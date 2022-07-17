@@ -6,13 +6,7 @@ import rawData from "../../../content/data";
 const CardScore = ({ answers, name }: CardScoreProps) => {
   const { adultScore, respScore } = useMemo(() => {
     let adultScore = 0;
-    let adultScoreMax = 0;
-    let adultScoreMin = 0;
     let respScore = 0;
-    let respScoreMax = 0;
-    let adultQuote = 0;
-    let adultQuoteMin = 0;
-    let respQuote = 0;
 
     for (const givenAnswer of answers) {
       const question = rawData.find(
@@ -40,24 +34,14 @@ const CardScore = ({ answers, name }: CardScoreProps) => {
 
       if (!answer) continue;
       adultScore += answer.adultScore ? answer.adultScore : 0;
-      adultScoreMax += answerRange.adultMax ? answerRange.adultMax : 0;
-      adultScoreMin += answerRange.adultMin ? answerRange.adultMin : 0;
       respScore += answer.respScore ? answer.respScore : 0;
-      respScoreMax += answerRange.respMax ? answerRange.respMax : 0;
-      adultQuote +=
-        answerRange.adultMax === null ? 0 : answerRange.adultMax / 10;
-      adultQuoteMin +=
-        answerRange.adultMin === null ? 0 : answerRange.adultMin / 10;
-      respQuote += answerRange.respMax === null ? 0 : answerRange.respMax / 10;
     }
     const playerAdultScore = adultScore / rawData.length / 10;
-    const maxAdultScore = adultScoreMax / rawData.length / 10;
     const playerRespScore = respScore / rawData.length / 10;
-    const maxRespScore = respScoreMax / rawData.length / 10;
 
     return {
-      adultScore: (playerAdultScore / maxAdultScore).toFixed(2),
-      respScore: (playerRespScore / maxRespScore).toFixed(2),
+      adultScore: playerAdultScore.toFixed(2),
+      respScore: playerRespScore.toFixed(2),
     };
   }, [answers]);
 
