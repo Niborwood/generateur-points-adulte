@@ -1,13 +1,12 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { CardScoreProps } from "../../../definitions/definitions";
+import useStats from "../../../hooks/useStats";
 
 import rawData from "../../../content/data";
 
 const CardScore = ({ answers, name }: CardScoreProps) => {
-  console.log(
-    "🚀 ~ file: card-score.tsx ~ line 7 ~ CardScore ~ answers",
-    answers
-  );
+  const { loading, error } = useStats(answers, name);
+
   const { adultScore, respScore } = useMemo(() => {
     let adultScore = 0;
     let respScore = 0;

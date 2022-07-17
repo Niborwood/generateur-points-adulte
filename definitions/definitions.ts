@@ -40,6 +40,14 @@ export interface QuizState {
   createdAt: Date | null;
 }
 
+export interface Stats {
+  _id?: number;
+  createdAt: Date;
+  completedAt: Date;
+  name: string;
+  answers: AnswersGiven;
+}
+
 // PROPS DEFINITIONS
 export interface CardProps {
   question: Question | undefined;

@@ -11,7 +11,7 @@ const CardName = ({ setQuizState }: CardNameProps) => {
   const checkUserName = () => {
     const name = nameInput.current?.value;
     if (name && name.trim().length > 0)
-      setQuizState((prev) => ({ ...prev, name }));
+      setQuizState((prev) => ({ ...prev, name, hasSetName: true }));
     else setError("Merci d'entrer un nom.");
   };
 

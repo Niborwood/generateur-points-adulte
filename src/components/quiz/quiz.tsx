@@ -1,7 +1,7 @@
 import { useState, Fragment } from "react";
 
 // HOOKS
-import { useQuestions } from "../../../hooks";
+import { useQuestions } from "../../../hooks/useQuestions";
 
 // DEFINITIONS
 import {
