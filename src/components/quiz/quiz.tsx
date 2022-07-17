@@ -1,9 +1,13 @@
 import { useState, Fragment } from "react";
 
+// HOOKS
+import { useQuestions } from "../../../hooks";
+
 // DEFINITIONS
 import {
   goToNextQuestionProps,
   Question,
+  QuizState,
   AnswersGiven,
 } from "../../../definitions/definitions";
 
@@ -14,11 +18,23 @@ import Card from "../card/index";
 import rawData from "../../../content/data";
 
 const Quiz = () => {
+  // Fetch questions from Supabase
+  const { data, loading, error } = useQuestions();
+  console.log("🚀 ~ file: quiz.tsx ~ line 23 ~ Quiz ~ data", data);
+
   // Handles currentQuestion
   const [questionIndex, setQuestionIndex] = useState(0);
   const currentQuestion: Question | undefined = rawData.find(
     (data) => data._id === questionIndex
   );
+
+  // Handles quiz state
+  const [quizState, setQuizState] = useState<QuizState>({
+    questions: rawData,
+    answers: [],
+    name: "",
+    createdAt: null,
+  });
 
   // Handles save of answers
   const [answers, setAnswers] = useState<AnswersGiven>([]);
@@ -66,7 +82,8 @@ const Quiz = () => {
       <Card
         question={currentQuestion}
         goToNextQuestion={goToNextQuestion}
-        answers={answers}
+        quizState={quizState}
+        setQuizState={setQuizState}
       />
       <button
         className="p-2 mt-8 text-sm text-center bg-white rounded-md"

@@ -17,6 +17,8 @@ export interface Score {
 export interface Question {
   _id: number;
   title: string;
+  title_0?: string;
+  title_1?: string;
   helper?: string;
   condition?: [number, number]
   category: string;
@@ -29,11 +31,19 @@ export type AnswersGiven = {
   answerId: number
 }[]
 
+export interface QuizState {
+  questions: Question[];
+  answers: AnswersGiven;
+  name: string;
+  createdAt: Date | null;
+}
+
 // PROPS DEFINITIONS
 export interface CardProps {
   question: Question | undefined;
   goToNextQuestion: ({questionId, answerId}: goToNextQuestionProps) => void,
-  answers: AnswersGiven
+  quizState: QuizState;
+  setQuizState: Dispatch<SetStateAction<QuizState>>;
 }
 
 export interface CardQuestionProps {

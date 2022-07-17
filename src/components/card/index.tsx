@@ -13,20 +13,22 @@ import Button from "../ui/button";
 export default function Card({
   question,
   goToNextQuestion,
-  answers,
+  quizState,
+  setQuizState,
 }: CardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
-  const [name, setName] = useState("");
   const [hasSetName, setHasSetName] = useState(false);
 
   let child;
 
   // Add prompt for first name
   if (!hasSetName) {
-    child = <NameCard setName={setName} setHasSetName={setHasSetName} />;
+    child = (
+      <NameCard setQuizState={setQuizState} setHasSetName={setHasSetName} />
+    );
   } else {
     // If no question, show score
-    if (!question) child = <CardScore answers={answers} />;
+    if (!question) child = <CardScore answers={quizState.answers} />;
     else
       child = (
         <>
