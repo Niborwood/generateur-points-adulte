@@ -4,6 +4,10 @@ import { CardScoreProps } from "../../../definitions/definitions";
 import rawData from "../../../content/data";
 
 const CardScore = ({ answers, name }: CardScoreProps) => {
+  console.log(
+    "🚀 ~ file: card-score.tsx ~ line 7 ~ CardScore ~ answers",
+    answers
+  );
   const { adultScore, respScore } = useMemo(() => {
     let adultScore = 0;
     let respScore = 0;
@@ -14,20 +18,20 @@ const CardScore = ({ answers, name }: CardScoreProps) => {
       );
 
       if (!question) continue;
-      const answerRange = {
-        adultMax: Math.max(
-          ...question.answers.map((answer) => answer.adultScore ?? 0)
-        ),
-        adultMin: Math.min(
-          ...question.answers.map((answer) => answer.adultScore ?? 0)
-        ),
-        respMax: Math.max(
-          ...question.answers.map((answer) => answer.respScore ?? 0)
-        ),
-        respMin: Math.min(
-          ...question.answers.map((answer) => answer.respScore ?? 0)
-        ),
-      };
+      // const answerRange = {
+      //   adultMax: Math.max(
+      //     ...question.answers.map((answer) => answer.adultScore ?? 0)
+      //   ),
+      //   adultMin: Math.min(
+      //     ...question.answers.map((answer) => answer.adultScore ?? 0)
+      //   ),
+      //   respMax: Math.max(
+      //     ...question.answers.map((answer) => answer.respScore ?? 0)
+      //   ),
+      //   respMin: Math.min(
+      //     ...question.answers.map((answer) => answer.respScore ?? 0)
+      //   ),
+      // };
       const answer = question.answers.find(
         (answer) => answer._id === givenAnswer.answerId
       );

@@ -5,6 +5,7 @@ import { useQuestions } from "../../../hooks";
 
 // DEFINITIONS
 import {
+  AnswersGiven,
   goToNextQuestionProps,
   QuizState,
 } from "../../../definitions/definitions";
@@ -32,30 +33,21 @@ const Quiz = () => {
 
   // Randomize answers
   const randomizeQuiz = () => {
+    let answers: AnswersGiven = [];
     for (const question of rawData) {
       // Choose randomly between one of the answers
       const randomIndex = Math.floor(Math.random() * question.answers.length);
       const answer = question.answers[randomIndex];
-
-      // Update quiz state
-      if (quizState.answers.length >= rawData.length)
-        setQuizState((prev) => ({
-          ...prev,
-          answers: [],
-        }));
-      else {
-        setQuizState((prev) => ({
-          ...prev,
-          name: "Random Test",
-          hasSetName: true,
-          answers: [
-            ...prev.answers,
-            { questionId: question._id, answerId: answer._id },
-          ],
-          currentQuestionIndex: rawData.length,
-        }));
-      }
+      answers.push({ questionId: question._id, answerId: answer._id });
     }
+
+    setQuizState((prev) => ({
+      ...prev,
+      name: "Random Test",
+      hasSetName: true,
+      answers,
+      currentQuestionIndex: rawData.length,
+    }));
   };
 
   // Handles next question logic
