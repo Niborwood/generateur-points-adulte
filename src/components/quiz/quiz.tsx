@@ -32,13 +32,11 @@ const Quiz = () => {
   const [quizState, setQuizState] = useState<QuizState>({
     questions: rawData,
     answers: [],
+    currentQuestionIndex: 0,
     name: "",
     createdAt: null,
     hasSetName: false,
   });
-
-  // Handles save of answers
-  const [answers, setAnswers] = useState<AnswersGiven>([]);
 
   // Randomize answers
   const randomizeQuiz = () => {
@@ -62,10 +60,10 @@ const Quiz = () => {
             ...prev.answers,
             { questionId: question._id, answerId: answer._id },
           ],
+          currentQuestionIndex: rawData.length,
         }));
       }
     }
-    setQuestionIndex(rawData.length);
   };
 
   // Handles next question logic
@@ -73,26 +71,22 @@ const Quiz = () => {
     questionId,
     answerId,
   }: goToNextQuestionProps) => {
-    setAnswers((prev) => [
+    setQuizState((prev) => ({
       ...prev,
-      {
-        questionId: questionId,
-        answerId: answerId,
-      },
-    ]);
-
-    // New question
-    setQuestionIndex((prev) => prev + 1);
+      answers: [...prev.answers, { questionId, answerId }],
+      currentQuestionIndex: prev.currentQuestionIndex + 1,
+    }));
   };
 
   return (
     <Fragment>
       <Card
-        question={currentQuestion}
+        question={quizState.questions.find(
+          (question) => question._id === quizState.currentQuestionIndex
+        )}
         goToNextQuestion={goToNextQuestion}
         quizState={quizState}
         setQuizState={setQuizState}
-        hasSetName={quizState.hasSetName}
       />
       <button
         className="p-2 mt-8 text-sm text-center bg-white rounded-md"

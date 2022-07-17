@@ -34,9 +34,10 @@ export type AnswersGiven = {
 export interface QuizState {
   questions: Question[];
   answers: AnswersGiven;
+  currentQuestionIndex: number;
   name: string;
-  createdAt: Date | null;
   hasSetName: boolean;
+  createdAt: Date | null;
 }
 
 // PROPS DEFINITIONS
@@ -45,7 +46,6 @@ export interface CardProps {
   goToNextQuestion: ({questionId, answerId}: goToNextQuestionProps) => void,
   quizState: QuizState;
   setQuizState: Dispatch<SetStateAction<QuizState>>;
-  hasSetName: boolean;
 }
 
 export interface CardQuestionProps {
