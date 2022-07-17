@@ -3,7 +3,7 @@ import { CardScoreProps } from "../../../definitions/definitions";
 
 import rawData from "../../../content/data";
 
-const CardScore = ({ answers }: CardScoreProps) => {
+const CardScore = ({ answers, name }: CardScoreProps) => {
   const { adultScore, respScore } = useMemo(() => {
     let adultScore = 0;
     let adultScoreMax = 0;
@@ -64,7 +64,7 @@ const CardScore = ({ answers }: CardScoreProps) => {
   return (
     <div>
       <div>
-        <p className="mb-4 text-2xl font-bold">Score alt : </p>
+        <p className="mb-4 text-2xl font-bold">{name}, voici votre score : </p>
         <p>
           <strong>{adultScore}</strong> - Indice d'adulte
         </p>

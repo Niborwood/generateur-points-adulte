@@ -15,20 +15,19 @@ export default function Card({
   goToNextQuestion,
   quizState,
   setQuizState,
+  hasSetName,
 }: CardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
-  const [hasSetName, setHasSetName] = useState(false);
 
   let child;
 
   // Add prompt for first name
   if (!hasSetName) {
-    child = (
-      <NameCard setQuizState={setQuizState} setHasSetName={setHasSetName} />
-    );
+    child = <NameCard setQuizState={setQuizState} />;
   } else {
     // If no question, show score
-    if (!question) child = <CardScore answers={quizState.answers} />;
+    if (!question)
+      child = <CardScore answers={quizState.answers} name={quizState.name} />;
     else
       child = (
         <>

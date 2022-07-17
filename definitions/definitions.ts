@@ -36,6 +36,7 @@ export interface QuizState {
   answers: AnswersGiven;
   name: string;
   createdAt: Date | null;
+  hasSetName: boolean;
 }
 
 // PROPS DEFINITIONS
@@ -44,6 +45,7 @@ export interface CardProps {
   goToNextQuestion: ({questionId, answerId}: goToNextQuestionProps) => void,
   quizState: QuizState;
   setQuizState: Dispatch<SetStateAction<QuizState>>;
+  hasSetName: boolean;
 }
 
 export interface CardQuestionProps {
@@ -66,7 +68,8 @@ export interface CardAnswerProps {
 }
 
 export interface CardScoreProps {
-  answers: AnswersGiven
+  answers: AnswersGiven,
+  name: string,
 }
 
 export interface goToNextQuestionProps {

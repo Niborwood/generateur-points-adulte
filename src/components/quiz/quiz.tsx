@@ -34,6 +34,7 @@ const Quiz = () => {
     answers: [],
     name: "",
     createdAt: null,
+    hasSetName: false,
   });
 
   // Handles save of answers
@@ -47,15 +48,22 @@ const Quiz = () => {
       const answer = question.answers[randomIndex];
 
       // Update answers
-      if (answers.length >= rawData.length) setAnswers([]);
-      else
-        setAnswers((prev) => [
+      if (quizState.answers.length >= rawData.length)
+        setQuizState((prev) => ({
           ...prev,
-          {
-            questionId: question._id,
-            answerId: answer._id,
-          },
-        ]);
+          answers: [],
+        }));
+      else {
+        setQuizState((prev) => ({
+          ...prev,
+          name: "Random Test",
+          hasSetName: true,
+          answers: [
+            ...prev.answers,
+            { questionId: question._id, answerId: answer._id },
+          ],
+        }));
+      }
     }
     setQuestionIndex(rawData.length);
   };
@@ -84,12 +92,13 @@ const Quiz = () => {
         goToNextQuestion={goToNextQuestion}
         quizState={quizState}
         setQuizState={setQuizState}
+        hasSetName={quizState.hasSetName}
       />
       <button
         className="p-2 mt-8 text-sm text-center bg-white rounded-md"
         onClick={randomizeQuiz}
       >
-        🎲 Randomize answers
+        🎲 Randomize quiz
       </button>
     </Fragment>
   );

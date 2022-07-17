@@ -2,7 +2,7 @@ import Button from "../ui/button";
 import { QuizState } from "../../../definitions/definitions";
 import { Dispatch, SetStateAction } from "react";
 
-const CardName = ({ setQuizState, setHasSetName }: CardNameProps) => {
+const CardName = ({ setQuizState }: CardNameProps) => {
   return (
     <div>
       <h3 className="text-2xl font-bold">Quel est votre nom ?</h3>
@@ -16,14 +16,21 @@ const CardName = ({ setQuizState, setHasSetName }: CardNameProps) => {
           }))
         }
       />
-      <Button text="Commencer" onClick={() => setHasSetName(true)} />
+      <Button
+        text="Commencer"
+        onClick={() =>
+          setQuizState((prev) => ({
+            ...prev,
+            hasSetName: true,
+          }))
+        }
+      />
     </div>
   );
 };
 
 type CardNameProps = {
   setQuizState: Dispatch<SetStateAction<QuizState>>;
-  setHasSetName: Dispatch<SetStateAction<boolean>>;
 };
 
 export default CardName;
