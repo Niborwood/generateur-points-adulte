@@ -6,9 +6,7 @@ import { useQuestions } from "../../../hooks";
 // DEFINITIONS
 import {
   goToNextQuestionProps,
-  Question,
   QuizState,
-  AnswersGiven,
 } from "../../../definitions/definitions";
 
 // COMPONENT IMPORTS
@@ -21,12 +19,6 @@ const Quiz = () => {
   // Fetch questions from Supabase
   const { data, loading, error } = useQuestions();
   console.log("🚀 ~ file: quiz.tsx ~ line 23 ~ Quiz ~ data", data);
-
-  // Handles currentQuestion
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const currentQuestion: Question | undefined = rawData.find(
-    (data) => data._id === questionIndex
-  );
 
   // Handles quiz state
   const [quizState, setQuizState] = useState<QuizState>({
@@ -45,7 +37,7 @@ const Quiz = () => {
       const randomIndex = Math.floor(Math.random() * question.answers.length);
       const answer = question.answers[randomIndex];
 
-      // Update answers
+      // Update quiz state
       if (quizState.answers.length >= rawData.length)
         setQuizState((prev) => ({
           ...prev,
