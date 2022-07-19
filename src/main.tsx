@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Quiz from "./components/quiz/quiz";
+import Admin from "./components/admin";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,7 +12,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Quiz />} />
-          <Route path="/gpa-admin" element={<div>Hello</div>} />
+          <Route path="/gpa-admin" element={<Admin />} />
         </Route>
       </Routes>
     </BrowserRouter>
