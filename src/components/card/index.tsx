@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CardProps, Answer } from "../../../definitions/definitions";
 
 // IMPORTS
+import CardWrapper from "../ui/card-wrapper";
 import CardQuestion from "./card-question";
 import CardAnswers from "./card-answers";
 import CardScore from "./card-score";
@@ -62,9 +63,5 @@ export default function Card({
       );
   }
 
-  return (
-    <div className="relative max-w-lg px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl skew-x-1">
-      {child}
-    </div>
-  );
+  return <CardWrapper>{child}</CardWrapper>;
 }
