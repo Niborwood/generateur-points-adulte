@@ -1,10 +1,11 @@
-import { useMemo, useEffect } from "react";
-import { CardScoreProps } from "../../../definitions/definitions";
-import useStats from "../../../hooks/useStats";
+import { useMemo } from "react";
+import useStats from "../../hooks/useStats";
 
-import rawData from "../../../content/data";
+// REDUX
+import { useAppSelector } from "../../hooks/redux";
 
-const CardScore = ({ answers, name }: CardScoreProps) => {
+const CardScore = () => {
+  const { questions, answers, name } = useAppSelector((state) => state.quiz);
   const { loading, error } = useStats(answers, name);
 
   const { adultScore, respScore } = useMemo(() => {
@@ -12,7 +13,7 @@ const CardScore = ({ answers, name }: CardScoreProps) => {
     let respScore = 0;
 
     for (const givenAnswer of answers) {
-      const question = rawData.find(
+      const question = questions.find(
         (question) => question._id === givenAnswer.questionId
       );
 
@@ -39,8 +40,8 @@ const CardScore = ({ answers, name }: CardScoreProps) => {
       adultScore += answer.adultScore ? answer.adultScore : 0;
       respScore += answer.respScore ? answer.respScore : 0;
     }
-    const playerAdultScore = adultScore / rawData.length / 10;
-    const playerRespScore = respScore / rawData.length / 10;
+    const playerAdultScore = adultScore / questions.length / 10;
+    const playerRespScore = respScore / questions.length / 10;
 
     return {
       adultScore: playerAdultScore.toFixed(2),

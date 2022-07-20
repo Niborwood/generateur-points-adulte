@@ -1,8 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, Dispatch, SetStateAction } from "react";
 import { RadioGroup } from "@headlessui/react";
 
-// DEFINITIONS
-import { CardAnswersProps } from "../../../definitions/definitions";
+// TYPES
+import { Answer } from "../../../definitions/definitions";
 
 // COMPONENT IMPORTS
 import CardAnswer from "./card-answer";
@@ -36,4 +36,10 @@ export default function CardAnswers({
       </RadioGroup>
     </Fragment>
   );
+}
+interface CardAnswersProps {
+  answers: Answer[];
+  selectedAnswer: Answer | null;
+  setSelectedAnswer: Dispatch<SetStateAction<Answer | null>>;
+  color: string | undefined;
 }

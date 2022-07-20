@@ -1,17 +1,8 @@
-import { SetStateAction, Dispatch } from "react";
-
 export interface Answer {
   _id: number,
   adultScore: number | null,
   respScore: number | null,
   answer: string,
-}
-
-export interface Score {
-  adultScore: number,
-  respScore: number,
-  adultQuote: number,
-  respQuote: number,
 }
 
 export interface Question {
@@ -26,10 +17,12 @@ export interface Question {
   color?: string;
 }
 
-export type AnswersGiven = {
-  questionId: number,
-  answerId: number
-}[]
+export interface AnswerGiven {
+  questionId: number;
+  answerId: number;
+}
+
+export type AnswersGiven = AnswerGiven[]
 
 export interface QuizState {
   questions: Question[];
@@ -38,6 +31,7 @@ export interface QuizState {
   name: string;
   hasSetName: boolean;
   createdAt: Date | null;
+  hasEndedQuiz: boolean;
 }
 
 export interface Stats {
@@ -46,41 +40,4 @@ export interface Stats {
   completedAt: Date;
   name: string;
   answers: AnswersGiven;
-}
-
-// PROPS DEFINITIONS
-export interface CardProps {
-  question: Question | undefined;
-  goToNextQuestion: ({questionId, answerId}: goToNextQuestionProps) => void,
-  quizState: QuizState;
-  setQuizState: Dispatch<SetStateAction<QuizState>>;
-}
-
-export interface CardQuestionProps {
-  _id: number,
-  title: string,
-  category: string,
-  helper?: string
-}
-
-export interface CardAnswersProps {
-  answers: Answer[]
-  selectedAnswer: Answer | null,
-  setSelectedAnswer: Dispatch<SetStateAction<Answer | null>>
-  color: string | undefined
-}
-
-export interface CardAnswerProps {
-  answer: string,
-  checked: boolean,
-}
-
-export interface CardScoreProps {
-  answers: AnswersGiven,
-  name: string,
-}
-
-export interface goToNextQuestionProps {
-  questionId: number,
-  answerId: number
 }

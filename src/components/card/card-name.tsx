@@ -1,18 +1,24 @@
 import { useRef, useState } from "react";
 import Button from "../ui/button";
-import { QuizState } from "../../../definitions/definitions";
-import { Dispatch, SetStateAction } from "react";
 
-const CardName = ({ setQuizState }: CardNameProps) => {
+// REDUX
+import { useAppDispatch } from "../../hooks/redux";
+import { beginQuiz } from "../../features/quiz/quizSlice";
+
+const CardName = () => {
   const nameInput = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string>("");
+  const dispatch = useAppDispatch();
 
   // Check User Name
   const checkUserName = () => {
     const name = nameInput.current?.value;
-    if (name && name.trim().length > 0)
-      setQuizState((prev) => ({ ...prev, name, hasSetName: true }));
-    else setError("Merci d'entrer un nom.");
+
+    // Name Guard
+    if (!name || !name.trim().length) return setError("Merci d'entrer un nom.");
+
+    // Begin Quiz if name is valid
+    dispatch(beginQuiz(name));
   };
 
   return (
@@ -28,10 +34,6 @@ const CardName = ({ setQuizState }: CardNameProps) => {
       <Button text="Commencer" onClick={checkUserName} />
     </div>
   );
-};
-
-type CardNameProps = {
-  setQuizState: Dispatch<SetStateAction<QuizState>>;
 };
 
 export default CardName;

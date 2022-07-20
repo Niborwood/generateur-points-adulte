@@ -1,6 +1,3 @@
-// DEFINITIONS
-import { CardQuestionProps } from "../../../definitions/definitions";
-
 export default function CardQuestion({
   _id,
   title,
@@ -15,4 +12,10 @@ export default function CardQuestion({
       {helper && <h5 className="text-sm italic">{helper}</h5>}
     </div>
   );
+}
+interface CardQuestionProps {
+  _id: number;
+  title: string;
+  category: string;
+  helper?: string;
 }

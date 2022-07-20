@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PostgrestError } from '@supabase/supabase-js'
-import { Question } from '../definitions/definitions';
-import supabase from '../lib/supabase';
+import { Question } from '../../definitions/definitions';
+import supabase from '../../lib/supabase';
 
 export const useQuestions = () => {
   const [data,setData] = useState<Question[] | null>(null);
