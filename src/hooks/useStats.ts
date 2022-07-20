@@ -24,7 +24,7 @@ const useStats = (answers: AnswersGiven, name: string) => {
         setLoading(false)
       }
     )()
-  }, [])
+  }, [answers])
 
   return {error,loading}
 }
