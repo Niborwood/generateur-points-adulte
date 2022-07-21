@@ -14,13 +14,15 @@ const Admin = () => {
     e.preventDefault();
 
     // Handling validation
-    if (!email.current?.value.trim())
-      setError({ ...error, email: "Email is required" });
-    else setError({ ...error, email: "" });
+    if (!email.current?.value.match(/^[^@]+@[^@]+\.[^@]+$/))
+      error.email = "Merci d'entrer une adresse email valide.";
+    else error.email = "";
 
-    if (!password.current?.value.trim())
-      setError({ ...error, password: "Password is required" });
-    else setError({ ...error, password: "" });
+    if (password.current?.value.length || 0 < 6)
+      error.password = "Le mot de passe doit faire a minima 6 caractères.";
+    else error.password = "";
+
+    setError({ ...error });
 
     console.log(email.current?.value, password.current?.value);
   };
@@ -30,13 +32,15 @@ const Admin = () => {
       <h1 className="text-2xl font-bold">Log In</h1>
       <div className="my-4">
         <form onSubmit={handleFormSubmit}>
-          <Input name="email" ref={email} error={error.email} />
-          <Input
-            name="password"
-            type="password"
-            ref={password}
-            error={error.password}
-          />
+          <div className="my-4 mt-8">
+            <Input name="email" ref={email} error={error.email} />
+            <Input
+              name="password"
+              type="password"
+              ref={password}
+              error={error.password}
+            />
+          </div>
           <Button text="Se connecter" />
         </form>
       </div>
