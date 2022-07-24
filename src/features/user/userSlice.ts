@@ -6,13 +6,11 @@ import { signUpUser, logInUser } from './userThunks'
 
 type UserState = {
   email: string,
-  name: string,
   isAuthenticated: boolean,
 }
 
 const initialState: UserState = {
   email: "",
-  name: "",
   isAuthenticated: false,
 }
 
@@ -30,6 +28,16 @@ export const userSlice = createSlice({
       }),
       builder.addCase(signUpUser.rejected, (state, action) => {
         state.isAuthenticated = false
+      })
+      builder.addCase(logInUser.pending, (state, action) => {
+        state.isAuthenticated = false
+      })
+      builder.addCase(logInUser.fulfilled, (state, action) => {
+        state.isAuthenticated = true
+      })
+      builder.addCase(logInUser.rejected, (state, action) => {
+        state.isAuthenticated = false
+        state.email = action.payload.email
       })
     }
 })

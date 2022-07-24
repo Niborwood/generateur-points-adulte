@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { CardWrapper, Input, Button } from "../../components/ui";
 
 import { useAppDispatch } from "../../hooks/redux";
-import { signUpUser } from "../../features/user/userThunks";
+import { logInUser, signUpUser } from "../../features/user/userThunks";
 
 const Admin = () => {
   const dispatch = useAppDispatch();
@@ -53,7 +53,7 @@ const Admin = () => {
     if (Object.values(error).every((e) => !e)) {
       // Login
       if (tab === "login") {
-        // Login
+        dispatch(logInUser({ email: emailInput, password: passwordInput }));
       }
 
       // Signup
