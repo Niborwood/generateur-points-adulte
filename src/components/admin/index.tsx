@@ -26,21 +26,22 @@ const Admin = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const emailInput = email.current?.value || "";
+    const passwordInput = password.current?.value || "";
+    const repeatPasswordInput = repeatPassword.current?.value || "";
+
     // Handling validation
-    if (!email.current?.value.match(/^[^@]+@[^@]+\.[^@]+$/))
+    if (emailInput.match(/^[^@]+@[^@]+\.[^@]+$/))
       error.email = "Merci d'entrer une adresse email valide.";
     else error.email = "";
 
-    console.log((password.current?.value.length || 0) < 6);
+    console.log((passwordInput || 0) < 6);
 
-    if ((password.current?.value.length || 0) < 6)
+    if ((passwordInput || 0) < 6)
       error.password = "Le mot de passe doit faire a minima 6 caractères.";
     else error.password = "";
 
-    if (
-      tab === "signup" &&
-      repeatPassword.current?.value !== password.current?.value
-    )
+    if (tab === "signup" && repeatPasswordInput !== passwordInput)
       error.repeatPassword = "Les mots de passe ne correspondent pas.";
     else error.repeatPassword = "";
 
@@ -55,7 +56,7 @@ const Admin = () => {
 
       // Signup
       if (tab === "signup") {
-        // Signup
+        dispatch(signUpUser({ email: emailInput, password: passwordInput }));
       }
     }
   };
