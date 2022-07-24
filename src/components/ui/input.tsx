@@ -4,12 +4,21 @@ interface InputProps {
   type?: "text" | "password";
   name: string;
   error?: string;
+  label?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = "text", name, error }, ref) => {
+  ({ type = "text", name, error, label }, ref) => {
     return (
-      <Fragment>
+      <div className="mb-2">
+        {label && (
+          <label
+            className="ml-2 text-sm font-semibold text-pink-700"
+            htmlFor={name}
+          >
+            {label}
+          </label>
+        )}
         <input
           type={type}
           name={name}
@@ -23,7 +32,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {error && (
           <div className="pl-2 mb-2 text-sm text-fuchsia-700">{error}</div>
         )}
-      </Fragment>
+      </div>
     );
   }
 );
