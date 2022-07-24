@@ -1,4 +1,4 @@
-import { forwardRef, Fragment } from "react";
+import { forwardRef } from "react";
 
 interface InputProps {
   type?: "text" | "password";

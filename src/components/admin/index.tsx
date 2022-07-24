@@ -1,7 +1,12 @@
 import { useRef, useState } from "react";
 import { CardWrapper, Input, Button } from "../../components/ui";
 
+import { useAppDispatch } from "../../hooks/redux";
+import { signUpUser } from "../../features/user/userThunks";
+
 const Admin = () => {
+  const dispatch = useAppDispatch();
+
   // Input refs
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
@@ -43,7 +48,15 @@ const Admin = () => {
 
     // Handling submit
     if (Object.values(error).every((e) => !e)) {
-      console.log("Form submitted");
+      // Login
+      if (tab === "login") {
+        // Login
+      }
+
+      // Signup
+      if (tab === "signup") {
+        // Signup
+      }
     }
   };
 
