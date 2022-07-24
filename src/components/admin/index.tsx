@@ -5,11 +5,13 @@ const Admin = () => {
   // Input refs
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
+  const repeatPassword = useRef<HTMLInputElement>(null);
 
   // Error state
   const [error, setError] = useState({
     email: "",
     password: "",
+    repeatPassword: "",
   });
 
   // Tab state
@@ -24,11 +26,25 @@ const Admin = () => {
       error.email = "Merci d'entrer une adresse email valide.";
     else error.email = "";
 
-    if (password.current?.value.length || 0 < 6)
+    console.log((password.current?.value.length || 0) < 6);
+
+    if ((password.current?.value.length || 0) < 6)
       error.password = "Le mot de passe doit faire a minima 6 caractères.";
     else error.password = "";
 
+    if (
+      tab === "signup" &&
+      repeatPassword.current?.value !== password.current?.value
+    )
+      error.repeatPassword = "Les mots de passe ne correspondent pas.";
+    else error.repeatPassword = "";
+
     setError({ ...error });
+
+    // Handling submit
+    if (Object.values(error).every((e) => !e)) {
+      console.log("Form submitted");
+    }
   };
 
   return (
@@ -64,10 +80,10 @@ const Admin = () => {
             />
             {tab === "signup" && (
               <Input
-                name="password"
+                name="repeat_password"
                 type="password"
-                ref={password}
-                error={error.password}
+                ref={repeatPassword}
+                error={error.repeatPassword}
                 label="Confirmer le mot de passe"
               />
             )}
