@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import supabase from '../../../lib/supabase'
 import { User } from '@supabase/supabase-js'
-import { Question } from '../../../definitions/definitions'
 
 interface signUpData {
   email: string,
@@ -15,20 +14,21 @@ export const signUpUser = createAsyncThunk(
       email,
       password
     })
+
+    if (error) throw new Error(error.message)
     return user as any
   }
 )
 
-export const logInUser = createAsyncThunk<User, {em}>(
+export const logInUser = createAsyncThunk<User, signUpData>(
   'user/logIn',
-  async ({ email, password }: {email: string, password: string}) => {
+  async ({ email, password }) => {
     const { user, error } = await supabase.auth.signIn({
       email,
       password
     })
 
-    if (!user) throw error
-    
+    if (error) throw new Error(error.message)
     return user as User
   }
 )

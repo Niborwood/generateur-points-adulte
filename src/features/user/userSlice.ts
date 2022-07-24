@@ -34,10 +34,10 @@ export const userSlice = createSlice({
       })
       builder.addCase(logInUser.fulfilled, (state, action) => {
         state.isAuthenticated = true
+        state.email = action.payload.email || ''
       })
       builder.addCase(logInUser.rejected, (state, action) => {
         state.isAuthenticated = false
-        state.email = action.payload.email
       })
     }
 })

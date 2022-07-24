@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import quizReducer from '../features/quiz/quizSlice'
+import userReducer from '../features/user/userSlice'
 
-// THUNKS
-import { fetchQuestions } from '../features/quiz/quizThunks'
 
 export const store = configureStore({
   reducer: {
     quiz: quizReducer,
+    user: userReducer
   },
 })
 
