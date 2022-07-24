@@ -1,3 +1,4 @@
+type NotEmptyArray<T> = [T, ...T[]];
 export interface Answer {
   _id: number,
   adultScore: number | null,
@@ -13,7 +14,7 @@ export interface Question {
   helper?: string;
   condition?: [number, number]
   category: string;
-  answers: Answer[];
+  answers: NotEmptyArray<Answer>;
   color?: string;
 }
 
@@ -32,6 +33,8 @@ export interface QuizState {
   hasSetName: boolean;
   createdAt: Date | null;
   hasEndedQuiz: boolean;
+  kindOfQuestions: 0 | 1;
+  isLoading: boolean;
 }
 
 export interface Stats {

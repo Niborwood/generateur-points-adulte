@@ -1,19 +1,20 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // REDUX
 import { useAppDispatch } from "../../hooks/redux";
 import { randomizeQuiz } from "../../features/quiz/quizSlice";
-
-// HOOKS
-import { useQuestions } from "../../hooks/useQuestions";
+import { fetchQuestions } from "../../features/quiz/quizThunks";
 
 // COMPONENT IMPORTS
 import QuizCard from "../card/index";
 
 const Quiz = () => {
-  // Fetch questions from Supabase
-  const { data, loading, error } = useQuestions();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchQuestions());
+  }, []);
 
   // Randomize answers
   const handleRandomize = () => dispatch(randomizeQuiz());
@@ -21,12 +22,17 @@ const Quiz = () => {
   return (
     <Fragment>
       <QuizCard />
-      <button
-        className="p-2 mt-8 text-sm text-center bg-white rounded-md"
-        onClick={handleRandomize}
-      >
-        🎲 Randomize quiz
-      </button>
+      <div className="space-x-4">
+        <button
+          className="p-2 mt-8 text-sm text-center bg-white rounded-md"
+          onClick={handleRandomize}
+        >
+          🎲 Randomize quiz
+        </button>
+        <button className="p-2 mt-8 text-sm text-center bg-white rounded-md">
+          <Link to="/gpa-admin">🔒 Admin</Link>
+        </button>
+      </div>
     </Fragment>
   );
 };

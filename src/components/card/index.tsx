@@ -47,12 +47,7 @@ export default function Card() {
       child = (
         <>
           {/* Card Question */}
-          <CardQuestion
-            _id={currentQuestion._id}
-            title={currentQuestion.title}
-            category={currentQuestion.category}
-            helper={currentQuestion.helper}
-          />
+          <CardQuestion currentQuestion={currentQuestion} />
 
           {/* Card Answers */}
           <CardAnswers
