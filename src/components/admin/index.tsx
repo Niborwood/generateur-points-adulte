@@ -27,15 +27,17 @@ const Admin = () => {
     e.preventDefault();
 
     const emailInput = email.current?.value || "";
+    console.log(
+      "🚀 ~ file: index.tsx ~ line 30 ~ handleFormSubmit ~ emailInput",
+      emailInput
+    );
     const passwordInput = password.current?.value || "";
     const repeatPasswordInput = repeatPassword.current?.value || "";
 
     // Handling validation
-    if (emailInput.match(/^[^@]+@[^@]+\.[^@]+$/))
+    if (!emailInput.match(/^[^@]+@[^@]+\.[^@]+$/))
       error.email = "Merci d'entrer une adresse email valide.";
     else error.email = "";
-
-    console.log((passwordInput || 0) < 6);
 
     if ((passwordInput || 0) < 6)
       error.password = "Le mot de passe doit faire a minima 6 caractères.";
