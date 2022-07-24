@@ -47,10 +47,14 @@ export const quizSlice = createSlice({
           state.hasSetName = true
         },
         goToNextQuestion: (state, action: PayloadAction<AnswerGiven>) => {
-          if (state.currentQuestionIndex === 0 && action.payload.answerId === 1) state.kindOfQuestions = 1
+          // Tutoiement or vouvoiement
+          if (state.currentQuestionIndex === 0 && (action.payload.answerId === 0 || action.payload.answerId === 1)) state.kindOfQuestions = action.payload.answerId
 
           state.answers.push(action.payload)
           state.currentQuestionIndex++
+        },
+        clearQuiz: (state) => {
+          state = initialState
         }
     },
     extraReducers: (builder) => {
@@ -58,7 +62,7 @@ export const quizSlice = createSlice({
       state.questions = action.payload,
       state.isLoading = false
     })
-    builder.addCase(fetchQuestions.pending, (state, action) => {
+    builder.addCase(fetchQuestions.pending, (state) => {
       state.isLoading = false
     })
   }
