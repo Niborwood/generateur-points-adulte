@@ -10,7 +10,9 @@ const Admin = () => {
   const { isAuthenticated } = useAppSelector((state) => state.user);
 
   return (
-    <CardWrapper>{isAuthenticated ? <Dashboard /> : <Sign />}</CardWrapper>
+    <CardWrapper large={isAuthenticated}>
+      {isAuthenticated ? <Dashboard /> : <Sign />}
+    </CardWrapper>
   );
 };
 

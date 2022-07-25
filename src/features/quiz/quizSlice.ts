@@ -60,7 +60,7 @@ export const quizSlice = createSlice({
     extraReducers: (builder) => {
     builder.addCase(fetchQuestions.fulfilled, (state, action) => {
       // If questions have already been fetched, do nothing
-      if (!state.questions.length) return
+      if (state.questions.length) return
       
       state.questions = action.payload
       state.isLoading = false
