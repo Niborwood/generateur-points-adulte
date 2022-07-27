@@ -5,15 +5,29 @@ interface InputProps {
   name: string;
   error?: string;
   label?: string;
+  small?: boolean;
+  labelColor?: "white" | "pink-700";
+  value?: HTMLInputElement["value"];
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = "text", name, error, label }, ref) => {
+  (
+    {
+      type = "text",
+      name,
+      error,
+      label,
+      value,
+      small = false,
+      labelColor = "pink-700",
+    },
+    ref
+  ) => {
     return (
       <div className="mb-2">
         {label && (
           <label
-            className="ml-2 text-sm font-semibold text-pink-700"
+            className={`ml-2 text-sm font-normal ${labelColor}`}
             htmlFor={name}
           >
             {label}
@@ -23,11 +37,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           name={name}
           id={name}
-          className={`w-full p-4 my-1 text-sm bg-fuchsia-200 border-0 rounded-xl transition-all ${
+          className={`w-full ${
+            small ? "p-2" : "p-4"
+          } my-1 text-sm bg-fuchsia-200 text-pink-800 font-bold border-0 rounded-xl transition-all ${
             error && "bg-purple-200!important"
           }`}
           autoComplete="on"
           ref={ref}
+          value={value}
         />
         {error && (
           <div className="pl-2 mb-2 text-sm text-fuchsia-700">{error}</div>
