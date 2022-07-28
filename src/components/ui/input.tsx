@@ -27,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="mb-2">
         {label && (
           <label
-            className={`ml-2 text-sm font-normal ${labelColor}`}
+            className={`ml-2 text-sm font-semibold ${labelColor}`}
             htmlFor={name}
           >
             {label}
@@ -39,7 +39,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           id={name}
           className={`w-full ${
             small ? "p-2" : "p-4"
-          } my-1 text-sm bg-fuchsia-200 text-pink-800 font-bold border-0 rounded-xl transition-all ${
+          } my-1 text-sm bg-fuchsia-200 text-pink-800 font-semibold border-0 rounded-xl transition-all ${
             error && "bg-purple-200!important"
           }`}
           autoComplete="on"
