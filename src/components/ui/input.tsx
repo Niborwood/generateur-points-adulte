@@ -46,7 +46,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className={editable ? "flex flex-row items-center gap-1" : "mb-2"}>
         {label && (
           <label
-            className={`ml-2 text-sm font-normal ${labelColor}`}
+            className={`ml-2 text-sm font-semibold ${labelColor}`}
             htmlFor={name}
           >
             {label}
@@ -57,6 +57,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           name={name}
           id={name}
+<<<<<<< HEAD
           className={
             editable
               ? "bg-transparent text-slate-100 w-full break-words"
@@ -66,6 +67,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                   error && "bg-purple-200!important"
                 }`
           }
+=======
+          className={`w-full ${
+            small ? "p-2" : "p-4"
+          } my-1 text-sm bg-fuchsia-200 text-pink-800 font-semibold border-0 rounded-xl transition-all ${
+            error && "bg-purple-200!important"
+          }`}
+>>>>>>> 5f3462246c334b7af2331236ce68e58272c040f8
           autoComplete="on"
           ref={ref}
           defaultValue={defaultValue}
