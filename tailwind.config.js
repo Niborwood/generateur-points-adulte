@@ -21,4 +21,9 @@ module.exports = {
     },
   },
   plugins: [],
+  variants: {
+    extend: {
+      textDecoration: ['focus-visible']
+    }
+  }
 };

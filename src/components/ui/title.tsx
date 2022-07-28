@@ -12,7 +12,7 @@ const Title = ({ title, size = "2xl", bold = true }: TitleProps) => {
 
 interface TitleProps {
   title: string;
-  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
   bold?: boolean;
 }
 

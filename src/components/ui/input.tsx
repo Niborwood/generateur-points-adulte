@@ -1,13 +1,15 @@
 import { forwardRef } from "react";
-
+import { PencilIcon } from "@heroicons/react/solid";
 interface InputProps {
-  type?: "text" | "password";
+  type?: "text" | "password" | "number";
   name: string;
   error?: string;
   label?: string;
   small?: boolean;
   labelColor?: "white" | "pink-700";
-  value?: HTMLInputElement["value"];
+  defaultValue?: HTMLInputElement["value"];
+  editable?: boolean;
+  editableArea?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -17,14 +19,31 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       name,
       error,
       label,
-      value,
+      defaultValue,
       small = false,
+      editable = false,
+      editableArea = false,
       labelColor = "pink-700",
     },
     ref
   ) => {
+    if (editableArea) {
+      return (
+        <div className="flex flex-row items-start justify-start gap-2">
+          <PencilIcon className="relative w-5 text-white top-1" />
+          <textarea
+            name={name}
+            id={name}
+            className="font-bold bg-transparent resize-none text-slate-100"
+          >
+            {defaultValue}
+          </textarea>
+        </div>
+      );
+    }
+
     return (
-      <div className="mb-2">
+      <div className={editable ? "flex flex-row items-center gap-1" : "mb-2"}>
         {label && (
           <label
             className={`ml-2 text-sm font-normal ${labelColor}`}
@@ -33,18 +52,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {label}
           </label>
         )}
+        {editable && <PencilIcon className="w-4 text-white" />}
         <input
           type={type}
           name={name}
           id={name}
-          className={`w-full ${
-            small ? "p-2" : "p-4"
-          } my-1 text-sm bg-fuchsia-200 text-pink-800 font-bold border-0 rounded-xl transition-all ${
-            error && "bg-purple-200!important"
-          }`}
+          className={
+            editable
+              ? "bg-transparent text-slate-100 w-full break-words"
+              : `w-full ${
+                  small ? "p-2" : "p-4"
+                } my-1 text-sm bg-fuchsia-200 text-pink-800 font-bold border-0 rounded-xl focus-visible:ring-transparent transition-all ${
+                  error && "bg-purple-200!important"
+                }`
+          }
           autoComplete="on"
           ref={ref}
-          value={value}
+          defaultValue={defaultValue}
         />
         {error && (
           <div className="pl-2 mb-2 text-sm text-fuchsia-700">{error}</div>
