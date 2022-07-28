@@ -3,6 +3,7 @@ const Button = ({
   children,
   small = false,
   style = "primary",
+  type = "button",
   onClick = () => {},
 }: ButtonProps) => {
   const getStyle = () => {
@@ -16,7 +17,8 @@ const Button = ({
 
   return (
     <button
-      className={`flex justify-center w-full ${
+      type={type}
+      className={`flex justify-center w-fit-content ${
         small
           ? "px-3 py-2 text-sm shadow-sm rounded-md"
           : "p-4 shadow-lg rounded-xl"
@@ -32,6 +34,7 @@ type ButtonProps = {
   text?: string;
   children?: React.ReactNode;
   small?: boolean;
+  type?: "button" | "submit" | "reset";
   style?:
     | "primary"
     | "secondary"

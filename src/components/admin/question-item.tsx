@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Question, Answer } from "../../../definitions/definitions";
 
 import { Button, Title, Input } from "../../components/ui";
-import EditableItem from "./answer-item";
+import AnswerItem from "./answer-item";
 
 interface QuestionItemProps {
   question: Question;
@@ -11,12 +11,25 @@ interface QuestionItemProps {
 
 const QuestionItem = ({ question, index }: QuestionItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [answers, setAnswers] = useState<Answer[]>(question.answers);
   const toggleEdit = () => setIsEditing((prev) => !prev);
+
+  const addAnswer = () => {
+    setAnswers((prev) => [
+      ...prev,
+      {
+        _id: 0,
+        answer: "Nouvelle réponse",
+        respScore: 0,
+        adultScore: 0,
+      },
+    ]);
+  };
 
   return (
     <div className="transition-all border-2 border-pink-200 border-dashed rounded-xl">
       <div
-        className={`flex justify-between pr-4 items-center ${
+        className={`flex justify-between items-center ${
           isEditing && "border-b-2 border-purple-200"
         }`}
       >
@@ -49,22 +62,19 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
               </div>
             </div>
             <div className="flex flex-row gap-4">
-              <div className="flex-1 p-8 text-lg font-bold bg-gradient-to-tl from-purple-600 to-purple-900 text-slate-100 rounded-2xl">
-                <Input
-                  name="title_0"
-                  type="text"
-                  editableArea
-                  defaultValue={question.title_0}
-                />
-              </div>
-              <div className="flex-1 p-8 text-lg font-bold bg-gradient-to-tl from-purple-600 to-purple-900 text-slate-100 rounded-2xl">
-                <Input
-                  name="title_0"
-                  type="text"
-                  editableArea
-                  defaultValue={question.title_1}
-                />
-              </div>
+              {[question.title_0, question.title_1].map((title, index) => (
+                <div
+                  key={index}
+                  className="flex-1 p-6 text-lg font-bold bg-gradient-to-tl from-purple-600 to-purple-900 text-slate-100 rounded-2xl"
+                >
+                  <Input
+                    name={`title_${index}`}
+                    type="text"
+                    editableArea
+                    defaultValue={title}
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
@@ -74,16 +84,20 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
               <Title title="Réponses" size="xl" />
             </div>
             <div className="space-y-2">
-              {question.answers.length
-                ? question.answers.map((answer: Answer) => (
-                    <EditableItem answer={answer} />
+              {answers.length
+                ? answers.map((answer: Answer) => (
+                    <AnswerItem answer={answer} />
                   ))
                 : "Aucune réponse associée."}
             </div>
-            <div className="flex flex-row justify-end mt-4">
-              <div className="w-52">
-                <Button text="Enregister" style="secondary" small />
-              </div>
+            <div className="flex flex-row justify-end mt-4 gap-4">
+              <Button
+                text="Ajouter une question"
+                style="secondary"
+                small
+                onClick={addAnswer}
+              />
+              <Button text="Enregister" style="secondary" small type="submit" />
             </div>
           </div>
         </form>
