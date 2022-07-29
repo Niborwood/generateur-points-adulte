@@ -40,11 +40,6 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
 
     const title0 = title0Ref.current?.value;
     const title1 = title1Ref.current?.value;
-    console.log(
-      "🚀 ~ file: question-item.tsx ~ line 42 ~ handleQuestionUpdate ~ title0",
-      title0,
-      title1
-    );
 
     if (!title0 || !title1) return;
 

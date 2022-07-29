@@ -35,6 +35,7 @@ export interface QuizState {
   hasEndedQuiz: boolean;
   kindOfQuestions: 0 | 1;
   isLoading: boolean;
+  error: string;
 }
 
 export interface Stats {

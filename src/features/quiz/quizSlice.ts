@@ -15,6 +15,7 @@ const initialState: QuizState = {
     hasEndedQuiz: false,
     kindOfQuestions: 0,
     isLoading: false,
+    error: "",
 }
 
 export const quizSlice = createSlice({
@@ -76,6 +77,10 @@ export const quizSlice = createSlice({
         if (questionIndex !== -1) state.questions[questionIndex] = question
         else state.questions.push(question)
       }
+    })
+    builder.addCase(upsertQuestion.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message || 'Une erreur est survenue'
     })
   }
 })
