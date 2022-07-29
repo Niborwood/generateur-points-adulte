@@ -6,19 +6,24 @@ import { MinusCircleIcon } from "@heroicons/react/solid";
 const AnswerItem = ({ answer, index, deleteAnswer }: AnswerItemProps) => {
   return (
     <div className="pl-4 font-bold text-white shadow-sm shadow-purple-300 rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
+      <Input
+        type="hidden"
+        name={`asw_${index}_id`}
+        defaultValue={answer.answer}
+      />
       <div className="flex flex-row items-center justify-between gap-6">
         <div className="flex-1 py-1">
           <Input
             type="text"
             defaultValue={answer.answer}
-            name={`answer_${index}`}
+            name={`asw_${index}_answer`}
             editable
           />
         </div>
         <div className="flex flex-row gap-2">
           <div className="w-14">
             <Input
-              name={`resp_score_${index}`}
+              name={`asw_${index}_resp_score`}
               type="number"
               defaultValue={answer.respScore?.toString()}
               label="Resp."
@@ -28,7 +33,7 @@ const AnswerItem = ({ answer, index, deleteAnswer }: AnswerItemProps) => {
           </div>
           <div className="w-14">
             <Input
-              name={`adult_score_${index}`}
+              name={`asw_${index}_adult_score`}
               type="number"
               defaultValue={answer.adultScore?.toString()}
               label="Adulte"

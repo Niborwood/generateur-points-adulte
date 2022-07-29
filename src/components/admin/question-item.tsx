@@ -36,10 +36,15 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
   };
 
   const handleForm = (formValues: { [k: string]: FormDataEntryValue }) => {
+    console.log(
+      "🚀 ~ file: question-item.tsx ~ line 39 ~ handleForm ~ formValues",
+      formValues
+    );
     const { title_0, title_1, question_id } = formValues;
 
     // Check if titles are empty
     if (!title_0 || !title_1 || !question_id) return;
+    return;
 
     dispatch(
       upsertQuestion({
@@ -92,14 +97,6 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
             <div className="mb-6 ml-4 text-purple-700/80">
               <Title title="Questions" size="xl" />
             </div>
-            {/* <div className="flex flex-row gap-4 sm:flex-col">
-              <div className="flex-1 mb-2 ml-3 text-sm font-bold text-purple-600">
-                Vouvoiement
-              </div>
-              <div className="flex-1 mb-2 ml-3 text-sm font-bold text-purple-600">
-                Tutoiement
-              </div>
-            </div> */}
             <div className="flex flex-col gap-8 mt-12 md:gap-4 md:flex-row">
               {[question.title_0, question.title_1].map((title, index) => (
                 <div

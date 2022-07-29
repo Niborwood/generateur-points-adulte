@@ -16,6 +16,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
+    // Hidden
+    if (type === "hidden")
+      return <input type="hidden" name={name} defaultValue={defaultValue} />;
+
+    // Editable area (textarea)
     if (editableArea) {
       return (
         <div className="flex flex-row items-start justify-start gap-2">
@@ -24,13 +29,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             name={name}
             // ref={ref}
             id={name}
-            className="font-bold bg-transparent outline-none resize-none text-slate-100 focus-visible:border-0 :focus-visible:ring-0 outline-0"
+            className="w-full font-bold bg-transparent outline-none resize-none text-slate-100 focus-visible:border-0 :focus-visible:ring-0 outline-0"
             defaultValue={defaultValue}
           />
         </div>
       );
     }
 
+    // Classic
     return (
       <div className={editable ? "flex flex-row items-center gap-1" : "mb-2"}>
         {label && (
