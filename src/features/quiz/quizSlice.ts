@@ -2,10 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { AnswerGiven, QuizState } from '../../../definitions/definitions'
 
-import rawData from '../../../content/data'
-
 // IMPORT THUNKS
-import { fetchQuestions } from './quizThunks'
+import { fetchQuestions, upsertQuestion } from './quizThunks'
 
 const initialState: QuizState = {
     questions: [],
@@ -38,7 +36,7 @@ export const quizSlice = createSlice({
             // Choose randomly between one of the answers
             const randomIndex = Math.floor(Math.random() * question.answers.length);
             const answer = question.answers[randomIndex];
-            if (answer) state.answers.push({ questionId: question._id, answerId: answer._id });
+            if (answer) state.answers.push({ questionId: question._id, answerId: answer._id! });
           }
           
           state.currentQuestionIndex = state.questions.length
@@ -67,6 +65,17 @@ export const quizSlice = createSlice({
     })
     builder.addCase(fetchQuestions.pending, (state) => {
       state.isLoading = false
+    })
+    builder.addCase(upsertQuestion.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(upsertQuestion.fulfilled, (state, action) => {
+      state.isLoading = false
+      for (const question of action.payload.updatedQuestions) {
+        const questionIndex = state.questions.findIndex(q => q._id === question._id)
+        if (questionIndex !== -1) state.questions[questionIndex] = question
+        else state.questions.push(question)
+      }
     })
   }
 })

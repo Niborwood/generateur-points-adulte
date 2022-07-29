@@ -3,9 +3,13 @@ import supabase from '../../../lib/supabase'
 import { Question, Answer } from '../../../definitions/definitions'
 
 interface upsertProps {
-  question: Question,
-  answers: Answer[]
-}
+  question: {
+    _id?: number,
+    title_0: string,
+    title_1: string,
+    created_at?: Date,
+    updated_at: Date,
+  }}
 
 export const fetchQuestions = createAsyncThunk<Question[]>(
   'quiz/fetchAllQuestions', 
@@ -18,18 +22,20 @@ export const fetchQuestions = createAsyncThunk<Question[]>(
   }
 )
 
-export const upsertQuestion = createAsyncThunk<upsertProps, upsertProps>(
+export const upsertQuestion = createAsyncThunk(
   'quiz/upsertQuestion',
-  async ({question, answers}) => {
-    const { data: updatedQuestion, error: errorQuestion } = await supabase
+  async ({question}: upsertProps) => {
+    const { data: updatedQuestions, error: errorQuestion } = await supabase
             .from<Question>('questions')
             .upsert(question, { onConflict: '_id' })
 
-    const { data: updatedAnswers, error: errorAnswers } = await supabase
-            .from<Question>('answers')
-            .upsert(answers, { onConflict: '_id' })
+    // const { data: updatedAnswers, error: errorAnswers } = await supabase
+    //         .from<Question>('answers')
+    //         .upsert(answers, { onConflict: '_id' })
 
-    if (errorQuestion || errorAnswers) throw new Error(errorQuestion?.message || errorAnswers?.message)
-    return {updatedQuestion, updatedAnswers} as {updatedQuestion: Question, updatedAnswers: Answer[]}
+    // if (errorQuestion || errorAnswers) throw new Error(errorQuestion?.message || errorAnswers?.message)
+    if (errorQuestion) throw new Error(errorQuestion?.message)
+    // return {updatedQuestion, updatedAnswers} as {updatedQuestion: Question, updatedAnswers: Answer[]}
+    return {updatedQuestions} as {updatedQuestions: Question[]}
   }
 )

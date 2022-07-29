@@ -33,8 +33,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <PencilIcon className="relative w-5 text-white top-1" />
           <textarea
             name={name}
+            ref={ref}
             id={name}
-            className="font-bold bg-transparent resize-none text-slate-100 focus-visible:border-0 :focus-visible:ring-0 outline-none outline-0"
+            className="font-bold bg-transparent outline-none resize-none text-slate-100 focus-visible:border-0 :focus-visible:ring-0 outline-0"
           >
             {defaultValue}
           </textarea>

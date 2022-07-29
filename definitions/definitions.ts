@@ -9,8 +9,8 @@ export interface Answer {
 export interface Question {
   _id: number;
   title: string;
-  title_0?: string;
-  title_1?: string;
+  title_0: string;
+  title_1: string;
   helper?: string;
   condition?: [number, number]
   category: string;
