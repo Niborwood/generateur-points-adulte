@@ -1,7 +1,7 @@
 import { useState, FormEvent, useRef } from "react";
 import { Question, Answer } from "../../../definitions/definitions";
 
-import { Button, Title, Input } from "../../components/ui";
+import { Button, Title, Input, Form } from "../../components/ui";
 import AnswerItem from "./answer-item";
 
 // REDUX
@@ -33,6 +33,13 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
         adultScore: 0,
       },
     ]);
+  };
+
+  const handleForm = (formData: FormData) => {
+    console.log(
+      "🚀 ~ file: question-item.tsx ~ line 39 ~ handleForm ~ formData",
+      formData
+    );
   };
 
   const handleQuestionUpdate = (e: FormEvent<HTMLFormElement>) => {
@@ -81,28 +88,28 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
         </div>
       </div>
       {isEditing && (
-        <form
+        <Form
           className="p-6 space-y-8 bg-purple-100 rounded-b-xl"
-          onSubmit={handleQuestionUpdate}
+          onSubmit={handleForm}
         >
           {/* QUESTION */}
           <div>
             <div className="mb-6 ml-4 text-purple-700/80">
               <Title title="Questions" size="xl" />
             </div>
-            <div className="flex flex-row gap-4 sm:flex-col">
+            {/* <div className="flex flex-row gap-4 sm:flex-col">
               <div className="flex-1 mb-2 ml-3 text-sm font-bold text-purple-600">
                 Vouvoiement
               </div>
               <div className="flex-1 mb-2 ml-3 text-sm font-bold text-purple-600">
                 Tutoiement
               </div>
-            </div>
-            <div className="flex flex-col gap-4 md:flex-row">
+            </div> */}
+            <div className="flex flex-col gap-4 mt-12 md:flex-row">
               {[question.title_0, question.title_1].map((title, index) => (
                 <div
                   key={index}
-                  className="flex-1 p-6 text-lg font-bold bg-gradient-to-tl from-purple-600 to-purple-900 text-slate-100 rounded-2xl"
+                  className="relative flex-1 p-6 text-lg font-bold bg-gradient-to-tl from-purple-600 to-purple-900 text-slate-100 rounded-2xl before:content-['Tutoiement'] before:text-sm before:absolute before:-top-6 before:text-purple-600 before:font-medium"
                 >
                   <Input
                     name={`title_${index}`}
@@ -130,7 +137,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
             </div>
             <div className="flex flex-row justify-end gap-4 mt-4">
               <Button
-                text="Ajouter une question"
+                text="Ajouter une réponse"
                 style="secondary"
                 small
                 onClick={addAnswer}
@@ -138,7 +145,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
               <Button text="Enregister" style="secondary" small type="submit" />
             </div>
           </div>
-        </form>
+        </Form>
       )}
     </div>
   );
