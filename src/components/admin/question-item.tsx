@@ -18,7 +18,6 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
     setAnswers((prev) => [
       ...prev,
       {
-        _id: 0,
         answer: "Nouvelle réponse",
         respScore: 0,
         adultScore: 0,
@@ -34,12 +33,12 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
         }`}
       >
         <div className="flex flex-row items-center flex-1">
-          <div className="justify-center p-6 font-bold text-pink-400 bg-pink-100 cursor-move">
+          <div className="justify-center p-6 font-bold text-pink-400 bg-pink-100 cursor-move self-stretch">
             {index + 1}
           </div>
           <div className="px-4 text-xl font-bold">{question.title_0}</div>
         </div>
-        <div className="flex flex-row items-center w-32 gap-2">
+        <div className="pr-2">
           <Button
             text={isEditing ? "Fermer" : "Modifier"}
             onClick={toggleEdit}
@@ -53,7 +52,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
             <div className="mb-6 ml-4 text-purple-700/80">
               <Title title="Questions" size="xl" />
             </div>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-4 sm:flex-col">
               <div className="flex-1 mb-2 ml-3 text-sm font-bold text-purple-600">
                 Vouvoiement
               </div>
@@ -61,7 +60,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
                 Tutoiement
               </div>
             </div>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-col gap-4 md:flex-row">
               {[question.title_0, question.title_1].map((title, index) => (
                 <div
                   key={index}

@@ -1,6 +1,6 @@
 type NotEmptyArray<T> = [T, ...T[]];
 export interface Answer {
-  _id: number,
+  _id?: number,
   adultScore: number | null,
   respScore: number | null,
   answer: string,

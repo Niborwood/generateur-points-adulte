@@ -9,7 +9,7 @@ interface AnswerItemProps {
 
 const AnswerItem = ({ answer }: AnswerItemProps) => {
   return (
-    <div className="px-4 py-2 font-bold text-white rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
+    <div className="px-4 py-1 font-bold text-white rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
       <div className="flex flex-row items-center justify-between gap-6">
         <div className="flex-1">
           <Input

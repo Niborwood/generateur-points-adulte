@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <textarea
             name={name}
             id={name}
-            className="font-bold bg-transparent resize-none text-slate-100 focus-visible:border-0 :focus-visible:ring-0"
+            className="font-bold bg-transparent resize-none text-slate-100 focus-visible:border-0 :focus-visible:ring-0 outline-none outline-0"
           >
             {defaultValue}
           </textarea>
@@ -59,10 +59,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           id={name}
           className={
             editable
-              ? "bg-transparent text-slate-100 w-full break-words fond-semibold"
+              ? "bg-transparent text-slate-100 w-full break-words fond-semibold outline-0"
               : `w-full ${
-                  small ? "p-2 text-center" : "p-4"
-                } my-1 text-sm bg-fuchsia-200 text-pink-800 font-bold border-0 rounded-xl focus-visible:ring-transparent transition-all ${
+                  small ? "p-2 text-center my-0" : "p-4 my-1"
+                } my-0 text-sm bg-fuchsia-200 text-pink-800 font-bold border-0 rounded-xl focus-visible:ring-transparent transition-all outline-0 ${
                   error && "bg-purple-200!important"
                 }`
           }
