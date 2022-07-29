@@ -1,4 +1,4 @@
-import { ReactNode, FormEvent, useRef } from "react";
+import { ReactNode, FormEvent, useRef, InputHTMLAttributes } from "react";
 
 const Form = ({ children, className, onSubmit }: FormProps) => {
   const form = useRef<HTMLFormElement>(null);
@@ -7,10 +7,8 @@ const Form = ({ children, className, onSubmit }: FormProps) => {
     event.preventDefault();
 
     if (!form.current) return;
-    console.log(form.current);
 
-    const formValues = new FormData(form.current);
-
+    const formValues = Object.fromEntries(new FormData(form.current));
     onSubmit(formValues);
   };
 
@@ -23,7 +21,7 @@ const Form = ({ children, className, onSubmit }: FormProps) => {
 
 interface FormProps {
   children: ReactNode;
-  onSubmit: (formData: FormData) => void;
+  onSubmit: (formData: { [k: string]: FormDataEntryValue }) => void;
   className?: string;
 }
 

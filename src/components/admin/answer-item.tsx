@@ -1,28 +1,24 @@
-import { useState } from "react";
 import { Answer } from "../../../definitions/definitions";
 
 import { Input } from "../ui";
+import { MinusCircleIcon } from "@heroicons/react/solid";
 
-interface AnswerItemProps {
-  answer: Answer;
-}
-
-const AnswerItem = ({ answer }: AnswerItemProps) => {
+const AnswerItem = ({ answer, index }: AnswerItemProps) => {
   return (
-    <div className="px-4 py-1 font-bold text-white rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
+    <div className="pl-4 font-bold text-white rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
       <div className="flex flex-row items-center justify-between gap-6">
-        <div className="flex-1">
+        <div className="flex-1 py-1">
           <Input
             type="text"
             defaultValue={answer.answer}
-            name="answer"
+            name={`answer_${index}`}
             editable
           />
         </div>
         <div className="flex flex-row gap-2">
           <div className="w-14">
             <Input
-              name="respScore"
+              name={`resp_score_${index}`}
               type="number"
               defaultValue={answer.respScore?.toString()}
               label="Resp."
@@ -32,7 +28,7 @@ const AnswerItem = ({ answer }: AnswerItemProps) => {
           </div>
           <div className="w-14">
             <Input
-              name="adultScore"
+              name={`adult_score_${index}`}
               type="number"
               defaultValue={answer.adultScore?.toString()}
               label="Adulte"
@@ -40,9 +36,17 @@ const AnswerItem = ({ answer }: AnswerItemProps) => {
             />
           </div>
         </div>
+        <button className="flex items-center self-stretch px-3 bg-red-600/70 rounded-r-xl">
+          <MinusCircleIcon className="w-5 text-slate-100" />
+        </button>
       </div>
     </div>
   );
 };
+
+interface AnswerItemProps {
+  answer: Answer;
+  index: number;
+}
 
 export default AnswerItem;

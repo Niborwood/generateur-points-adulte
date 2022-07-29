@@ -1,16 +1,5 @@
 import { forwardRef } from "react";
 import { PencilIcon } from "@heroicons/react/solid";
-interface InputProps {
-  type?: "text" | "password" | "number";
-  name: string;
-  error?: string;
-  label?: string;
-  small?: boolean;
-  labelColor?: "white" | "pink-700";
-  defaultValue?: HTMLInputElement["value"];
-  editable?: boolean;
-  editableArea?: boolean;
-}
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
@@ -33,12 +22,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <PencilIcon className="relative w-5 text-white top-1" />
           <textarea
             name={name}
-            ref={ref}
+            // ref={ref}
             id={name}
             className="font-bold bg-transparent outline-none resize-none text-slate-100 focus-visible:border-0 :focus-visible:ring-0 outline-0"
-          >
-            {defaultValue}
-          </textarea>
+            defaultValue={defaultValue}
+          />
         </div>
       );
     }
@@ -78,5 +66,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
+
+interface InputProps {
+  type?: "text" | "password" | "number" | "hidden";
+  name: string;
+  error?: string;
+  label?: string;
+  small?: boolean;
+  labelColor?: "white" | "pink-700";
+  defaultValue?: HTMLInputElement["value"];
+  editable?: boolean;
+  editableArea?: boolean;
+}
 
 export default Input;

@@ -102,7 +102,10 @@ const Sign = () => {
               />
             )}
           </div>
-          <Button text={tab === "login" ? "Se connecter" : "S'inscrire"} />
+          <Button
+            type="submit"
+            text={tab === "login" ? "Se connecter" : "S'inscrire"}
+          />
         </form>
       </div>
     </Fragment>
