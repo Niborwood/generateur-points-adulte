@@ -31,6 +31,10 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
     ]);
   };
 
+  const deleteAnswer = (index: number) => {
+    setAnswers((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const handleForm = (formValues: { [k: string]: FormDataEntryValue }) => {
     const { title_0, title_1, question_id } = formValues;
 
@@ -102,7 +106,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
                   key={index}
                   className={`relative flex-1 p-6 text-lg font-bold bg-gradient-to-tl from-purple-600 to-purple-900 text-slate-100 rounded-2xl before:content-['${
                     index === 1 ? "Tutoiement" : "Vouvoiement"
-                  }'] before:text-sm before:absolute before:-top-6 before:text-purple-600 before:font-medium`}
+                  }'] before:text-sm before:absolute before:-top-6 before:text-purple-600 before:font-medium shadow-xl`}
                 >
                   <Input
                     name={`title_${index}`}
@@ -127,6 +131,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
                       key={answer.answer}
                       answer={answer}
                       index={index}
+                      deleteAnswer={deleteAnswer}
                     />
                   ))
                 : "Aucune réponse associée."}

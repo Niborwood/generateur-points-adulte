@@ -3,9 +3,9 @@ import { Answer } from "../../../definitions/definitions";
 import { Input } from "../ui";
 import { MinusCircleIcon } from "@heroicons/react/solid";
 
-const AnswerItem = ({ answer, index }: AnswerItemProps) => {
+const AnswerItem = ({ answer, index, deleteAnswer }: AnswerItemProps) => {
   return (
-    <div className="pl-4 font-bold text-white rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
+    <div className="pl-4 font-bold text-white shadow-sm shadow-purple-300 rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
       <div className="flex flex-row items-center justify-between gap-6">
         <div className="flex-1 py-1">
           <Input
@@ -36,7 +36,10 @@ const AnswerItem = ({ answer, index }: AnswerItemProps) => {
             />
           </div>
         </div>
-        <button className="flex items-center self-stretch px-3 bg-red-600/70 rounded-r-xl">
+        <button
+          className="flex items-center self-stretch px-3 bg-red-600/70 rounded-r-xl"
+          onClick={() => deleteAnswer(index)}
+        >
           <MinusCircleIcon className="w-5 text-slate-100" />
         </button>
       </div>
@@ -47,6 +50,7 @@ const AnswerItem = ({ answer, index }: AnswerItemProps) => {
 interface AnswerItemProps {
   answer: Answer;
   index: number;
+  deleteAnswer: (index: number) => void;
 }
 
 export default AnswerItem;
