@@ -42,8 +42,21 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
     );
     const { title_0, title_1, question_id } = formValues;
 
-    // Check if titles are empty
-    if (!title_0 || !title_1 || !question_id) return;
+    const answers: { [k: string]: FormDataEntryValue }[] = [];
+    for (const key in formValues) {
+      if (!key.startsWith("asw_")) continue;
+      const currentAnswer = key.at(4);
+      if (!currentAnswer) continue;
+
+      if (!answers[+currentAnswer]) answers[+currentAnswer] = {};
+      answers[+currentAnswer][key.replace(`asw_${currentAnswer}_`, "")] =
+        formValues[key];
+    }
+    console.log(
+      "🚀 ~ file: question-item.tsx ~ line 42 ~ handleForm ~ answers",
+      answers
+    );
+
     return;
 
     dispatch(

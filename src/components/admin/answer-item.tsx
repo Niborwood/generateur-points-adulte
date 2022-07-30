@@ -8,8 +8,8 @@ const AnswerItem = ({ answer, index, deleteAnswer }: AnswerItemProps) => {
     <div className="pl-4 font-bold text-white shadow-sm shadow-purple-300 rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
       <Input
         type="hidden"
-        name={`asw_${index}_id`}
-        defaultValue={answer.answer}
+        name={`asw_${index}__id`}
+        defaultValue={answer._id?.toString()}
       />
       <div className="flex flex-row items-center justify-between gap-6">
         <div className="flex-1 py-1">
