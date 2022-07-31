@@ -16,24 +16,14 @@ const CardName = () => {
 
   const handleSubmit = (formValues: FormValues) => {
     const { name, age } = formValues;
+    // Name check
     if (!name || !name.toString().trim().length)
       return setError("Merci d'entrer un nom.");
-
+    // Age check
     if (!age) return setError("Merci d'entrer votre âge");
 
     dispatch(beginQuiz({ name: name.toString(), age: +age }));
   };
-
-  // Check User Name
-  // const checkUserName = () => {
-  //   const name = nameInput.current?.value;
-
-  //   // Name Guard
-  //   if (!name || !name.trim().length) return setError("Merci d'entrer un nom.");
-
-  //   // Begin Quiz if name is valid
-  //   dispatch(beginQuiz(name));
-  // };
 
   return (
     <div>
