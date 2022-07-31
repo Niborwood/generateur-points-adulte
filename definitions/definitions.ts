@@ -45,3 +45,18 @@ export interface Stats {
   name: string;
   answers: AnswersGiven;
 }
+
+export interface QuestionToUpsert {
+    _id?: number,
+    title_0: string,
+    title_1: string,
+    created_at?: Date,
+    updated_at: Date,
+}
+
+export interface AnswerToUpsert {
+    _id?: string,
+    question_id: string,
+    adultScore: string | null,
+    respScore: string | null,
+}

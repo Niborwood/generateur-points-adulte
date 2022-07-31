@@ -23,7 +23,7 @@ const AnswerItem = ({ answer, index, deleteAnswer }: AnswerItemProps) => {
         <div className="flex flex-row gap-2">
           <div className="w-14">
             <Input
-              name={`asw_${index}_resp_score`}
+              name={`asw_${index}_respScore`}
               type="number"
               defaultValue={answer.respScore?.toString()}
               label="Resp."
@@ -33,7 +33,7 @@ const AnswerItem = ({ answer, index, deleteAnswer }: AnswerItemProps) => {
           </div>
           <div className="w-14">
             <Input
-              name={`asw_${index}_adult_score`}
+              name={`asw_${index}_adultScore`}
               type="number"
               defaultValue={answer.adultScore?.toString()}
               label="Adulte"

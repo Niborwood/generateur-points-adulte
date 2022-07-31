@@ -1,5 +1,9 @@
 import { useState, FormEvent, useRef } from "react";
-import { Question, Answer } from "../../../definitions/definitions";
+import {
+  Question,
+  Answer,
+  AnswerToUpsert,
+} from "../../../definitions/definitions";
 
 import { Button, Title, Input, Form } from "../../components/ui";
 import AnswerItem from "./answer-item";
@@ -36,28 +40,29 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
   };
 
   const handleForm = (formValues: { [k: string]: FormDataEntryValue }) => {
-    console.log(
-      "🚀 ~ file: question-item.tsx ~ line 39 ~ handleForm ~ formValues",
-      formValues
-    );
     const { title_0, title_1, question_id } = formValues;
 
-    const answers: { [k: string]: FormDataEntryValue }[] = [];
+    const answers: AnswerToUpsert[] = [];
     for (const key in formValues) {
+      // Only keys concerning nnswers
       if (!key.startsWith("asw_")) continue;
-      const currentAnswer = key.at(4);
-      if (!currentAnswer) continue;
 
-      if (!answers[+currentAnswer]) answers[+currentAnswer] = {};
-      answers[+currentAnswer][key.replace(`asw_${currentAnswer}_`, "")] =
-        formValues[key];
+      // If _id is null, skip it
+      if (key.includes("_id") && !formValues[key]) continue;
+
+      // Get currentQuestionIndex
+      const currentQuestionIndex = key.at(4);
+      if (!currentQuestionIndex) continue;
+
+      // Create the answer object and insert elements
+      const sanitizedKey = key.replace(`asw_${currentQuestionIndex}_`, "");
+      if (!answers[+currentQuestionIndex]) answers[+currentQuestionIndex] = {};
+
+      answers[+currentQuestionIndex][sanitizedKey] =
+        formValues[key].toString() || null;
+      if (!answers[+currentQuestionIndex].question_id)
+        answers[+currentQuestionIndex].question_id = question_id.toString();
     }
-    console.log(
-      "🚀 ~ file: question-item.tsx ~ line 42 ~ handleForm ~ answers",
-      answers
-    );
-
-    return;
 
     dispatch(
       upsertQuestion({
@@ -67,6 +72,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
           title_1: title_1.toString(),
           updated_at: new Date(),
         },
+        answers,
       })
     );
   };

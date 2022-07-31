@@ -72,11 +72,18 @@ export const quizSlice = createSlice({
     })
     builder.addCase(upsertQuestion.fulfilled, (state, action) => {
       state.isLoading = false
-      for (const question of action.payload.updatedQuestions) {
-        const questionIndex = state.questions.findIndex(q => q._id === question._id)
-        if (questionIndex !== -1) state.questions[questionIndex] = question
-        else state.questions.push(question)
+      const { updatedQuestion, updatedAnswers } = action.payload
+      console.log("🚀 ~ file: quizSlice.ts ~ line 76 ~ builder.addCase ~ updatedAnswers", updatedAnswers)
+
+      // Questions
+      if(updatedQuestion) {
+        for (const question of updatedQuestion) {
+          const questionIndex = state.questions.findIndex(q => q._id === question._id)
+          if (questionIndex !== -1) state.questions[questionIndex] = question
+          else state.questions.push(question)
+        }
       }
+
     })
     builder.addCase(upsertQuestion.rejected, (state, action) => {
       state.isLoading = false
