@@ -10,6 +10,7 @@ const initialState: QuizState = {
     answers: [],
     currentQuestionIndex: 0,
     name: "",
+    age: 0,
     createdAt: null,
     hasSetName: false,
     hasEndedQuiz: false,
@@ -22,8 +23,9 @@ export const quizSlice = createSlice({
     name: 'quiz',
     initialState,
     reducers: {
-        beginQuiz: (state, action: PayloadAction<string>) => {
-          state.name = action.payload
+        beginQuiz: (state, action: PayloadAction<{name: string, age: number}>) => {
+          state.name = action.payload.name
+          state.age = action.payload.age
           state.hasSetName = true,
           state.createdAt = new Date()
         },

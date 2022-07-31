@@ -15,6 +15,8 @@ export const fetchQuestions = createAsyncThunk<Question[]>(
             .select(`*, answers (*)`)
             .order('_id')
             .order('created_at', { foreignTable: 'answers' })
+
+    if (error) throw new Error(error.message)
     return data as Question[]
   }
 )

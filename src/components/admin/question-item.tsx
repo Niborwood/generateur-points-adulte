@@ -3,6 +3,7 @@ import {
   Question,
   Answer,
   AnswerToUpsert,
+  FormValues,
 } from "../../../definitions/definitions";
 
 import { Button, Title, Input, Form } from "../../components/ui";
@@ -39,7 +40,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
     setAnswers((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleForm = (formValues: { [k: string]: FormDataEntryValue }) => {
+  const handleForm = (formValues: FormValues) => {
     const { title_0, title_1, question_id } = formValues;
 
     const answers: AnswerToUpsert[] = [];

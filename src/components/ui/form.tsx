@@ -21,7 +21,7 @@ const Form = ({ children, className, onSubmit }: FormProps) => {
 
 interface FormProps {
   children: ReactNode;
-  onSubmit: (formData: { [k: string]: FormDataEntryValue }) => void;
+  onSubmit: (param: { [k: string]: FormDataEntryValue }) => void;
   className?: string;
 }
 
