@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { AnswerGiven, QuizState } from '../../../definitions/definitions'
 
 // IMPORT THUNKS
-import { fetchQuestions, upsertQuestion } from './quizThunks'
+import { fetchQuestions, upsertQuestion, sendStats } from './quizThunks'
 
 const initialState: QuizState = {
     questions: [],
@@ -15,6 +15,10 @@ const initialState: QuizState = {
     hasEndedQuiz: false,
     kindOfQuestions: 0,
     isLoading: false,
+    score: {
+      adultScore: null,
+      respScore: null,
+    },
     error: "",
 }
 
@@ -52,11 +56,17 @@ export const quizSlice = createSlice({
           state.answers.push(action.payload)
           state.currentQuestionIndex++
         },
+        calculateScore: (state) => {
+          const {answers} = state
+          state.score.adultScore = 0.36
+          state.score.respScore = 0.36
+        },
         clearQuiz: (state) => {
           state = initialState
         }
     },
     extraReducers: (builder) => {
+      // FETCH QUESTIONS
     builder.addCase(fetchQuestions.fulfilled, (state, action) => {
       // If questions have already been fetched, do nothing
       if (state.questions.length) return
@@ -67,6 +77,8 @@ export const quizSlice = createSlice({
     builder.addCase(fetchQuestions.pending, (state) => {
       state.isLoading = false
     })
+
+    // UPSERT QUESTION
     builder.addCase(upsertQuestion.pending, (state) => {
       state.isLoading = true
     })
@@ -82,8 +94,20 @@ export const quizSlice = createSlice({
       state.isLoading = false
       state.error = action.error.message || 'Une erreur est survenue'
     })
+
+    // SEND STATS
+    builder.addCase(sendStats.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(sendStats.fulfilled, (state) => {
+      state.isLoading = false
+    })
+    builder.addCase(sendStats.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message || 'Une erreur est survenue'
+    })
   }
 })
 
-export const { beginQuiz, endQuiz, randomizeQuiz, goToNextQuestion } = quizSlice.actions
+export const { beginQuiz, endQuiz, randomizeQuiz, goToNextQuestion, calculateScore } = quizSlice.actions
 export default quizSlice.reducer

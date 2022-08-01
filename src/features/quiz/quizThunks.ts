@@ -39,3 +39,21 @@ export const upsertQuestion = createAsyncThunk(
     return {updatedQuestions} as {updatedQuestions: Question[]}
   }
 )
+
+export const sendStats = createAsyncThunk(
+  'quiz/sendStats',
+  async ({answers, name, age, createdAt, score}: {answers: Answer[], name: string, createdAt: Date, age: number, score: {adultScore: number, respScore: number}}) => {
+    const { error } = await supabase
+            .from('stats')
+            .insert({
+              createdAt,
+              age,
+              score,
+              completedAt: new Date(),
+              name,
+              answers,
+            })
+    if (error) throw new Error(error.message)
+    return true
+  }
+)
