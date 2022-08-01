@@ -1,15 +1,11 @@
 import { AsyncThunkPayloadCreator, createAsyncThunk } from '@reduxjs/toolkit'
 import supabase from '../../../lib/supabase'
-import { Question, Answer } from '../../../definitions/definitions'
+import { Question, Answer, QuestionToUpsert, AnswerToUpsert } from '../../../definitions/definitions'
 
 interface upsertProps {
-  question: {
-    _id?: number,
-    title_0: string,
-    title_1: string,
-    created_at?: Date,
-    updated_at: Date,
-  }}
+  question: QuestionToUpsert,
+  answers: AnswerToUpsert[]
+}
 
 export const fetchQuestions = createAsyncThunk<Question[]>(
   'quiz/fetchAllQuestions', 
@@ -18,25 +14,46 @@ export const fetchQuestions = createAsyncThunk<Question[]>(
             .from<Question>('questions')
             .select(`*, answers (*)`)
             .order('_id')
+            .order('created_at', { foreignTable: 'answers' })
+
+    if (error) throw new Error(error.message)
     return data as Question[]
   }
 )
 
 export const upsertQuestion = createAsyncThunk(
   'quiz/upsertQuestion',
-  async ({question}: upsertProps) => {
-    const { data: updatedQuestions, error: errorQuestion } = await supabase
-            .from<Question>('questions')
-            .upsert(question, { onConflict: '_id' })
+  async ({question, answers}: upsertProps) => {
+    
+    const {answersToUpsert, answersToInsert} = answers.reduce((acc: {answersToUpsert: AnswerToUpsert[], answersToInsert: AnswerToUpsert[]}, answer) => {
+      if (answer._id) {
+        acc.answersToUpsert.push(answer)
+      } else {
+        acc.answersToInsert.push(answer)
+      }
+      return acc
+    }, {answersToUpsert: [], answersToInsert: []})
 
-    // const { data: updatedAnswers, error: errorAnswers } = await supabase
-    //         .from<Question>('answers')
-    //         .upsert(answers, { onConflict: '_id' })
+    const res = await Promise.all([
+      supabase
+        .from<Question>('questions')
+        .upsert(question, { onConflict: '_id' }),
+      supabase
+        .from<AnswerToUpsert[]>('answers')
+        .insert(answersToInsert),
+      supabase
+        .from<AnswerToUpsert[]>('answers')
+        .upsert(answersToUpsert, { onConflict: '_id' })
+    ])
 
-    // if (errorQuestion || errorAnswers) throw new Error(errorQuestion?.message || errorAnswers?.message)
-    if (errorQuestion) throw new Error(errorQuestion?.message)
-    // return {updatedQuestion, updatedAnswers} as {updatedQuestion: Question, updatedAnswers: Answer[]}
-    return {updatedQuestions} as {updatedQuestions: Question[]}
+    // If any of the promises fails, throw an error
+    if(!res.every((r) => !r.error)) throw new Error('Error while inserting/upserting')
+
+    return {
+      updatedQuestion: res[0].data,
+      insertedAnswers: res[1].data,
+      updatedAnswers: res[2].data
+    }
   }
 )
 

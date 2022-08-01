@@ -1,7 +1,12 @@
 import { useState, FormEvent, useRef } from "react";
-import { Question, Answer } from "../../../definitions/definitions";
+import {
+  Question,
+  Answer,
+  AnswerToUpsert,
+  FormValues,
+} from "../../../definitions/definitions";
 
-import { Button, Title, Input } from "../../components/ui";
+import { Button, Title, Input, Form } from "../../components/ui";
 import AnswerItem from "./answer-item";
 
 // REDUX
@@ -20,10 +25,6 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
   const [answers, setAnswers] = useState<Answer[]>(question.answers);
   const toggleEdit = () => setIsEditing((prev) => !prev);
 
-  // TITLE REFS
-  const title0Ref = useRef<HTMLInputElement>(null);
-  const title1Ref = useRef<HTMLInputElement>(null);
-
   const addAnswer = () => {
     setAnswers((prev) => [
       ...prev,
@@ -35,25 +36,46 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
     ]);
   };
 
-  const handleQuestionUpdate = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const deleteAnswer = (index: number) => {
+    setAnswers((prev) => prev.filter((_, i) => i !== index));
+  };
 
-    const title0 = title0Ref.current?.value;
-    const title1 = title1Ref.current?.value;
+  const handleForm = (formValues: FormValues) => {
+    const { title_0, title_1, question_id } = formValues;
 
-    if (!title0 || !title1) return;
+    const answers: AnswerToUpsert[] = [];
+    for (const key in formValues) {
+      // Only keys concerning nnswers
+      if (!key.startsWith("asw_")) continue;
+
+      // If _id is null, skip it
+      if (key.includes("_id") && !formValues[key]) continue;
+
+      // Get currentQuestionIndex
+      const currentQuestionIndex = key.at(4);
+      if (!currentQuestionIndex) continue;
+
+      // Create the answer object and insert elements
+      const sanitizedKey = key.replace(`asw_${currentQuestionIndex}_`, "");
+      if (!answers[+currentQuestionIndex]) answers[+currentQuestionIndex] = {};
+
+      answers[+currentQuestionIndex][sanitizedKey] =
+        formValues[key].toString() || null;
+      if (!answers[+currentQuestionIndex].question_id)
+        answers[+currentQuestionIndex].question_id = question_id.toString();
+    }
 
     dispatch(
       upsertQuestion({
         question: {
-          _id: question._id,
-          title_0: title0,
-          title_1: title1,
+          _id: +question_id,
+          title_0: title_0.toString(),
+          title_1: title_1.toString(),
           updated_at: new Date(),
         },
+        answers,
       })
     );
-    console.log("handle question update");
   };
 
   return (
@@ -81,32 +103,30 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
         </div>
       </div>
       {isEditing && (
-        <form
+        <Form
           className="p-6 space-y-8 bg-purple-100 rounded-b-xl"
-          onSubmit={handleQuestionUpdate}
+          onSubmit={handleForm}
         >
           {/* QUESTION */}
+          <Input
+            type="hidden"
+            name="question_id"
+            defaultValue={question._id.toString()}
+          />
           <div>
             <div className="mb-6 ml-4 text-purple-700/80">
               <Title title="Questions" size="xl" />
             </div>
-            <div className="flex flex-row gap-4 sm:flex-col">
-              <div className="flex-1 mb-2 ml-3 text-sm font-bold text-purple-600">
-                Vouvoiement
-              </div>
-              <div className="flex-1 mb-2 ml-3 text-sm font-bold text-purple-600">
-                Tutoiement
-              </div>
-            </div>
-            <div className="flex flex-col gap-4 md:flex-row">
+            <div className="flex flex-col gap-8 mt-12 md:gap-4 md:flex-row">
               {[question.title_0, question.title_1].map((title, index) => (
                 <div
                   key={index}
-                  className="flex-1 p-6 text-lg font-bold bg-gradient-to-tl from-purple-600 to-purple-900 text-slate-100 rounded-2xl"
+                  className={`relative flex-1 p-6 text-lg font-bold bg-gradient-to-tl from-purple-600 to-purple-900 text-slate-100 rounded-2xl before:content-['${
+                    index === 1 ? "Tutoiement" : "Vouvoiement"
+                  }'] before:text-sm before:absolute before:-top-6 before:text-purple-600 before:font-medium shadow-xl`}
                 >
                   <Input
                     name={`title_${index}`}
-                    ref={index === 0 ? title0Ref : title1Ref}
                     type="text"
                     editableArea
                     defaultValue={title}
@@ -123,14 +143,19 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
             </div>
             <div className="space-y-2">
               {answers.length
-                ? answers.map((answer: Answer) => (
-                    <AnswerItem answer={answer} />
+                ? answers.map((answer: Answer, index) => (
+                    <AnswerItem
+                      key={answer.answer}
+                      answer={answer}
+                      index={index}
+                      deleteAnswer={deleteAnswer}
+                    />
                   ))
                 : "Aucune réponse associée."}
             </div>
             <div className="flex flex-row justify-end gap-4 mt-4">
               <Button
-                text="Ajouter une question"
+                text="Ajouter une réponse"
                 style="secondary"
                 small
                 onClick={addAnswer}
@@ -138,7 +163,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
               <Button text="Enregister" style="secondary" small type="submit" />
             </div>
           </div>
-        </form>
+        </Form>
       )}
     </div>
   );

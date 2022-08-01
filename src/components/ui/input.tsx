@@ -1,16 +1,5 @@
 import { forwardRef } from "react";
 import { PencilIcon } from "@heroicons/react/solid";
-interface InputProps {
-  type?: "text" | "password" | "number";
-  name: string;
-  error?: string;
-  label?: string;
-  small?: boolean;
-  labelColor?: "white" | "pink-700";
-  defaultValue?: HTMLInputElement["value"];
-  editable?: boolean;
-  editableArea?: boolean;
-}
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
@@ -27,22 +16,27 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
+    // Hidden
+    if (type === "hidden")
+      return <input type="hidden" name={name} defaultValue={defaultValue} />;
+
+    // Editable area (textarea)
     if (editableArea) {
       return (
         <div className="flex flex-row items-start justify-start gap-2">
           <PencilIcon className="relative w-5 text-white top-1" />
           <textarea
             name={name}
-            ref={ref}
+            // ref={ref}
             id={name}
-            className="font-bold bg-transparent outline-none resize-none text-slate-100 focus-visible:border-0 :focus-visible:ring-0 outline-0"
-          >
-            {defaultValue}
-          </textarea>
+            className="w-full font-bold bg-transparent outline-none resize-none text-slate-100 focus-visible:border-0 :focus-visible:ring-0 outline-0"
+            defaultValue={defaultValue}
+          />
         </div>
       );
     }
 
+    // Classic
     return (
       <div className={editable ? "flex flex-row items-center gap-1" : "mb-2"}>
         {label && (
@@ -78,5 +72,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
+
+interface InputProps {
+  type?: "text" | "password" | "number" | "hidden";
+  name: string;
+  error?: string;
+  label?: string;
+  small?: boolean;
+  labelColor?: "white" | "pink-700";
+  defaultValue?: HTMLInputElement["value"];
+  editable?: boolean;
+  editableArea?: boolean;
+}
 
 export default Input;

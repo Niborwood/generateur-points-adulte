@@ -10,6 +10,7 @@ const initialState: QuizState = {
     answers: [],
     currentQuestionIndex: 0,
     name: "",
+    age: 0,
     createdAt: null,
     hasSetName: false,
     hasEndedQuiz: false,
@@ -26,8 +27,9 @@ export const quizSlice = createSlice({
     name: 'quiz',
     initialState,
     reducers: {
-        beginQuiz: (state, action: PayloadAction<string>) => {
-          state.name = action.payload
+        beginQuiz: (state, action: PayloadAction<{name: string, age: number}>) => {
+          state.name = action.payload.name
+          state.age = action.payload.age
           state.hasSetName = true,
           state.createdAt = new Date()
         },
@@ -84,11 +86,18 @@ export const quizSlice = createSlice({
     })
     builder.addCase(upsertQuestion.fulfilled, (state, action) => {
       state.isLoading = false
-      for (const question of action.payload.updatedQuestions) {
-        const questionIndex = state.questions.findIndex(q => q._id === question._id)
-        if (questionIndex !== -1) state.questions[questionIndex] = question
-        else state.questions.push(question)
+      const { updatedQuestion, updatedAnswers } = action.payload
+      console.log("🚀 ~ file: quizSlice.ts ~ line 76 ~ builder.addCase ~ updatedAnswers", updatedAnswers)
+
+      // Questions
+      if(updatedQuestion) {
+        for (const question of updatedQuestion) {
+          const questionIndex = state.questions.findIndex(q => q._id === question._id)
+          if (questionIndex !== -1) state.questions[questionIndex] = question
+          else state.questions.push(question)
+        }
       }
+
     })
     builder.addCase(upsertQuestion.rejected, (state, action) => {
       state.isLoading = false

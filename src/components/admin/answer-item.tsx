@@ -1,28 +1,29 @@
-import { useState } from "react";
 import { Answer } from "../../../definitions/definitions";
 
 import { Input } from "../ui";
+import { MinusCircleIcon } from "@heroicons/react/solid";
 
-interface AnswerItemProps {
-  answer: Answer;
-}
-
-const AnswerItem = ({ answer }: AnswerItemProps) => {
+const AnswerItem = ({ answer, index, deleteAnswer }: AnswerItemProps) => {
   return (
-    <div className="px-4 py-1 font-bold text-white rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
+    <div className="pl-4 font-bold text-white shadow-sm shadow-purple-300 rounded-xl bg-gradient-to-tl from-purple-600 to-purple-900">
+      <Input
+        type="hidden"
+        name={`asw_${index}__id`}
+        defaultValue={answer._id?.toString()}
+      />
       <div className="flex flex-row items-center justify-between gap-6">
-        <div className="flex-1">
+        <div className="flex-1 py-1">
           <Input
             type="text"
             defaultValue={answer.answer}
-            name="answer"
+            name={`asw_${index}_answer`}
             editable
           />
         </div>
         <div className="flex flex-row gap-2">
           <div className="w-14">
             <Input
-              name="respScore"
+              name={`asw_${index}_respScore`}
               type="number"
               defaultValue={answer.respScore?.toString()}
               label="Resp."
@@ -32,7 +33,7 @@ const AnswerItem = ({ answer }: AnswerItemProps) => {
           </div>
           <div className="w-14">
             <Input
-              name="adultScore"
+              name={`asw_${index}_adultScore`}
               type="number"
               defaultValue={answer.adultScore?.toString()}
               label="Adulte"
@@ -40,9 +41,21 @@ const AnswerItem = ({ answer }: AnswerItemProps) => {
             />
           </div>
         </div>
+        <button
+          className="flex items-center self-stretch px-3 bg-red-600/70 rounded-r-xl"
+          onClick={() => deleteAnswer(index)}
+        >
+          <MinusCircleIcon className="w-5 text-slate-100" />
+        </button>
       </div>
     </div>
   );
 };
+
+interface AnswerItemProps {
+  answer: Answer;
+  index: number;
+  deleteAnswer: (index: number) => void;
+}
 
 export default AnswerItem;

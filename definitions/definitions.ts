@@ -30,6 +30,7 @@ export interface QuizState {
   answers: AnswersGiven;
   currentQuestionIndex: number;
   name: string;
+  age: number;
   hasSetName: boolean;
   createdAt: Date | null;
   hasEndedQuiz: boolean;
@@ -48,4 +49,23 @@ export interface Stats {
   completedAt: Date;
   name: string;
   answers: AnswersGiven;
+}
+
+export interface QuestionToUpsert {
+    _id?: number,
+    title_0: string,
+    title_1: string,
+    created_at?: Date,
+    updated_at: Date,
+}
+
+export interface AnswerToUpsert {
+    _id?: string,
+    question_id: string,
+    adultScore: string | null,
+    respScore: string | null,
+}
+
+export interface FormValues {
+  [k:string]: FormDataEntryValue
 }
