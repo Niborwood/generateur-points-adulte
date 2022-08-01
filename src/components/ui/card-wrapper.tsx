@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-const CardWrapper = ({ children, large }: CardWrapperProps) => {
+const CardWrapper = ({ children, large = false }: CardWrapperProps) => {
   return (
     <div
       className={`relative px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl $ ${
@@ -13,7 +13,7 @@ const CardWrapper = ({ children, large }: CardWrapperProps) => {
 };
 interface CardWrapperProps {
   children: ReactNode;
-  large: boolean;
+  large?: boolean;
 }
 
 export default CardWrapper;

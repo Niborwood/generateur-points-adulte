@@ -52,13 +52,17 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
       if (key.includes("_id") && !formValues[key]) continue;
 
       // Get currentQuestionIndex
-      const currentQuestionIndex = key.at(4);
+      const currentQuestionIndex = key[4];
       if (!currentQuestionIndex) continue;
 
       // Create the answer object and insert elements
       const sanitizedKey = key.replace(`asw_${currentQuestionIndex}_`, "");
+      // ! TO DELETE
+      // @ts-ignore
       if (!answers[+currentQuestionIndex]) answers[+currentQuestionIndex] = {};
 
+      // ! TO DELETE
+      // @ts-ignore
       answers[+currentQuestionIndex][sanitizedKey] =
         formValues[key].toString() || null;
       if (!answers[+currentQuestionIndex].question_id)

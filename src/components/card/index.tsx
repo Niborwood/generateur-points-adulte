@@ -32,7 +32,7 @@ export default function Card() {
     dispatch(
       goToNextQuestion({
         questionId: currentQuestion._id,
-        answerId: selectedAnswer._id,
+        answerId: selectedAnswer._id!,
       })
     );
   };
