@@ -97,7 +97,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
           </div>
           <div className="px-4 py-1">
             <div className="text-xl font-bold">{question.title_0}</div>
-            <div className="text-pink-600">
+            <div className="ml-0 text-pink-600">
               {question.answers?.length} réponses
             </div>
           </div>
