@@ -59,7 +59,11 @@ export default function Card() {
 
           {/* Next Question Button */}
           <div className="mt-16">
-            <Button text="Question suivante" onClick={handleNextQuestion} />
+            <Button
+              text="Question suivante"
+              onClick={handleNextQuestion}
+              full
+            />
           </div>
         </>
       );

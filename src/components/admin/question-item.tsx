@@ -1,4 +1,4 @@
-import { useState, FormEvent, useRef } from "react";
+import { useState } from "react";
 import {
   Question,
   Answer,
@@ -58,11 +58,9 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
       // Create the answer object and insert elements
       const sanitizedKey = key.replace(`asw_${currentQuestionIndex}_`, "");
       // ! TO DELETE
-      // @ts-ignore
       if (!answers[+currentQuestionIndex]) answers[+currentQuestionIndex] = {};
 
       // ! TO DELETE
-      // @ts-ignore
       answers[+currentQuestionIndex][sanitizedKey] =
         formValues[key].toString() || null;
       if (!answers[+currentQuestionIndex].question_id)
@@ -97,7 +95,12 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
           >
             {index + 1}
           </div>
-          <div className="px-4 text-xl font-bold">{question.title_0}</div>
+          <div className="px-4 py-1">
+            <div className="text-xl font-bold">{question.title_0}</div>
+            <div className="text-pink-600">
+              {question.answers?.length} réponses
+            </div>
+          </div>
         </div>
         <div className="pr-2">
           <Button

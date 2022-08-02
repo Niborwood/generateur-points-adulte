@@ -37,7 +37,7 @@ const CardName = () => {
             label="Quel est votre prénom ?"
           />
           <Input type="number" name="age" label="Et votre âge ?" />
-          <Button text="Commencer" type="submit" />
+          <Button text="Commencer" type="submit" full />
         </Form>
       </div>
     </div>
