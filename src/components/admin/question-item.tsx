@@ -122,7 +122,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
           />
           <div>
             <div className="mb-6 ml-4 text-purple-700/80">
-              <Title title="Questions" size="xl" />
+              <Title title="Questions" size="3xl" />
             </div>
             <div className="flex flex-col gap-8 mt-12 md:gap-4 md:flex-row">
               {[question.title_0, question.title_1].map((title, index) => (
@@ -146,7 +146,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
           {/* ANSWER */}
           <div>
             <div className="mb-6 ml-4 text-purple-700/80">
-              <Title title="Réponses" size="xl" />
+              <Title title="Reponses" size="3xl" />
             </div>
             <div className="space-y-2">
               {answers.length

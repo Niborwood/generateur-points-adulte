@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Bosch';
-  src: url("../public/font/Thunder-VF.otf");
+  font-family: 'Gavency';
+  src: url("../public/font/Gavency.otf");
 }

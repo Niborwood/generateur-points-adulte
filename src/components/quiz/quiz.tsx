@@ -24,7 +24,7 @@ const Quiz = () => {
       <QuizCard />
       <div className="space-x-4">
         <button
-          className="p-2 mt-8 text-sm text-center bg-white rounded-md"
+          className="p-2 text-sm text-center bg-white rounded-md"
           onClick={handleRandomize}
         >
           🎲 Randomize quiz

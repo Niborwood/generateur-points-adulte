@@ -2,7 +2,8 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{tsx,ts,js}"],
   theme: {
     fontFamily: {
-      headings: ["Bosch", "sans-serif"],
+      headings: ["Gavency", "sans-serif"],
+      regular: ["Kantumruy Pro", "sans-serif"],
     },
     extend: {
       

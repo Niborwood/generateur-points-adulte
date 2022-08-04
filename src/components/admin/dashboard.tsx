@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   return (
     <div className="">
-      <Title title="Modifier les questions" />
+      <Title title="Modifier les questions" size="5xl" />
       <div className="my-16 space-y-4">
         {questions.map((question, index) => (
           <EditableItem key={question._id} question={question} index={index} />
