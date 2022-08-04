@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     fontFamily: {
       headings: ["Gavency", "sans-serif"],
-      regular: ["Kantumruy Pro", "sans-serif"],
+      regular: ["Familjen Grotesk", "sans-serif"],
     },
     extend: {
       
