@@ -1,9 +1,9 @@
-const Title = ({ title, size = "2xl", bold = false }: TitleProps) => {
+const Title = ({ title, size = "3xl", bold = false }: TitleProps) => {
   return (
     <h3
       className={`text-${size} ${
         bold && "font-bold"
-      } after:content-[''] after:w-full after:h-2 after:absolute relative inline-block drop-shadow-md font-headings`}
+      } after:content-[''] after:w-full after:h-2 after:absolute relative inline-block font-headings`}
     >
       {title}
     </h3>

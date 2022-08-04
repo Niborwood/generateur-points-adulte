@@ -7,7 +7,7 @@ import { useAppDispatch } from "../../hooks/redux";
 import { beginQuiz } from "../../features/quiz/quizSlice";
 
 // COMPONENTS
-import { Input, Form } from "../ui";
+import { Input, Form, Title } from "../ui";
 
 const CardName = () => {
   const nameInput = useRef<HTMLInputElement>(null);
@@ -27,8 +27,7 @@ const CardName = () => {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold">Avant de commencer</h3>
-      <div className="mt-8">
+      <div className="mt-0">
         <Form onSubmit={handleSubmit}>
           <Input
             name="name"

@@ -22,7 +22,7 @@ export default function CardAnswers({
         />
       )}
       <RadioGroup
-        className="flex flex-row flex-wrap justify-start gap-4 px-4"
+        className="flex flex-row flex-wrap items-center justify-center gap-4 px-4"
         value={selectedAnswer}
         onChange={setSelectedAnswer}
       >
