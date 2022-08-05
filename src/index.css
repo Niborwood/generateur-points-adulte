@@ -6,3 +6,7 @@
   font-family: 'Gavency';
   src: url("/font/Gavency.otf");
 }
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
