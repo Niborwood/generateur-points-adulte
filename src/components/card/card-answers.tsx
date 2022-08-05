@@ -27,7 +27,11 @@ export default function AnswerButtons({
         onChange={setSelectedAnswer}
       >
         {answers.map((answer) => (
-          <RadioGroup.Option key={answer._id} value={answer}>
+          <RadioGroup.Option
+            key={answer._id}
+            value={answer}
+            className="w-full md:w-fit-content"
+          >
             {({ checked }) => (
               <AnswerButton checked={checked} answer={answer.answer} />
             )}
