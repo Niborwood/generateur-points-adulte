@@ -19,8 +19,8 @@ export default ({ answers, questions }: CalculateScoreProps) => {
     );
 
     if (!answer) continue;
-    adultScore += answer.adultScore ? answer.adultScore : 0;
-    respScore += answer.respScore ? answer.respScore : 0;
+    adultScore += answer.adultScore ?? 0;
+    respScore += answer.respScore ?? 0;
   }
   adultScore = adultScore / questions.length / 10;
   respScore = respScore / questions.length / 10;

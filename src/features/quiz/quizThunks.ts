@@ -48,6 +48,25 @@ export const upsertQuestion = createAsyncThunk(
       { answersToUpsert: [], answersToInsert: [] }
     );
 
+    const { data: existingAnswers, error } = await supabase
+      .from("answers")
+      .select("*")
+      .eq("question_id", question._id);
+
+    console.log("🚀 ~ file: quizThunks.ts ~ line 52 ~ error", error);
+
+    // If some answersToUpsers ids are not in existingAnswers, delete them
+    const answersToUpsertIds = answersToUpsert.map((answer) => answer._id);
+    if (existingAnswers) {
+      const answersToDelete = existingAnswers.filter(
+        (answer) => !answersToUpsertIds.includes(answer._id)
+      );
+
+      if (answersToDelete.length) {
+        await supabase.from("answers").delete().in("id", answersToDelete);
+      }
+    }
+
     const res = await Promise.all([
       supabase
         .from<Question>("questions")
