@@ -13,6 +13,7 @@ export default function AnswerButtons({
   setSelectedAnswer,
   color,
 }: AnswerButtonsProps) {
+  console.log("🚀 ~ file: card-answers.tsx ~ line 16 ~ color", color);
   return (
     <Fragment>
       {color && (

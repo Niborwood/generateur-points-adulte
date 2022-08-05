@@ -1,9 +1,9 @@
 type NotEmptyArray<T> = [T, ...T[]];
 export interface Answer {
-  _id?: number,
-  adultScore: number | null,
-  respScore: number | null,
-  answer: string,
+  _id?: number;
+  adultScore: number | null;
+  respScore: number | null;
+  answer: string;
 }
 
 export interface Question {
@@ -12,10 +12,18 @@ export interface Question {
   title_0: string;
   title_1: string;
   helper?: string;
-  condition?: [number, number]
+  condition?: [number, number];
   category: string;
   answers: NotEmptyArray<Answer>;
+  conditions?: QuestionConditions;
+}
+
+export interface QuestionConditions {
   color?: string;
+  bound?: {
+    questionId: number;
+    boundAnswerId: number;
+  };
 }
 
 export interface AnswerGiven {
@@ -23,7 +31,7 @@ export interface AnswerGiven {
   answerId: number;
 }
 
-export type AnswersGiven = AnswerGiven[]
+export type AnswersGiven = AnswerGiven[];
 
 export interface QuizState {
   questions: Question[];
@@ -37,8 +45,8 @@ export interface QuizState {
   kindOfQuestions: 0 | 1;
   isLoading: boolean;
   score: {
-    adultScore: number | null,
-    respScore: number | null,
+    adultScore: number | null;
+    respScore: number | null;
   };
   error: string;
 }
@@ -52,20 +60,20 @@ export interface Stats {
 }
 
 export interface QuestionToUpsert {
-    _id?: number,
-    title_0: string,
-    title_1: string,
-    created_at?: Date,
-    updated_at: Date,
+  _id?: number;
+  title_0: string;
+  title_1: string;
+  created_at?: Date;
+  updated_at: Date;
 }
 
 export interface AnswerToUpsert {
-    _id?: string,
-    question_id: string,
-    adultScore: string | null,
-    respScore: string | null,
+  _id?: string;
+  question_id: string;
+  adultScore: string | null;
+  respScore: string | null;
 }
 
 export interface FormValues {
-  [k:string]: FormDataEntryValue
+  [k: string]: FormDataEntryValue;
 }

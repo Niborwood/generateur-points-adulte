@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // DEFINITIONS
-import { Answer } from "../../../definitions/definitions";
+import { Answer, QuestionConditions } from "../../../definitions/definitions";
 
 // REDUX
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
@@ -43,7 +43,8 @@ export default function Card() {
   } else {
     // If no question, show score
     if (!currentQuestion) child = <CardScore />;
-    else
+    else {
+      console.log(currentQuestion.conditions);
       child = (
         <>
           {/* Card Question */}
@@ -54,7 +55,7 @@ export default function Card() {
             answers={currentQuestion.answers}
             selectedAnswer={selectedAnswer}
             setSelectedAnswer={setSelectedAnswer}
-            color={currentQuestion.color}
+            color={currentQuestion.conditions?.color}
           />
 
           {/* Next Question Button */}
@@ -67,6 +68,7 @@ export default function Card() {
           </div>
         </>
       );
+    }
   }
 
   return <CardWrapper>{child}</CardWrapper>;
