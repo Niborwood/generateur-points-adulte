@@ -5,14 +5,14 @@ import { RadioGroup } from "@headlessui/react";
 import { Answer } from "../../../definitions/definitions";
 
 // COMPONENT IMPORTS
-import CardAnswer from "./card-answer";
+import AnswerButton from "./answer-button";
 
-export default function CardAnswers({
+export default function AnswerButtons({
   answers,
   selectedAnswer,
   setSelectedAnswer,
   color,
-}: CardAnswersProps) {
+}: AnswerButtonsProps) {
   return (
     <Fragment>
       {color && (
@@ -22,14 +22,14 @@ export default function CardAnswers({
         />
       )}
       <RadioGroup
-        className="flex flex-row flex-wrap items-center justify-center gap-4 px-4"
+        className="flex flex-col flex-wrap items-center justify-center gap-4 px-4 md:flex-row"
         value={selectedAnswer}
         onChange={setSelectedAnswer}
       >
         {answers.map((answer) => (
           <RadioGroup.Option key={answer._id} value={answer}>
             {({ checked }) => (
-              <CardAnswer checked={checked} answer={answer.answer} />
+              <AnswerButton checked={checked} answer={answer.answer} />
             )}
           </RadioGroup.Option>
         ))}
@@ -37,7 +37,7 @@ export default function CardAnswers({
     </Fragment>
   );
 }
-interface CardAnswersProps {
+interface AnswerButtonsProps {
   answers: Answer[];
   selectedAnswer: Answer | null;
   setSelectedAnswer: Dispatch<SetStateAction<Answer | null>>;

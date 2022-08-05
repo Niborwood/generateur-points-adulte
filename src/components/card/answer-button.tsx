@@ -1,4 +1,4 @@
-export default function CardAnswer({ answer, checked }: CardAnswerProps) {
+export default function AnswerButton({ answer, checked }: AnswerButtonProps) {
   return (
     <button
       className={`px-6 py-4 font-medium text-center border-4 rounded-xl border-stone-200 transition-all ease-in-out ${
@@ -9,7 +9,7 @@ export default function CardAnswer({ answer, checked }: CardAnswerProps) {
     </button>
   );
 }
-interface CardAnswerProps {
+interface AnswerButtonProps {
   answer: string;
   checked: boolean;
 }
