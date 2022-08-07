@@ -10,7 +10,7 @@ import { Button, Title, Input, Form } from "../../components/ui";
 import AnswerItem from "./answer-item";
 
 // REDUX
-import { useAppDispatch } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { upsertQuestion } from "../../features/quiz/quizThunks";
 
 interface QuestionItemProps {
@@ -20,6 +20,7 @@ interface QuestionItemProps {
 
 const QuestionItem = ({ question, index }: QuestionItemProps) => {
   const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.quiz);
 
   const [isEditing, setIsEditing] = useState(false);
   const [answers, setAnswers] = useState<Answer[]>(question.answers);
@@ -167,7 +168,13 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
                 small
                 onClick={addAnswer}
               />
-              <Button text="Enregister" style="secondary" small type="submit" />
+              <Button
+                text="Enregister"
+                style="secondary"
+                small
+                isLoading={isLoading}
+                type="submit"
+              />
             </div>
           </div>
         </Form>

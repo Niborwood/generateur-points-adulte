@@ -5,6 +5,7 @@ const Button = ({
   style = "primary",
   type = "button",
   full = false,
+  isLoading = false,
   onClick = () => {},
 }: ButtonProps) => {
   const getStyle = () => {
@@ -23,10 +24,14 @@ const Button = ({
         small
           ? "px-3 py-2 text-sm shadow-sm rounded-md"
           : "p-4 shadow-lg rounded-xl"
+      }  ${
+        isLoading
+          ? "from-slate-300 to-slate-500 hover:to-slate-500"
+          : "from-purple-600 to-purple-900"
       } ${getStyle()} mt-2 mb-2 font-bold text-white transition-all ease-in-out hover:shadow-md`}
       onClick={onClick}
     >
-      {text || children}
+      {isLoading ? "Loading..." : text || children}
     </button>
   );
 };
@@ -37,6 +42,7 @@ type ButtonProps = {
   small?: boolean;
   type?: "button" | "submit" | "reset";
   full?: boolean;
+  isLoading?: boolean;
   style?:
     | "primary"
     | "secondary"
