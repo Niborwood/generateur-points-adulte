@@ -104,17 +104,20 @@ export const quizSlice = createSlice({
     });
     builder.addCase(upsertQuestion.fulfilled, (state, action) => {
       state.isLoading = false;
-      const { updatedQuestion, updatedAnswers } = action.payload;
+      const { updatedQuestion } = action.payload;
+      console.log(
+        "🚀 ~ file: quizSlice.ts ~ line 108 ~ builder.addCase ~ updatedQuestion",
+        updatedQuestion
+      );
 
       // Questions
       if (updatedQuestion) {
-        for (const question of updatedQuestion) {
-          const questionIndex = state.questions.findIndex(
-            (q) => q._id === question._id
-          );
-          if (questionIndex !== -1) state.questions[questionIndex] = question;
-          else state.questions.push(question);
-        }
+        const questionIndex = state.questions.findIndex(
+          (q) => q._id === updatedQuestion._id
+        );
+        if (questionIndex !== -1)
+          state.questions[questionIndex] = updatedQuestion;
+        else state.questions.push(updatedQuestion);
       }
     });
     builder.addCase(upsertQuestion.rejected, (state, action) => {

@@ -69,20 +69,25 @@ export const upsertQuestion = createAsyncThunk(
       supabase
         .from<Question>("questions")
         .upsert(question, { onConflict: "_id" }),
-      supabase.from<AnswerToUpsert[]>("answers").insert(answersToInsert),
+      supabase.from<Answer[]>("answers").insert(answersToInsert),
       supabase
         .from<AnswerToUpsert[]>("answers")
         .upsert(answersToUpsert, { onConflict: "_id" }),
     ]);
+    console.log("🚀 ~ file: quizThunks.ts ~ line 77 ~ res", res);
 
     // If any of the promises fails, throw an error
     if (!res.every((r) => !r.error))
       throw new Error("Error while inserting/upserting");
 
+    // Insert the answers inside the question object
+    const updatedQuestion = {
+      ...question,
+      answers: [...answersToInsert, ...answersToUpsert],
+    };
+
     return {
-      updatedQuestion: res[0].data,
-      insertedAnswers: res[1].data,
-      updatedAnswers: res[2].data,
+      updatedQuestion,
     };
   }
 );
