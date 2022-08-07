@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Answer, Question } from "../../../definitions/definitions";
+import { useEffect } from "react";
+import { Question } from "../../../definitions/definitions";
 
 // REDUX
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   return (
     <div className="">
-      <Title title="Modifier les questions" size="5xl" />
+      {/* <Title title="Modifier les questions" size="5xl" /> */}
       <div className="my-16 space-y-4">
         {questions.map((question, index) => (
           <EditableItem key={question._id} question={question} index={index} />

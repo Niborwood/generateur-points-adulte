@@ -53,17 +53,15 @@ export const upsertQuestion = createAsyncThunk(
       .select("*")
       .eq("question_id", question._id);
 
-    console.log("🚀 ~ file: quizThunks.ts ~ line 52 ~ error", error);
-
     // If some answersToUpsers ids are not in existingAnswers, delete them
     const answersToUpsertIds = answersToUpsert.map((answer) => answer._id);
     if (existingAnswers) {
-      const answersToDelete = existingAnswers.filter(
-        (answer) => !answersToUpsertIds.includes(answer._id)
-      );
+      const answersToDelete = existingAnswers
+        .filter((answer) => !answersToUpsertIds.includes(answer._id))
+        .map((answer) => answer._id);
 
       if (answersToDelete.length) {
-        await supabase.from("answers").delete().in("id", answersToDelete);
+        await supabase.from("answers").delete().in("_id", answersToDelete);
       }
     }
 
