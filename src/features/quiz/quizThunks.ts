@@ -4,13 +4,14 @@ import {
   Question,
   QuestionToUpsert,
   AnswerToUpsert,
+  Answer,
   QuizState,
 } from "../../../definitions/definitions";
 import { RootState } from "../../app/store";
 
 interface upsertProps {
   question: QuestionToUpsert;
-  answers: AnswerToUpsert[];
+  answers: Answer[];
 }
 
 export const fetchQuestions = createAsyncThunk<Question[]>(
@@ -33,8 +34,8 @@ export const upsertQuestion = createAsyncThunk(
     const { answersToUpsert, answersToInsert } = answers.reduce(
       (
         acc: {
-          answersToUpsert: AnswerToUpsert[];
-          answersToInsert: AnswerToUpsert[];
+          answersToUpsert: Answer[];
+          answersToInsert: Answer[];
         },
         answer
       ) => {
@@ -71,7 +72,7 @@ export const upsertQuestion = createAsyncThunk(
         .upsert(question, { onConflict: "_id" }),
       supabase.from<Answer[]>("answers").insert(answersToInsert),
       supabase
-        .from<AnswerToUpsert[]>("answers")
+        .from<Answer[]>("answers")
         .upsert(answersToUpsert, { onConflict: "_id" }),
     ]);
     console.log("🚀 ~ file: quizThunks.ts ~ line 77 ~ res", res);
@@ -81,7 +82,7 @@ export const upsertQuestion = createAsyncThunk(
       throw new Error("Error while inserting/upserting");
 
     // Insert the answers inside the question object
-    const updatedQuestion = {
+    const updatedQuestion: Question = {
       ...question,
       answers: [...answersToInsert, ...answersToUpsert],
     };

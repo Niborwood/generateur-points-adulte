@@ -105,10 +105,6 @@ export const quizSlice = createSlice({
     builder.addCase(upsertQuestion.fulfilled, (state, action) => {
       state.isLoading = false;
       const { updatedQuestion } = action.payload;
-      console.log(
-        "🚀 ~ file: quizSlice.ts ~ line 108 ~ builder.addCase ~ updatedQuestion",
-        updatedQuestion
-      );
 
       // Questions
       if (updatedQuestion) {
@@ -128,6 +124,7 @@ export const quizSlice = createSlice({
     // SEND STATS
     builder.addCase(sendStats.pending, (state) => {
       state.isLoading = true;
+      state.error = "";
     });
     builder.addCase(sendStats.fulfilled, (state) => {
       state.isLoading = false;
