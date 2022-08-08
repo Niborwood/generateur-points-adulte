@@ -14,6 +14,7 @@ export interface Question {
   condition?: [number, number];
   answers: Answer[];
   conditions?: QuestionConditions;
+  position: number;
 }
 
 export interface QuestionConditions {

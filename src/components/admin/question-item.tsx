@@ -13,11 +13,6 @@ import AnswerItem from "./answer-item";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { upsertQuestion } from "../../features/quiz/quizThunks";
 
-interface QuestionItemProps {
-  question: Question;
-  index: number;
-}
-
 const QuestionItem = ({ question, index }: QuestionItemProps) => {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.quiz);
@@ -94,7 +89,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
               isEditing ? "rounded-tl-xl" : "rounded-l-xl"
             }`}
           >
-            {index + 1}
+            {question.position + 1}
           </div>
           <div className="px-4 py-1">
             <div className="text-xl font-bold">{question.title_0}</div>
@@ -181,6 +176,10 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
       )}
     </div>
   );
+};
+
+type QuestionItemProps = {
+  question: Question;
 };
 
 export default QuestionItem;

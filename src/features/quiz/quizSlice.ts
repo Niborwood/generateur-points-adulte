@@ -3,7 +3,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { AnswerGiven, QuizState } from "../../../definitions/definitions";
 
 // IMPORT THUNKS
-import { fetchQuestions, upsertQuestion, sendStats } from "./quizThunks";
+import {
+  fetchQuestions,
+  upsertQuestion,
+  sendStats,
+  reorderQuestions,
+} from "./quizThunks";
 
 // UTILS
 import { calculateScore } from "../../utils";
@@ -96,6 +101,19 @@ export const quizSlice = createSlice({
     });
     builder.addCase(fetchQuestions.pending, (state) => {
       state.isLoading = false;
+    });
+
+    // REORDER QUESTIONS
+    builder.addCase(reorderQuestions.fulfilled, (state, action) => {
+      state.questions = action.payload;
+    });
+    builder.addCase(reorderQuestions.pending, (state) => {
+      state.isLoading = true;
+      state.error = "";
+    });
+    builder.addCase(reorderQuestions.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message || "Une erreur est survenue";
     });
 
     // UPSERT QUESTION

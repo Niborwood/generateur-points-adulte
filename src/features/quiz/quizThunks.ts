@@ -28,6 +28,18 @@ export const fetchQuestions = createAsyncThunk<Question[]>(
   }
 );
 
+export const reorderQuestions = createAsyncThunk(
+  "quiz/reorderQuestions",
+  async (questions: Partial<Question>[]) => {
+    const { data, error } = await supabase
+      .from<Question>("questions")
+      .upsert(questions, { onConflict: "_id" });
+
+    if (error) throw new Error(error.message);
+    return data as Question[];
+  }
+);
+
 export const upsertQuestion = createAsyncThunk(
   "quiz/upsertQuestion",
   async ({ question, answers }: upsertProps) => {
@@ -75,7 +87,6 @@ export const upsertQuestion = createAsyncThunk(
         .from<Answer[]>("answers")
         .upsert(answersToUpsert, { onConflict: "_id" }),
     ]);
-    console.log("🚀 ~ file: quizThunks.ts ~ line 77 ~ res", res);
 
     // If any of the promises fails, throw an error
     if (!res.every((r) => !r.error))
