@@ -14,13 +14,20 @@ interface upsertProps {
   answers: Answer[];
 }
 
+interface reorderProps {
+  moveDirection: "up" | "down";
+  source: number;
+  destination: number;
+  sourceId: number;
+}
+
 export const fetchQuestions = createAsyncThunk<Question[]>(
   "quiz/fetchAllQuestions",
   async () => {
     const { data, error } = await supabase
       .from("questions")
       .select(`*, answers (*)`)
-      .order("_id")
+      .order("position", { ascending: true })
       .order("created_at", { foreignTable: "answers" });
 
     if (error) throw new Error(error.message);
@@ -30,12 +37,17 @@ export const fetchQuestions = createAsyncThunk<Question[]>(
 
 export const reorderQuestions = createAsyncThunk(
   "quiz/reorderQuestions",
-  async (questions: Partial<Question>[]) => {
-    const { data, error } = await supabase
-      .from<Question>("questions")
-      .upsert(questions, { onConflict: "_id" });
+  async ({ source, destination, moveDirection, sourceId }: reorderProps) => {
+    const { data, error } = await supabase.rpc("reorder_questions", {
+      possource: source,
+      posdestination: destination,
+      direction: moveDirection,
+      sourceid: sourceId,
+    });
 
     if (error) throw new Error(error.message);
+
+    // sort data by position
     return data as Question[];
   }
 );

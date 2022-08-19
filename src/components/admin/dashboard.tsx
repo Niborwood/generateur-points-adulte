@@ -25,38 +25,19 @@ const Dashboard = () => {
   }, []);
 
   const handleDrag: OnDragEndResponder = (result) => {
-    const resultDestinationIndex = result.destination?.index;
-    const resultSourceIndex = result.source.index;
-    if (resultDestinationIndex) {
-      // const newQuestions = [];
-      // for (const question of questions) {
-      //   const { answers, ...rest } = question;
-      //   newQuestions.push(rest);
-      // }
-
-      // const [removed] = newQuestions.splice(resultSourceIndex, 1);
-      // newQuestions.splice(resultDestinationIndex, 0, removed);
-
-      // dispatch(reorderQuestions(newQuestions));
-
-      // Update the positions
-      const newQuestions = questions.map((question, index) => {
-        if (index === resultSourceIndex) {
-          return {
-            ...question,
-            position: resultDestinationIndex,
-          };
-        }
-
-        if (index === resultDestinationIndex) {
-          return {
-            ...question,
-            position: resultSourceIndex,
-          };
-        }
-
-        return question;
-      });
+    const destination = result.destination?.index;
+    const source = result.source.index;
+    const sourceId = +result.draggableId;
+    console.log(destination, source, sourceId);
+    if (destination) {
+      dispatch(
+        reorderQuestions({
+          moveDirection: source > destination ? "up" : "down",
+          source,
+          destination,
+          sourceId,
+        })
+      );
     }
   };
 
@@ -75,12 +56,13 @@ const Dashboard = () => {
                 {questions.map((question, index) => (
                   <Draggable
                     key={question.position}
-                    draggableId={question.position.toString()}
+                    draggableId={question._id.toString()}
                     index={index}
                   >
                     {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
+                        className="top-0 left-0"
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}
                       >
