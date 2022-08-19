@@ -123,3 +123,13 @@ export const sendStats = createAsyncThunk(
     return true;
   }
 );
+
+export const eraseTests = createAsyncThunk("quiz/eraseTests", async () => {
+  const { data, error } = await supabase.from("stats").delete().match({
+    name: "Random Test",
+    age: -1,
+  });
+
+  if (error) throw new Error(error.message);
+  return data;
+});

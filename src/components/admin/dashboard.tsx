@@ -11,10 +11,12 @@ import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import {
   fetchQuestions,
   reorderQuestions,
+  eraseTests,
 } from "../../features/quiz/quizThunks";
 
 // COMPONENTS
 import QuestionItem from "./question-item";
+import { Button } from "../ui";
 
 const Dashboard = () => {
   const { questions } = useAppSelector((state) => state.quiz);
@@ -23,6 +25,10 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(fetchQuestions());
   }, []);
+
+  const handleEraseTest = () => {
+    dispatch(eraseTests());
+  };
 
   const handleDrag: OnDragEndResponder = (result) => {
     const resultDestinationIndex = result.destination?.index;
@@ -61,7 +67,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="">
+    <div>
       {/* <Title title="Modifier les questions" size="5xl" /> */}
       <DragDropContext onDragEnd={handleDrag}>
         <div className="my-4">
@@ -98,6 +104,8 @@ const Dashboard = () => {
           </Droppable>
         </div>
       </DragDropContext>
+
+      <Button text="Supprimer les tests" onClick={handleEraseTest} />
     </div>
   );
 };
