@@ -105,7 +105,13 @@ export const quizSlice = createSlice({
 
     // REORDER QUESTIONS
     builder.addCase(reorderQuestions.fulfilled, (state, action) => {
-      state.questions = action.payload;
+      state.questions = state.questions
+        .map((question) => ({
+          ...question,
+          position: action.payload.find((q) => q._id === question._id)!
+            .position,
+        }))
+        .sort((a, b) => a.position - b.position);
     });
     builder.addCase(reorderQuestions.pending, (state) => {
       state.isLoading = true;
