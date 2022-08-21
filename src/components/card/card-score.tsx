@@ -20,8 +20,10 @@ const CardScore = () => {
   return (
     <div>
       <div>
-        <p className="mb-4 text-2xl font-bold">{name}, voici votre score : </p>
-        <div className="flex flex-col gap-2 space-between">
+        <p className="mb-4 text-2xl font-bold text-center">
+          {name}, voici votre score :{" "}
+        </p>
+        <div className="flex flex-col gap-4 mt-8 space-between">
           <ScoreSquare score={score.adultScore} type="adult" />
           <ScoreSquare score={score.respScore} type="resp" />
         </div>

@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 const CardWrapper = ({ children, large = false }: CardWrapperProps) => {
   return (
     <div
-      className={`relative px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl $ ${
+      className={`relative px-4 py-8 bg-stone-100 rounded-xl drop-shadow-xl min-w-[300px] $ ${
         large ? "max-w-3xl" : "max-w-lg"
       }`}
     >
