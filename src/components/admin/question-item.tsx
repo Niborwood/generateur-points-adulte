@@ -13,7 +13,7 @@ import AnswerItem from "./answer-item";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { upsertQuestion } from "../../features/quiz/quizThunks";
 
-const QuestionItem = ({ question, index }: QuestionItemProps) => {
+const QuestionItem = ({ question }: QuestionItemProps) => {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.quiz);
 
@@ -146,7 +146,7 @@ const QuestionItem = ({ question, index }: QuestionItemProps) => {
             </div>
             <div className="space-y-2">
               {answers.length
-                ? answers.map((answer: Answer, index) => (
+                ? answers.map((answer, index) => (
                     <AnswerItem
                       key={answer.answer}
                       answer={answer}

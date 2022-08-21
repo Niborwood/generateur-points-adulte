@@ -94,7 +94,8 @@ export const quizSlice = createSlice({
     // FETCH QUESTIONS
     builder.addCase(fetchQuestions.fulfilled, (state, action) => {
       // If questions have already been fetched, do nothing
-      if (state.questions.length) return;
+      // ! Removed this for drag/drop update
+      // if (state.questions.length) return;
 
       state.questions = action.payload;
       state.isLoading = false;
@@ -105,13 +106,7 @@ export const quizSlice = createSlice({
 
     // REORDER QUESTIONS
     builder.addCase(reorderQuestions.fulfilled, (state, action) => {
-      state.questions = state.questions
-        .map((question) => ({
-          ...question,
-          position: action.payload.find((q) => q._id === question._id)!
-            .position,
-        }))
-        .sort((a, b) => a.position - b.position);
+      state.isLoading = false;
     });
     builder.addCase(reorderQuestions.pending, (state) => {
       state.isLoading = true;

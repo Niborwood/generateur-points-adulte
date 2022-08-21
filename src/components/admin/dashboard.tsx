@@ -24,13 +24,13 @@ const Dashboard = () => {
     dispatch(fetchQuestions());
   }, []);
 
-  const handleDrag: OnDragEndResponder = (result) => {
+  const handleDrag: OnDragEndResponder = async (result) => {
     const destination = result.destination?.index;
     const source = result.source.index;
     const sourceId = +result.draggableId;
     console.log(destination, source, sourceId);
     if (destination) {
-      dispatch(
+      await dispatch(
         reorderQuestions({
           moveDirection: source > destination ? "up" : "down",
           source,
@@ -38,6 +38,7 @@ const Dashboard = () => {
           sourceId,
         })
       );
+      await dispatch(fetchQuestions());
     }
   };
 
@@ -61,8 +62,8 @@ const Dashboard = () => {
                   >
                     {(provided, snapshot) => (
                       <div
+                        className="!top-auto !left-auto"
                         ref={provided.innerRef}
-                        className="top-0 left-0"
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}
                       >
