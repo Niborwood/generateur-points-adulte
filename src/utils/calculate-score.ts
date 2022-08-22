@@ -7,6 +7,8 @@ const threeDecimals = (num: number) => {
 export default ({ answers, questions }: CalculateScoreProps) => {
   let adultScore = 0;
   let respScore = 0;
+  let adultQuote = 0;
+  let respQuote = 0;
 
   for (const givenAnswer of answers) {
     const question = questions.find(
@@ -21,9 +23,11 @@ export default ({ answers, questions }: CalculateScoreProps) => {
     if (!answer) continue;
     adultScore += answer.adultScore ?? 0;
     respScore += answer.respScore ?? 0;
+    adultQuote += answer.adultScore ? 1 : 0;
+    respQuote += answer.respScore ? 1 : 0;
   }
-  adultScore = adultScore / questions.length / 10;
-  respScore = respScore / questions.length / 10;
+  adultScore = adultScore / adultQuote / 10;
+  respScore = respScore / respQuote / 10;
 
   return {
     adultScore: threeDecimals(adultScore),

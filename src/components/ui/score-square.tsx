@@ -9,7 +9,7 @@ export default ({ score, type }: ScoreSquareProps) => {
     gradient: "from-red-300/80 to-red-300",
   };
 
-  if (score >= 0.2 && score < 0.45) {
+  if (score >= 0.25 && score < 0.45) {
     scoreColor.bg = "bg-pink-200";
     scoreColor.text = "text-pink-800/60";
     scoreColor.gradient = "from-pink-300/80 to-pink-300";
@@ -21,13 +21,13 @@ export default ({ score, type }: ScoreSquareProps) => {
     scoreColor.gradient = "from-stone-300/80 to-stone-300";
   }
 
-  if (score >= 0.55 && score < 0.8) {
+  if (score >= 0.55 && score < 0.75) {
     scoreColor.bg = "bg-fuchsia-200";
     scoreColor.text = "text-fuchsia-800/60";
     scoreColor.gradient = "from-fuchsia-300/80 to-fuchsia-300";
   }
 
-  if (score >= 0.8) {
+  if (score >= 0.75) {
     scoreColor.bg = "bg-purple-200";
     scoreColor.text = "text-purple-800/60";
     scoreColor.gradient = "from-purple-300/80 to-purple-300";
@@ -41,7 +41,7 @@ export default ({ score, type }: ScoreSquareProps) => {
         className={`flex flex-row items-center justify-between text-5xl ${scoreColor.text}`}
       >
         <div>
-          <strong>{score ?? "N/A"}</strong>
+          <strong>{(score * 100).toFixed(1) ?? "N/A"}</strong>
         </div>
         <div>
           {type === "resp" ? (
@@ -57,7 +57,7 @@ export default ({ score, type }: ScoreSquareProps) => {
         {type === "adult" ? " adulte" : " responsabilité"}
       </p>
       <p className="text-xs italic text-slate-900/60">
-        0 indique la valeur minimale, 1 la valeur maximale.
+        0 indique la valeur minimale, 100 la valeur maximale.
       </p>
     </div>
   );

@@ -2,15 +2,19 @@ import { useEffect } from "react";
 
 // REDUX
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
-import { getScore } from "../../features/quiz/quizSlice";
+import { getScore, clearQuiz } from "../../features/quiz/quizSlice";
 import { sendStats } from "../../features/quiz/quizThunks";
 
 // UI
-import { ScoreSquare } from "../ui";
+import { ScoreSquare, Button } from "../ui";
 
 const CardScore = () => {
   const dispatch = useAppDispatch();
   const { answers, name, score } = useAppSelector((state) => state.quiz);
+
+  const handleClearQuiz = () => {
+    dispatch(clearQuiz());
+  };
 
   useEffect(() => {
     dispatch(getScore());
@@ -19,7 +23,7 @@ const CardScore = () => {
 
   return (
     <div>
-      <div>
+      <div className="mb-8">
         <p className="mb-4 text-2xl font-bold text-center">
           {name}, voici votre score :{" "}
         </p>
@@ -27,6 +31,9 @@ const CardScore = () => {
           <ScoreSquare score={score.adultScore} type="adult" />
           <ScoreSquare score={score.respScore} type="resp" />
         </div>
+      </div>
+      <div className="flex justify-center">
+        <Button text="Refaire le quiz" onClick={handleClearQuiz} />
       </div>
     </div>
   );
