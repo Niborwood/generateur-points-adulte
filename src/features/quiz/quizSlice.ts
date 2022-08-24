@@ -86,8 +86,11 @@ export const quizSlice = createSlice({
 
       state.score = score;
     },
-    clearQuiz: () => {
-      return initialState;
+    clearQuiz: (state) => {
+      return {
+        ...initialState,
+        questions: state.questions,
+      };
     },
   },
   extraReducers: (builder) => {
