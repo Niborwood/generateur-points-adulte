@@ -28,7 +28,6 @@ const Dashboard = () => {
     const destination = result.destination?.index;
     const source = result.source.index;
     const sourceId = +result.draggableId;
-    console.log(destination, source, sourceId);
     if (destination) {
       await dispatch(
         reorderQuestions({

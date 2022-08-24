@@ -63,7 +63,7 @@ export const quizSlice = createSlice({
       state.currentQuestionIndex = state.questions.length;
       state.hasEndedQuiz = true;
       state.name = "Random Test";
-      state.age = -1;
+      state.age = 29;
       state.createdAt = new Date();
       state.hasSetName = true;
     },
