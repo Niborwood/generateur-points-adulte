@@ -8,6 +8,7 @@ import {
   upsertQuestion,
   sendStats,
   reorderQuestions,
+  fetchStats,
 } from "./quizThunks";
 
 // UTILS
@@ -139,6 +140,20 @@ export const quizSlice = createSlice({
       }
     });
     builder.addCase(upsertQuestion.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message || "Une erreur est survenue";
+    });
+
+    // FETCH STATS
+    builder.addCase(fetchStats.pending, (state) => {
+      state.isLoading = true;
+      state.error = "";
+    });
+    builder.addCase(fetchStats.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.stats = action.payload;
+    });
+    builder.addCase(fetchStats.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message || "Une erreur est survenue";
     });

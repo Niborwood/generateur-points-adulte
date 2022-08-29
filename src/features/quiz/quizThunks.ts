@@ -3,9 +3,8 @@ import supabase from "../../../lib/supabase";
 import {
   Question,
   QuestionToUpsert,
-  AnswerToUpsert,
   Answer,
-  QuizState,
+  FetchedStats,
 } from "../../../definitions/definitions";
 import { RootState } from "../../app/store";
 
@@ -135,3 +134,11 @@ export const sendStats = createAsyncThunk(
     return true;
   }
 );
+
+export const fetchStats = createAsyncThunk("quiz/fetchStats", async () => {
+  const { data, error } = await supabase
+    .rpc("average_score")
+    .select("adult_score, resp_score");
+  if (error) throw new Error(error.message);
+  return data as FetchedStats;
+});

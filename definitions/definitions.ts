@@ -32,6 +32,11 @@ export interface AnswerGiven {
 
 export type AnswersGiven = AnswerGiven[];
 
+export type FetchedStats = {
+  adult_score: number | null;
+  resp_score: number | null;
+}[];
+
 export interface QuizState {
   questions: Question[];
   answers: AnswersGiven;
@@ -47,6 +52,7 @@ export interface QuizState {
     adultScore: number | null;
     respScore: number | null;
   };
+  stats?: FetchedStats;
   error: string;
 }
 
@@ -64,6 +70,7 @@ export interface QuestionToUpsert {
   title_1: string;
   created_at?: Date;
   updated_at: Date;
+  position: number;
 }
 
 export interface AnswerToUpsert {
