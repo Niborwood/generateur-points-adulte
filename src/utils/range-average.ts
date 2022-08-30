@@ -7,5 +7,5 @@ export default (score: number, average: number, type: "adult" | "resp") => {
   const roundedDiff = Math.round(diff * 100) / 100;
   const isAboveAverage = roundedDiff > 0;
 
-  return `Vous êtes ${isAboveAverage ? "plus" : "moins"} ${type === "adult" ? 'adulte' : 'responsable'} de ${roundedDiff}% que votre tranche d'âge.`;
+  return `Vous êtes ${Math.abs(roundedDiff)}% ${isAboveAverage ? "plus" : "moins"} ${type === "adult" ? 'adulte' : 'responsable'} que votre tranche d'âge.`;
 }

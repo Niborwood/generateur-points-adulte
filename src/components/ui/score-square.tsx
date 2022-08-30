@@ -58,8 +58,6 @@ export default ({ type }: ScoreSquareProps) => {
     return rangeAverage(score * 100, ageRangeAverage, type);
   }, [userAge, stats, score]);
 
-  console.log(calculateAverageDiff());
-
   const scoreColor = {
     bg: "bg-red-200",
     text: "text-red-800/60",
@@ -92,13 +90,13 @@ export default ({ type }: ScoreSquareProps) => {
 
   return (
     <div
-      className={`py-6 px-10 bg-gradient-to-br ${scoreColor.gradient} rounded-2xl`}
+      className={`p-10 bg-gradient-to-br ${scoreColor.gradient} rounded-2xl`}
     >
       <div
         className={`flex flex-row items-center justify-between text-5xl ${scoreColor.text}`}
       >
         <div>
-          <strong>{(score * 100).toFixed(1) ?? "N/A"}</strong>
+          <strong>{score ? (score * 100).toFixed(1) : "N/A"}</strong>
         </div>
         <div>
           {type === "resp" ? (
@@ -113,8 +111,16 @@ export default ({ type }: ScoreSquareProps) => {
         Indice
         {type === "adult" ? " adulte" : " responsabilité"}
       </p>
+      <p className="text-slate-900/80">{calculateAverageDiff()}</p>
+      <hr className="m-4 border-slate-500/30" />
       <p className="text-xs italic text-slate-900/60">
-        0 indique la valeur minimale, 100 la valeur maximale.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus
+        nesciunt porro perferendis ipsam quidem odio aliquid repudiandae. Minima
+        nihil ipsum perspiciatis, ad natus voluptates iusto molestiae beatae
+        accusantium magnam illo sequi fugit qui laudantium. Qui impedit
+        excepturi deleniti alias corrupti quisquam itaque dolorem labore magnam.
+        Qui expedita vel maxime aperiam sunt reiciendis reprehenderit dolore
+        non! Sed laudantium fuga molestiae repellendus.
       </p>
     </div>
   );
