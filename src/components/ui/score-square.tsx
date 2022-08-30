@@ -1,7 +1,64 @@
+import { useCallback } from "react";
 import { LightBulbIcon, IdentificationIcon } from "@heroicons/react/outline";
+import { rangeAverage } from "../../utils";
+import { useAppSelector } from "../../hooks/redux";
 
-export default ({ score, type }: ScoreSquareProps) => {
-  if (!score) score = 0;
+const AGES = [
+  {
+    label: "- de 18 ans",
+    min: 0,
+    max: 18,
+  },
+  {
+    label: "18 à 25 ans",
+    min: 18,
+    max: 25,
+  },
+  {
+    label: "26 à 35 ans",
+    min: 26,
+    max: 35,
+  },
+  {
+    label: "36 à 50 ans",
+    min: 36,
+    max: 50,
+  },
+  {
+    label: "+ de 50 ans",
+    min: 51,
+    max: 100,
+  },
+];
+
+export default ({ type }: ScoreSquareProps) => {
+  const {
+    stats,
+    score: scores,
+    age: userAge,
+  } = useAppSelector((state) => state.quiz);
+  const score = type === "adult" ? scores.adultScore : scores.respScore;
+
+  // Display age range differencial
+  const calculateAverageDiff = useCallback(() => {
+    if (!stats) return;
+
+    const userAgeRange = AGES.findIndex((age) => {
+      return age.min <= userAge && age.max >= userAge;
+    })!;
+
+    const ageRangeAverages = stats[userAgeRange];
+    const ageRangeAverage =
+      type === "adult"
+        ? ageRangeAverages.adult_score
+        : ageRangeAverages.resp_score;
+
+    if (!score || !ageRangeAverage) return;
+    console.log(score * 100, ageRangeAverage);
+    return rangeAverage(score * 100, ageRangeAverage, type);
+  }, [userAge, stats, score]);
+
+  console.log(calculateAverageDiff());
 
   const scoreColor = {
     bg: "bg-red-200",
@@ -9,25 +66,25 @@ export default ({ score, type }: ScoreSquareProps) => {
     gradient: "from-red-300/80 to-red-300",
   };
 
-  if (score >= 0.25 && score < 0.45) {
+  if (score && score >= 0.25 && score < 0.45) {
     scoreColor.bg = "bg-pink-200";
     scoreColor.text = "text-pink-800/60";
     scoreColor.gradient = "from-pink-300/80 to-pink-300";
   }
 
-  if (score >= 0.45 && score < 0.55) {
+  if (score && score >= 0.45 && score < 0.55) {
     scoreColor.bg = "bg-stone-200";
     scoreColor.text = "text-stone-800/60";
     scoreColor.gradient = "from-stone-300/80 to-stone-300";
   }
 
-  if (score >= 0.55 && score < 0.75) {
+  if (score && score >= 0.55 && score < 0.75) {
     scoreColor.bg = "bg-fuchsia-200";
     scoreColor.text = "text-fuchsia-800/60";
     scoreColor.gradient = "from-fuchsia-300/80 to-fuchsia-300";
   }
 
-  if (score >= 0.75) {
+  if (score && score >= 0.75) {
     scoreColor.bg = "bg-purple-200";
     scoreColor.text = "text-purple-800/60";
     scoreColor.gradient = "from-purple-300/80 to-purple-300";
@@ -64,6 +121,5 @@ export default ({ score, type }: ScoreSquareProps) => {
 };
 
 interface ScoreSquareProps {
-  score: number | null;
   type: "adult" | "resp";
 }

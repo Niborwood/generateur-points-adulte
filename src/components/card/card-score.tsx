@@ -48,7 +48,6 @@ const CardScore = () => {
   const {
     answers,
     name,
-    score,
     age: userAge,
     stats,
   } = useAppSelector((state) => state.quiz);
@@ -80,18 +79,18 @@ const CardScore = () => {
 
   return (
     <div>
-      <div className="p-2 mb-8 sm:p-4">
+      <div className="mb-4">
         {/* Player score */}
-        <div className="mb-6 bg-slate-100" ref={shareRef}>
+        <div className="p-2 mb-6 bg-slate-100" ref={shareRef}>
           <p className="mb-4 text-2xl font-bold text-center">
             {name}, voici votre score :{" "}
           </p>
           <div className="flex flex-col gap-4 mt-8 space-between">
-            <ScoreSquare score={score.adultScore} type="adult" />
-            <ScoreSquare score={score.respScore} type="resp" />
+            <ScoreSquare type="adult" />
+            <ScoreSquare type="resp" />
           </div>
         </div>
-        <div>
+        <div className="flex flex-row justify-center mb-8">
           <Button text="Partager votre résultat" onClick={handleShareClick} />
         </div>
 
