@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useCallback } from "react";
+import { toPng } from "html-to-image";
 
 // REDUX
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
@@ -42,6 +43,7 @@ const AGES = [
 ];
 
 const CardScore = () => {
+  const shareRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const {
     answers,
@@ -61,11 +63,26 @@ const CardScore = () => {
     dispatch(fetchStats());
   }, [answers]);
 
+  const handleShareClick = useCallback(() => {
+    if (!shareRef.current) return;
+
+    toPng(shareRef.current, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "my-image-name.png";
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [shareRef]);
+
   return (
     <div>
       <div className="p-2 mb-8 sm:p-4">
         {/* Player score */}
-        <div className="mb-6">
+        <div className="mb-6 bg-slate-100" ref={shareRef}>
           <p className="mb-4 text-2xl font-bold text-center">
             {name}, voici votre score :{" "}
           </p>
@@ -73,6 +90,9 @@ const CardScore = () => {
             <ScoreSquare score={score.adultScore} type="adult" />
             <ScoreSquare score={score.respScore} type="resp" />
           </div>
+        </div>
+        <div>
+          <Button text="Partager votre résultat" onClick={handleShareClick} />
         </div>
 
         {/* Average scores */}
