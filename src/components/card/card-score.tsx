@@ -50,6 +50,7 @@ const CardScore = () => {
     name,
     age: userAge,
     stats,
+    kindOfQuestions,
   } = useAppSelector((state) => state.quiz);
 
   const handleClearQuiz = () => {
@@ -82,8 +83,9 @@ const CardScore = () => {
       <div className="mb-4">
         {/* Player score */}
         <div className="p-2 mb-6 bg-slate-100" ref={shareRef}>
-          <p className="mb-4 text-2xl font-bold text-center">
-            {name}, voici votre score :{" "}
+          <p className="mb-4 text-3xl font-bold text-center">
+            {name}, <br />
+            voici {kindOfQuestions ? "tes" : "vos"} résultats :{" "}
           </p>
           <div className="flex flex-col gap-4 mt-8 space-between">
             <ScoreSquare type="adult" />
