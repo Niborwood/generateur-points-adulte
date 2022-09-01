@@ -93,7 +93,7 @@ const CardScore = () => {
           </div>
         </div>
         <div className="flex flex-row justify-center mb-8">
-          <Button text="Partager votre résultat" onClick={handleShareClick} />
+          <Button text="Partager le résultat" onClick={handleShareClick} />
         </div>
 
         {/* Average scores */}
@@ -115,7 +115,17 @@ const CardScore = () => {
                 >
                   <div className="flex flex-row items-center justify-center">
                     <ArrowCircleRightIcon className="w-4 mr-3 text-fuchsia-700/80" />
-                    <p className="font-bold">{age.label}</p>
+                    <p className="font-bold">
+                      {age.min <= userAge && age.max >= userAge && (
+                        <>
+                          <span className="font-thin text-md">
+                            Ma tranche d'âge
+                          </span>
+                          <br />
+                        </>
+                      )}
+                      {age.label}
+                    </p>
                   </div>
                   <div className="flex flex-row gap-2 font-bold text-fuchsia-700/80">
                     <div className="min-w-[50px] flex flex-col justify-center items-center">
