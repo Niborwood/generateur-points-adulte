@@ -14,12 +14,12 @@ import CardAnswers from "./card-answers";
 import CardScore from "./card-score";
 import NameCard from "../card/card-name";
 import Button from "../ui/button";
+import HomeLaunch from "./home-launch";
 
 export default function Card() {
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
-  const { questions, currentQuestionIndex, hasSetName } = useAppSelector(
-    (state) => state.quiz
-  );
+  const { questions, currentQuestionIndex, hasSetName, hasClickedLaunch } =
+    useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();
   let child;
 
@@ -37,8 +37,10 @@ export default function Card() {
     );
   };
 
-  // Add prompt for first name
-  if (!hasSetName) {
+  if (!hasClickedLaunch) {
+    return <HomeLaunch />;
+    // Add prompt for first name
+  } else if (!hasSetName) {
     child = <NameCard />;
   } else {
     // If no question, show score

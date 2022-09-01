@@ -14,7 +14,7 @@ export default function Header() {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <h1 className="text-4xl font-thin tracking-wider text-center uppercase skew-x-6 skew-y-3 sm:text-5xl md:text-7xl lg:text-8xl font-headings 2xl:text-9xl text-slate-100 drop-shadow-xl shadow-white">
+        <h1 className="text-5xl font-thin tracking-wider text-center uppercase skew-x-6 skew-y-3 sm:text-6xl md:text-7xl lg:text-8xl font-headings 2xl:text-9xl text-slate-100 drop-shadow-xl shadow-white">
           <Link to="/">
             Le <br />
             ieuv- o -metre

@@ -30,12 +30,16 @@ const initialState: QuizState = {
     respScore: null,
   },
   error: "",
+  hasClickedLaunch: false,
 };
 
 export const quizSlice = createSlice({
   name: "quiz",
   initialState,
   reducers: {
+    launchQuiz: (state) => {
+      state.hasClickedLaunch = true;
+    },
     beginQuiz: (
       state,
       action: PayloadAction<{ name: string; age: number }>
@@ -67,6 +71,7 @@ export const quizSlice = createSlice({
       state.age = 29;
       state.createdAt = new Date();
       state.hasSetName = true;
+      state.hasClickedLaunch = true;
     },
     goToNextQuestion: (state, action: PayloadAction<AnswerGiven>) => {
       // Tutoiement or vouvoiement
@@ -180,5 +185,6 @@ export const {
   goToNextQuestion,
   getScore,
   clearQuiz,
+  launchQuiz,
 } = quizSlice.actions;
 export default quizSlice.reducer;

@@ -7,9 +7,9 @@ import { useAppDispatch } from "../../hooks/redux";
 import { beginQuiz } from "../../features/quiz/quizSlice";
 
 // COMPONENTS
-import { Input, Form, Title } from "../ui";
+import { Input, Form } from "../ui";
 
-const CardName = () => {
+const StartCard = () => {
   const nameInput = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string>("");
   const dispatch = useAppDispatch();
@@ -43,4 +43,4 @@ const CardName = () => {
   );
 };
 
-export default CardName;
+export default StartCard;
