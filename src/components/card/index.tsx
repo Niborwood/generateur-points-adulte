@@ -8,12 +8,11 @@ import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { goToNextQuestion } from "../../features/quiz/quizSlice";
 
 // IMPORTS
-import CardWrapper from "../ui/card-wrapper";
+import { CardWrapper, Button } from "../ui/";
 import CardQuestion from "./card-question";
 import CardAnswers from "./card-answers";
 import CardScore from "./card-score";
-import NameCard from "../card/card-name";
-import Button from "../ui/button";
+import StartCard from "./start-card";
 import HomeLaunch from "./home-launch";
 
 export default function Card() {
@@ -41,12 +40,11 @@ export default function Card() {
     return <HomeLaunch />;
     // Add prompt for first name
   } else if (!hasSetName) {
-    child = <NameCard />;
+    child = <StartCard />;
   } else {
     // If no question, show score
     if (!currentQuestion) child = <CardScore />;
     else {
-      console.log(currentQuestion.conditions);
       child = (
         <>
           {/* Card Question */}

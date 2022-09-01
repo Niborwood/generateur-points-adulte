@@ -31,6 +31,7 @@ const initialState: QuizState = {
   },
   error: "",
   hasClickedLaunch: false,
+  startCardTimer: 0,
 };
 
 export const quizSlice = createSlice({
@@ -97,6 +98,9 @@ export const quizSlice = createSlice({
         ...initialState,
         questions: state.questions,
       };
+    },
+    setStardCardTimer: (state, action: PayloadAction<number>) => {
+      state.startCardTimer = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -186,5 +190,6 @@ export const {
   getScore,
   clearQuiz,
   launchQuiz,
+  setStardCardTimer,
 } = quizSlice.actions;
 export default quizSlice.reducer;

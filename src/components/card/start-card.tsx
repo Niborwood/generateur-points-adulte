@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Button from "../ui/button";
 import { FormValues } from "../../../definitions/definitions";
 
 // REDUX
 import { useAppDispatch } from "../../hooks/redux";
-import { beginQuiz } from "../../features/quiz/quizSlice";
+import { beginQuiz, setStardCardTimer } from "../../features/quiz/quizSlice";
 
 // COMPONENTS
 import { Input, Form } from "../ui";
@@ -13,6 +13,13 @@ const StartCard = () => {
   const nameInput = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string>("");
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    performance.now();
+    return () => {
+      dispatch(setStardCardTimer(Math.round(performance.now())));
+    };
+  }, []);
 
   const handleSubmit = (formValues: FormValues) => {
     const { name, age } = formValues;

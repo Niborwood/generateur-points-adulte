@@ -55,6 +55,7 @@ export interface QuizState {
   };
   stats?: FetchedStats;
   error: string;
+  startCardTimer: number;
 }
 
 export interface Stats {
