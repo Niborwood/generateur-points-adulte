@@ -22,17 +22,19 @@ const Quiz = () => {
   return (
     <Fragment>
       <QuizCard />
-      <div className="space-x-4">
-        <button
-          className="p-2 text-sm text-center bg-white rounded-md"
-          onClick={handleRandomize}
-        >
-          🎲 Randomize quiz
-        </button>
-        <button className="p-2 mt-8 text-sm text-center bg-white rounded-md">
-          <Link to="/gpa-admin">🔒 Admin</Link>
-        </button>
-      </div>
+      {import.meta.env.DEV && (
+        <div className="space-x-4">
+          <button
+            className="p-2 text-sm text-center bg-white rounded-md"
+            onClick={handleRandomize}
+          >
+            🎲 Randomize quiz
+          </button>
+          <button className="p-2 mt-8 text-sm text-center bg-white rounded-md">
+            <Link to="/gpa-admin">🔒 Admin</Link>
+          </button>
+        </div>
+      )}
     </Fragment>
   );
 };
