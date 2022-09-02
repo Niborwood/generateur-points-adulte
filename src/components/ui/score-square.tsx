@@ -55,7 +55,6 @@ export default ({ type }: ScoreSquareProps) => {
         : ageRangeAverages.resp_score;
 
     if (!score || !ageRangeAverage) return;
-    console.log(score * 100, ageRangeAverage);
     return rangeAverage(score * 100, ageRangeAverage, type, kindOfQuestions);
   }, [userAge, stats, score]);
 
@@ -98,6 +97,7 @@ export default ({ type }: ScoreSquareProps) => {
       >
         <div>
           <strong>{score ? (score * 100).toFixed(1) : "N/A"}</strong>
+          <span className="text-xl"> / 100</span>
         </div>
         <div>
           {type === "resp" ? (
