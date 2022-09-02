@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // DEFINITIONS
 import { Answer, QuestionConditions } from "../../../definitions/definitions";
@@ -17,6 +17,10 @@ import HomeLaunch from "./home-launch";
 
 export default function Card() {
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
+  console.log(
+    "🚀 ~ file: index.tsx ~ line 20 ~ Card ~ selectedAnswer",
+    selectedAnswer
+  );
   const { questions, currentQuestionIndex, hasSetName, hasClickedLaunch } =
     useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();
@@ -25,13 +29,18 @@ export default function Card() {
   // Derived state
   const currentQuestion = questions[currentQuestionIndex];
 
+  // Reinitialize selected answer when question changes
+  useEffect(() => {
+    setSelectedAnswer(null);
+  }, [currentQuestionIndex]);
+
   // Handle next question
   const handleNextQuestion = () => {
-    if (!selectedAnswer) return;
+    if (!selectedAnswer || selectedAnswer._id === undefined) return;
     dispatch(
       goToNextQuestion({
         questionId: currentQuestion._id,
-        answerId: selectedAnswer._id!,
+        answerId: selectedAnswer._id,
       })
     );
   };
