@@ -48,7 +48,7 @@ export default function Card() {
     child = <StartCard />;
   } else {
     // If no question, show score
-    if (!currentQuestion) child = <CardScore />;
+    if (!currentQuestion) return <CardScore />;
     else {
       child = (
         <>
