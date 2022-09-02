@@ -17,10 +17,6 @@ import HomeLaunch from "./home-launch";
 
 export default function Card() {
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
-  console.log(
-    "🚀 ~ file: index.tsx ~ line 20 ~ Card ~ selectedAnswer",
-    selectedAnswer
-  );
   const { questions, currentQuestionIndex, hasSetName, hasClickedLaunch } =
     useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();

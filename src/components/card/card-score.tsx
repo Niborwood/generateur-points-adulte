@@ -112,6 +112,7 @@ const CardScore = () => {
                     age.max >= userAge &&
                     "bg-fuchsia-500/60 py-8 px-4"
                   } rounded-xl`}
+                  key={age.label}
                 >
                   <div className="flex flex-row items-center justify-center">
                     <ArrowCircleRightIcon className="w-4 mr-3 text-fuchsia-700/80" />

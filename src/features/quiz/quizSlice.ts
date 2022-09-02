@@ -43,11 +43,12 @@ export const quizSlice = createSlice({
     },
     beginQuiz: (
       state,
-      action: PayloadAction<{ name: string; age: number }>
+      action: PayloadAction<{ name: string; age: number; createdAt: string }>
     ) => {
       state.name = action.payload.name;
       state.age = action.payload.age;
-      (state.hasSetName = true), (state.createdAt = new Date());
+      state.hasSetName = true;
+      state.createdAt = action.payload.createdAt;
     },
     endQuiz: (state) => {
       state.hasEndedQuiz = true;
@@ -70,7 +71,7 @@ export const quizSlice = createSlice({
       state.hasEndedQuiz = true;
       state.name = "Random Test";
       state.age = 29;
-      state.createdAt = new Date();
+      state.createdAt = new Date().toISOString();
       state.hasSetName = true;
       state.hasClickedLaunch = true;
     },

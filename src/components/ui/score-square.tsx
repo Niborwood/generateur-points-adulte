@@ -36,6 +36,7 @@ export default ({ type }: ScoreSquareProps) => {
     stats,
     score: scores,
     age: userAge,
+    kindOfQuestions,
   } = useAppSelector((state) => state.quiz);
   const score = type === "adult" ? scores.adultScore : scores.respScore;
 
@@ -55,7 +56,7 @@ export default ({ type }: ScoreSquareProps) => {
 
     if (!score || !ageRangeAverage) return;
     console.log(score * 100, ageRangeAverage);
-    return rangeAverage(score * 100, ageRangeAverage, type);
+    return rangeAverage(score * 100, ageRangeAverage, type, kindOfQuestions);
   }, [userAge, stats, score]);
 
   const scoreColor = {

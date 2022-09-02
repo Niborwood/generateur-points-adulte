@@ -45,7 +45,7 @@ export interface QuizState {
   age: number;
   hasClickedLaunch: boolean;
   hasSetName: boolean;
-  createdAt: Date | null;
+  createdAt: string | null;
   hasEndedQuiz: boolean;
   kindOfQuestions: 0 | 1;
   isLoading: boolean;

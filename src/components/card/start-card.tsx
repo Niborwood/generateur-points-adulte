@@ -29,7 +29,13 @@ const StartCard = () => {
     // Age check
     if (!age) return setError("Merci d'entrer votre âge");
 
-    dispatch(beginQuiz({ name: name.toString(), age: +age }));
+    dispatch(
+      beginQuiz({
+        name: name.toString(),
+        age: +age,
+        createdAt: new Date().toISOString(),
+      })
+    );
   };
 
   return (
