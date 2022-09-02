@@ -71,9 +71,9 @@ export default ({ type }: ScoreSquareProps) => {
   }
 
   if (score && score >= 0.45 && score < 0.55) {
-    scoreColor.bg = "bg-stone-200";
-    scoreColor.text = "text-stone-800/60";
-    scoreColor.gradient = "from-stone-300/80 to-stone-300";
+    scoreColor.bg = "bg-slate-200";
+    scoreColor.text = "text-slate-800/60";
+    scoreColor.gradient = "from-slate-300/80 to-slate-300";
   }
 
   if (score && score >= 0.55 && score < 0.75) {
@@ -101,9 +101,13 @@ export default ({ type }: ScoreSquareProps) => {
         </div>
         <div>
           {type === "resp" ? (
-            <LightBulbIcon className={`w-10 ${scoreColor.text}`} />
+            <LightBulbIcon
+              className={`w-16 rounded-full p-2 ${scoreColor.bg} ${scoreColor.text}`}
+            />
           ) : (
-            <IdentificationIcon className={`w-10 ${scoreColor.text}`} />
+            <IdentificationIcon
+              className={`w-16 rounded-full p-2 ${scoreColor.bg} ${scoreColor.text}`}
+            />
           )}
         </div>
       </div>
@@ -114,15 +118,19 @@ export default ({ type }: ScoreSquareProps) => {
       </p>
       <p className="text-slate-900/80">{calculateAverageDiff()}</p>
       <hr className="m-4 border-slate-500/30" />
-      <p className="text-xs italic text-slate-900/60">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus
-        nesciunt porro perferendis ipsam quidem odio aliquid repudiandae. Minima
-        nihil ipsum perspiciatis, ad natus voluptates iusto molestiae beatae
-        accusantium magnam illo sequi fugit qui laudantium. Qui impedit
-        excepturi deleniti alias corrupti quisquam itaque dolorem labore magnam.
-        Qui expedita vel maxime aperiam sunt reiciendis reprehenderit dolore
-        non! Sed laudantium fuga molestiae repellendus.
-      </p>
+      <div className="space-y-2 text-xs italic text-slate-900/60">
+        <p>
+          Le score n'indique pas votre âge mais votre niveau{" "}
+          {type === "adult" ? "d'adulte" : "de responsabilité"} sur une échelle
+          de 0 à 100, 0 étant la valeur minimale et 100 la valeur maximale.
+        </p>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores
+          exercitationem unde et ullam asperiores veniam sed voluptates hic est
+          rem, ad cum quaerat aliquid, illum suscipit praesentium necessitatibus
+          qui soluta!
+        </p>
+      </div>
     </div>
   );
 };
