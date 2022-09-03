@@ -15,6 +15,7 @@ export interface Question {
   answers: Answer[];
   conditions?: QuestionConditions;
   position: number;
+  subject: string;
 }
 
 export interface QuestionConditions {
