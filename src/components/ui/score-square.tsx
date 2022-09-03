@@ -3,40 +3,13 @@ import { LightBulbIcon, IdentificationIcon } from "@heroicons/react/outline";
 import { rangeAverage } from "../../utils";
 import { useAppSelector } from "../../hooks/redux";
 
-const AGES = [
-  {
-    label: "- de 18 ans",
-    min: 0,
-    max: 18,
-  },
-  {
-    label: "18 à 25 ans",
-    min: 18,
-    max: 25,
-  },
-  {
-    label: "26 à 35 ans",
-    min: 26,
-    max: 35,
-  },
-  {
-    label: "36 à 50 ans",
-    min: 36,
-    max: 50,
-  },
-  {
-    label: "+ de 50 ans",
-    min: 51,
-    max: 100,
-  },
-];
-
 export default ({ type }: ScoreSquareProps) => {
   const {
     stats,
     score: scores,
     age: userAge,
     kindOfQuestions,
+    ages,
   } = useAppSelector((state) => state.quiz);
   const score = type === "adult" ? scores.adultScore : scores.respScore;
 
@@ -44,7 +17,7 @@ export default ({ type }: ScoreSquareProps) => {
   const calculateAverageDiff = useCallback(() => {
     if (!stats) return;
 
-    const userAgeRange = AGES.findIndex((age) => {
+    const userAgeRange = ages.findIndex((age) => {
       return age.min <= userAge && age.max >= userAge;
     })!;
 
@@ -120,15 +93,32 @@ export default ({ type }: ScoreSquareProps) => {
       <hr className="m-4 border-slate-500/30" />
       <div className="space-y-2 text-xs italic text-slate-900/60">
         <p>
-          Le score n'indique pas votre âge mais votre niveau{" "}
+          Le score n'indique pas votre âge mais{" "}
+          {kindOfQuestions ? "ton" : "votre"} niveau{" "}
           {type === "adult" ? "d'adulte" : "de responsabilité"} sur une échelle
           de 0 à 100, 0 étant la valeur minimale et 100 la valeur maximale.
         </p>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores
-          exercitationem unde et ullam asperiores veniam sed voluptates hic est
-          rem, ad cum quaerat aliquid, illum suscipit praesentium necessitatibus
-          qui soluta!
+          {type === "adult"
+            ? `Cet indice agrège ${
+                kindOfQuestions ? "tes" : "vos"
+              } réponses relatives
+          à ${kindOfQuestions ? "tes" : "vos"} conditions et à 
+          ${
+            kindOfQuestions ? "tes" : "vos"
+          } habitudes. Plus la valeur est proche
+          de 100, plus ${kindOfQuestions ? "tu es" : "vous êtes"} une personne
+          avec des façons de faire qui sont spécifiques à l’âge adulte, peu
+          importe ${kindOfQuestions ? "ta" : "votre"} capacité d’anticipation ou
+          l’engagement que ${kindOfQuestions ? "tu mets" : "vous mettez"} dans
+          celles-ci.`
+            : `Cet indice synthèse  ${
+                kindOfQuestions ? "ta" : "votre"
+              } capacité à anticiper ${
+                kindOfQuestions ? "tes" : "vos"
+              } actions et à être dans une situation confortable. Plus la valeur est proche de 100, plus ${
+                kindOfQuestions ? "tu es" : "vous êtes"
+              } une personne faisant preuve d’autonomie qui met en œuvre des actions pour prévoir les aléas de la vie.`}
         </p>
       </div>
     </div>

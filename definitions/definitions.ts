@@ -56,6 +56,7 @@ export interface QuizState {
   stats?: FetchedStats;
   error: string;
   startCardTimer: number;
+  ages: AgeRange[];
 }
 
 export interface Stats {
@@ -84,4 +85,10 @@ export interface AnswerToUpsert {
 
 export interface FormValues {
   [k: string]: FormDataEntryValue;
+}
+
+export interface AgeRange {
+  label: string;
+  min: number;
+  max: number;
 }

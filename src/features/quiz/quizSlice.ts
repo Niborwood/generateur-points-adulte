@@ -32,6 +32,33 @@ const initialState: QuizState = {
   error: "",
   hasClickedLaunch: false,
   startCardTimer: 0,
+  ages: [
+    {
+      label: "- de 18 ans",
+      min: 0,
+      max: 18,
+    },
+    {
+      label: "18 à 25 ans",
+      min: 18,
+      max: 25,
+    },
+    {
+      label: "26 à 35 ans",
+      min: 26,
+      max: 35,
+    },
+    {
+      label: "36 à 50 ans",
+      min: 36,
+      max: 50,
+    },
+    {
+      label: "+ de 50 ans",
+      min: 51,
+      max: 100,
+    },
+  ],
 };
 
 export const quizSlice = createSlice({
