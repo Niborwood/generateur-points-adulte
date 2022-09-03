@@ -72,7 +72,7 @@ const CardScore = () => {
         <CardWrapper>
           {stats && (
             <>
-              <p className="mb-8 mt-2 text-3xl font-bold text-center">
+              <p className="mt-2 mb-8 text-3xl font-bold text-center">
                 Moyenne par <br /> tranche d'âge
               </p>
               <div className="flex flex-col gap-2">
