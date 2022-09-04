@@ -17,7 +17,7 @@ export default ({ answers, questions }: CalculateScoreProps) => {
 
     if (!question) continue;
     const answer = question.answers.find(
-      (answer) => answer._id === givenAnswer.answerId
+      (answer) => answer._id === givenAnswer.answer._id
     );
 
     if (!answer) continue;

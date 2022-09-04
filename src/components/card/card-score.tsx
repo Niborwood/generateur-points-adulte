@@ -53,7 +53,7 @@ const CardScore = () => {
 
   return (
     <div>
-      <div className="flex flex-col gap-8 mb-4 lg:flex-row">
+      <div className="flex flex-col items-center gap-8 mb-4 lg:flex-row">
         {/* Player score */}
         <CardWrapper>
           <div className="p-2 bg-slate-100" ref={shareRef}>

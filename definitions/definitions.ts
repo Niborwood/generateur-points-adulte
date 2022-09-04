@@ -1,9 +1,10 @@
 type NotEmptyArray<T> = [T, ...T[]];
 export interface Answer {
-  _id?: number;
+  _id: number;
   adultScore: number | null;
   respScore: number | null;
   answer: string;
+  question_id: number;
 }
 
 export interface Question {
@@ -28,7 +29,8 @@ export interface QuestionConditions {
 
 export interface AnswerGiven {
   questionId: number;
-  answerId: number;
+  questionSubject: Question["subject"];
+  answer: Answer;
 }
 
 export type AnswersGiven = AnswerGiven[];
@@ -58,6 +60,7 @@ export interface QuizState {
   error: string;
   startCardTimer: number;
   ages: AgeRange[];
+  answersSubjects: AnswerSubjects;
 }
 
 export interface Stats {
@@ -75,6 +78,7 @@ export interface QuestionToUpsert {
   created_at?: Date;
   updated_at: Date;
   position: number;
+  subject?: string;
 }
 
 export interface AnswerToUpsert {
@@ -92,4 +96,11 @@ export interface AgeRange {
   label: string;
   min: number;
   max: number;
+}
+
+export interface AnswerSubjects {
+  adultMax: Question["subject"];
+  adultMin: Question["subject"];
+  respMax: Question["subject"];
+  respMin: Question["subject"];
 }

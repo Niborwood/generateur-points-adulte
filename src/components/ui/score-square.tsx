@@ -10,6 +10,7 @@ export default ({ type }: ScoreSquareProps) => {
     age: userAge,
     kindOfQuestions,
     ages,
+    answersSubjects,
   } = useAppSelector((state) => state.quiz);
   const score = type === "adult" ? scores.adultScore : scores.respScore;
 
@@ -37,7 +38,7 @@ export default ({ type }: ScoreSquareProps) => {
     gradient: "from-red-300/80 to-red-300",
   };
 
-  if (score && score >= 0.25 && score < 0.45) {
+  if (score && score >= 0.3 && score < 0.45) {
     scoreColor.bg = "bg-pink-200";
     scoreColor.text = "text-pink-800/60";
     scoreColor.gradient = "from-pink-300/80 to-pink-300";
@@ -49,13 +50,13 @@ export default ({ type }: ScoreSquareProps) => {
     scoreColor.gradient = "from-slate-300/80 to-slate-300";
   }
 
-  if (score && score >= 0.55 && score < 0.75) {
+  if (score && score >= 0.55 && score < 0.7) {
     scoreColor.bg = "bg-fuchsia-200";
     scoreColor.text = "text-fuchsia-800/60";
     scoreColor.gradient = "from-fuchsia-300/80 to-fuchsia-300";
   }
 
-  if (score && score >= 0.75) {
+  if (score && score >= 0.7) {
     scoreColor.bg = "bg-purple-200";
     scoreColor.text = "text-purple-800/60";
     scoreColor.gradient = "from-purple-300/80 to-purple-300";
@@ -89,11 +90,26 @@ export default ({ type }: ScoreSquareProps) => {
         Indice
         {type === "adult" ? " adulte" : " responsabilité"}
       </p>
-      <p className="text-slate-900/80">{calculateAverageDiff()}</p>
+      <p className="text-slate-900/80">
+        {calculateAverageDiff()} {kindOfQuestions ? "Tu es" : "Vous êtes"} très{" "}
+        {type === "adult" ? "adulte" : "responsable"} sur{" "}
+        <strong>
+          {answersSubjects[
+            type === "adult" ? "adultMax" : "respMax"
+          ].toLowerCase()}
+        </strong>{" "}
+        et peu {type === "adult" ? "adulte" : "responsable"} sur{" "}
+        <strong>
+          {answersSubjects[
+            type === "adult" ? "adultMin" : "respMin"
+          ].toLowerCase()}
+        </strong>
+        .
+      </p>
       <hr className="m-4 border-slate-500/30" />
       <div className="space-y-2 text-xs italic text-slate-900/60">
         <p>
-          Le score n'indique pas votre âge mais{" "}
+          Le score n'indique pas {kindOfQuestions ? "ton" : "votre"} âge mais{" "}
           {kindOfQuestions ? "ton" : "votre"} niveau{" "}
           {type === "adult" ? "d'adulte" : "de responsabilité"} sur une échelle
           de 0 à 100, 0 étant la valeur minimale et 100 la valeur maximale.

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { AnswerGiven, QuizState } from "../../../definitions/definitions";
 
@@ -13,6 +13,7 @@ import {
 
 // UTILS
 import { calculateScore } from "../../utils";
+import extractSubjects from "../../utils/extract-subjects";
 
 const initialState: QuizState = {
   questions: [],
@@ -59,6 +60,12 @@ const initialState: QuizState = {
       max: 100,
     },
   ],
+  answersSubjects: {
+    adultMax: "",
+    adultMin: "",
+    respMax: "",
+    respMin: "",
+  },
 };
 
 export const quizSlice = createSlice({
@@ -90,7 +97,8 @@ export const quizSlice = createSlice({
         if (answer)
           state.answers.push({
             questionId: question._id,
-            answerId: answer._id!,
+            questionSubject: question.subject,
+            answer,
           });
       }
 
@@ -103,23 +111,30 @@ export const quizSlice = createSlice({
       state.hasClickedLaunch = true;
     },
     goToNextQuestion: (state, action: PayloadAction<AnswerGiven>) => {
+      console.log(action.payload);
+
       // Tutoiement or vouvoiement
       if (
         state.currentQuestionIndex === 0 &&
-        (action.payload.answerId === 0 || action.payload.answerId === 1)
+        (action.payload.answer._id === 0 || action.payload.answer._id === 1)
       )
-        state.kindOfQuestions = action.payload.answerId;
+        state.kindOfQuestions = action.payload.answer._id;
 
       state.answers.push(action.payload);
       state.currentQuestionIndex++;
     },
     getScore: (state) => {
-      const score = calculateScore({
+      // Get scores
+      state.score = calculateScore({
         answers: state.answers,
         questions: state.questions,
       });
 
-      state.score = score;
+      // Get subjects
+      state.answersSubjects = extractSubjects({
+        questions: state.questions,
+        answers: state.answers,
+      });
     },
     clearQuiz: (state) => {
       return {

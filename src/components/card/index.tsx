@@ -35,7 +35,8 @@ export default function Card() {
     dispatch(
       goToNextQuestion({
         questionId: currentQuestion._id,
-        answerId: selectedAnswer._id,
+        answer: selectedAnswer,
+        questionSubject: currentQuestion.subject,
       })
     );
   };
