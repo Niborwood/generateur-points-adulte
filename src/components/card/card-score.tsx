@@ -53,7 +53,7 @@ const CardScore = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center gap-8 mb-4 lg:flex-row">
+      <div className="flex flex-col items-center gap-8 mb-4 lg:items-start lg:flex-row">
         {/* Player score */}
         <CardWrapper>
           <div className="p-2 bg-slate-100" ref={shareRef}>
@@ -71,7 +71,7 @@ const CardScore = () => {
         {/* Average scores */}
         <CardWrapper>
           {stats && (
-            <>
+            <div className="w-full">
               <p className="mt-2 mb-8 text-3xl font-bold text-center">
                 Moyenne par <br /> tranche d'âge
               </p>
@@ -114,7 +114,7 @@ const CardScore = () => {
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           )}
         </CardWrapper>
       </div>

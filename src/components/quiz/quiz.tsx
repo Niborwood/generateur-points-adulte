@@ -23,7 +23,7 @@ const Quiz = () => {
   return (
     <Fragment>
       <QuizCard />
-      {(email === "robin.souriau@gmail.com" || true) && (
+      {email === "robin.souriau@gmail.com" && (
         <div className="space-x-4">
           <button
             className="p-2 text-sm text-center bg-white rounded-md"
