@@ -152,11 +152,11 @@ const CardScore = () => {
           onClick={handleClearQuiz}
           style="light"
         />
-        <Button
+        {/* <Button
           text="Partager le résultat"
           onClick={handleShareClick}
           style="light"
-        />
+        /> */}
       </div>
     </div>
   );
