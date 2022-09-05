@@ -13,7 +13,7 @@ export default (
   const roundedDiff = Math.round(diff * 100) / 100;
   const isAboveAverage = roundedDiff > 0;
 
-  return `Vous êtes ${Math.abs(roundedDiff)}% ${
+  return `Ce résultat est ${Math.abs(roundedDiff)}% ${
     isAboveAverage ? "plus" : "moins"
   } ${type === "adult" ? "adulte" : "responsable"} que ${
     kindOfQuestions ? "ta" : "votre"

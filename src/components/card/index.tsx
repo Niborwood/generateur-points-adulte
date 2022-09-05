@@ -20,7 +20,6 @@ export default function Card() {
   const { questions, currentQuestionIndex, hasSetName, hasClickedLaunch } =
     useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();
-  let child;
 
   // Derived state
   const currentQuestion = questions[currentQuestionIndex];
@@ -36,45 +35,42 @@ export default function Card() {
     dispatch(
       goToNextQuestion({
         questionId: currentQuestion._id,
-        answerId: selectedAnswer._id,
+        answer: selectedAnswer,
+        questionSubject: currentQuestion.subject,
       })
     );
   };
 
-  if (!hasClickedLaunch) {
-    return <HomeLaunch />;
-    // Add prompt for first name
-  } else if (!hasSetName) {
-    child = <StartCard />;
-  } else {
-    // If no question, show score
-    if (!currentQuestion) return <CardScore />;
-    else {
-      child = (
-        <>
-          {/* Card Question */}
-          <CardQuestion currentQuestion={currentQuestion} />
+  // Before any prompt
+  if (!hasClickedLaunch) return <HomeLaunch />;
+  // Name and age card
+  else if (!hasSetName)
+    return (
+      <CardWrapper>
+        <StartCard />
+      </CardWrapper>
+    );
+  // No question left, score
+  else if (!currentQuestion) return <CardScore />;
+  // Questions flow
+  else
+    return (
+      <CardWrapper>
+        {/* Card Question */}
+        <CardQuestion currentQuestion={currentQuestion} />
 
-          {/* Card Answers */}
-          <CardAnswers
-            answers={currentQuestion.answers}
-            selectedAnswer={selectedAnswer}
-            setSelectedAnswer={setSelectedAnswer}
-            color={currentQuestion.conditions?.color}
-          />
+        {/* Card Answers */}
+        <CardAnswers
+          answers={currentQuestion.answers}
+          selectedAnswer={selectedAnswer}
+          setSelectedAnswer={setSelectedAnswer}
+          color={currentQuestion.conditions?.color}
+        />
 
-          {/* Next Question Button */}
-          <div className="mt-16">
-            <Button
-              text="Question suivante"
-              onClick={handleNextQuestion}
-              full
-            />
-          </div>
-        </>
-      );
-    }
-  }
-
-  return <CardWrapper>{child}</CardWrapper>;
+        {/* Next Question Button */}
+        <div className="mt-16">
+          <Button text="Question suivante" onClick={handleNextQuestion} full />
+        </div>
+      </CardWrapper>
+    );
 }

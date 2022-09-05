@@ -2,7 +2,7 @@ import { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // REDUX
-import { useAppDispatch } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { randomizeQuiz } from "../../features/quiz/quizSlice";
 import { fetchQuestions } from "../../features/quiz/quizThunks";
 
@@ -11,6 +11,7 @@ import QuizCard from "../card/index";
 
 const Quiz = () => {
   const dispatch = useAppDispatch();
+  const { email } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(fetchQuestions());
@@ -22,7 +23,7 @@ const Quiz = () => {
   return (
     <Fragment>
       <QuizCard />
-      {import.meta.env.DEV && (
+      {email === "robin.souriau@gmail.com" && (
         <div className="space-x-4">
           <button
             className="p-2 text-sm text-center bg-white rounded-md"

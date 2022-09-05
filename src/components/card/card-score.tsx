@@ -14,34 +14,6 @@ import {
   IdentificationIcon,
 } from "@heroicons/react/solid";
 
-const AGES = [
-  {
-    label: "- de 18 ans",
-    min: 0,
-    max: 18,
-  },
-  {
-    label: "18 à 25 ans",
-    min: 18,
-    max: 25,
-  },
-  {
-    label: "26 à 35 ans",
-    min: 26,
-    max: 35,
-  },
-  {
-    label: "36 à 50 ans",
-    min: 36,
-    max: 50,
-  },
-  {
-    label: "+ de 50 ans",
-    min: 51,
-    max: 100,
-  },
-];
-
 const CardScore = () => {
   const shareRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
@@ -51,6 +23,7 @@ const CardScore = () => {
     age: userAge,
     stats,
     kindOfQuestions,
+    ages,
   } = useAppSelector((state) => state.quiz);
 
   const handleClearQuiz = () => {
@@ -80,7 +53,7 @@ const CardScore = () => {
 
   return (
     <div>
-      <div className="flex flex-col gap-8 mb-4 lg:flex-row">
+      <div className="flex flex-col items-center gap-8 mb-4 lg:items-start lg:flex-row">
         {/* Player score */}
         <CardWrapper>
           <div className="p-2 bg-slate-100" ref={shareRef}>
@@ -98,12 +71,12 @@ const CardScore = () => {
         {/* Average scores */}
         <CardWrapper>
           {stats && (
-            <>
-              <p className="mb-6 text-3xl font-bold text-center">
-                Moyenne par tranche d'âge
+            <div className="w-full">
+              <p className="mt-2 mb-8 text-3xl font-bold text-center">
+                Moyenne par <br /> tranche d'âge
               </p>
               <div className="flex flex-col gap-2">
-                {AGES.map((age, index) => (
+                {ages.map((age, index) => (
                   <div
                     className={`flex flex-row p-4 justify-between items-center ${
                       index % 2 ? "bg-purple-200/80" : "bg-purple-200/30"
@@ -141,7 +114,7 @@ const CardScore = () => {
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           )}
         </CardWrapper>
       </div>
