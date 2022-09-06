@@ -149,9 +149,16 @@ export const fetchAdminStats = createAsyncThunk(
   async () => {
     const { data, error, count } = await supabase
       .from("stats")
-      .select("name, age, completedAt, createdAt, score", { count: "exact" })
+      .select("name, age, completedAt, createdAt, score, id", {
+        count: "exact",
+      })
       .neq("name", "Random Test");
+
+    const {
+      data: [totals],
+      error: error2,
+    } = await supabase.rpc("get_admin_stats").select("*");
     if (error) throw new Error(error.message);
-    return { data, count } as AdminStats;
+    return { data, totals } as AdminStats;
   }
 );

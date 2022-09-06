@@ -74,6 +74,7 @@ export interface Stats {
 
 export interface AdminStats {
   data: {
+    id: number;
     name: string;
     age: number;
     completedAt: string;
@@ -83,7 +84,12 @@ export interface AdminStats {
       respScore: number;
     };
   }[];
-  count: number;
+  totals: {
+    adult_average: number;
+    resp_average: number;
+    age_average: number;
+    total_answers: number;
+  };
 }
 
 export interface QuestionToUpsert {

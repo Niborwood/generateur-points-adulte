@@ -57,22 +57,22 @@ export default () => {
           </div>
           <CardStat
             name="Total de réponses"
-            number={adminStats?.count}
+            number={adminStats?.totals.total_answers}
             icon={<UserIcon />}
           />
           <CardStat
             name="Âge moyen"
-            number={getAverageAge()}
+            number={adminStats?.totals.age_average}
             icon={<UserIcon />}
           />
           <CardStat
             name="Moyenne adulte"
-            number={getAverageAdult()}
+            number={adminStats?.totals.adult_average}
             icon={<UserIcon />}
           />
           <CardStat
             name="Moyenne responsable"
-            number={getAverageResp()}
+            number={adminStats?.totals.resp_average}
             icon={<UserIcon />}
           />
           {/* <CardStat name="Temps moyen" number={12} icon={<UserIcon />} /> */}
@@ -85,7 +85,7 @@ export default () => {
             return (
               <div
                 className="flex flex-row justify-between p-2 bg-pink-100 rounded-md"
-                key={user.score.adultScore}
+                key={user.id}
               >
                 <div className="flex flex-row gap-2">
                   <div>{user.name}</div>
