@@ -61,6 +61,7 @@ export interface QuizState {
   startCardTimer: number;
   ages: AgeRange[];
   answersSubjects: AnswerSubjects;
+  adminStats?: AdminStats;
 }
 
 export interface Stats {
@@ -69,6 +70,20 @@ export interface Stats {
   completedAt: Date;
   name: string;
   answers: AnswersGiven;
+}
+
+export interface AdminStats {
+  data: {
+    name: string;
+    age: number;
+    completedAt: string;
+    createdAt: string;
+    score: {
+      adultScore: number;
+      respScore: number;
+    };
+  }[];
+  count: number;
 }
 
 export interface QuestionToUpsert {

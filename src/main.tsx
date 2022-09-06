@@ -9,6 +9,9 @@ import { Provider } from "react-redux";
 import App from "./App";
 import Quiz from "./components/quiz/quiz";
 import Admin from "./components/admin";
+import { CardWrapper } from "./components/ui";
+import QuestionsDashboard from "./components/admin/questions-dashboard";
+import StatsDashboard from "./components/admin/stats-dashboard";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,7 +20,18 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Quiz />} />
+
+            {/* Admin */}
             <Route path="/gpa-admin" element={<Admin />} />
+            <Route
+              path="/gpa-admin/questions"
+              element={
+                <CardWrapper large>
+                  <QuestionsDashboard />
+                </CardWrapper>
+              }
+            />
+            <Route path="/gpa-admin/stats" element={<StatsDashboard />} />
           </Route>
         </Routes>
       </BrowserRouter>

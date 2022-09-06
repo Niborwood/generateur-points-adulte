@@ -1,85 +1,31 @@
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Title } from "../ui";
 import {
-  DragDropContext,
-  OnDragEndResponder,
-  Droppable,
-  Draggable,
-} from "react-beautiful-dnd";
-
-// REDUX
-import { useAppSelector, useAppDispatch } from "../../hooks/redux";
-import {
-  fetchQuestions,
-  reorderQuestions,
-} from "../../features/quiz/quizThunks";
-
-// COMPONENTS
-import QuestionItem from "./question-item";
+  ChartSquareBarIcon,
+  QuestionMarkCircleIcon,
+} from "@heroicons/react/outline";
 
 const Dashboard = () => {
-  const { questions } = useAppSelector((state) => state.quiz);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchQuestions());
-  }, []);
-
-  const handleDrag: OnDragEndResponder = async (result) => {
-    const destination = result.destination?.index;
-    const source = result.source.index;
-    const sourceId = +result.draggableId;
-    if (destination) {
-      await dispatch(
-        reorderQuestions({
-          moveDirection: source > destination ? "up" : "down",
-          source,
-          destination,
-          sourceId,
-        })
-      );
-      await dispatch(fetchQuestions());
-    }
-  };
-
   return (
-    <div className="">
-      {/* <Title title="Modifier les questions" size="5xl" /> */}
-      <DragDropContext onDragEnd={handleDrag}>
-        <div className="my-4">
-          <Droppable droppableId="droppable">
-            {(provided, snapshot) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="space-y-4"
-              >
-                {questions.map((question, index) => (
-                  <Draggable
-                    key={question.position}
-                    draggableId={question._id.toString()}
-                    index={index}
-                  >
-                    {(provided, snapshot) => (
-                      <div
-                        className="!top-auto !left-auto"
-                        ref={provided.innerRef}
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                      >
-                        <QuestionItem
-                          key={question.position}
-                          question={question}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div>
-      </DragDropContext>
+    <div className="my-4 space-y-8">
+      <div className="text-center">
+        <Title title="DASHBOARD" size="5xl" />
+      </div>
+
+      <div className="flex flex-col gap-4 md:flex-row">
+        <Link
+          to="/gpa-admin/stats"
+          className="flex-1 p-8 text-3xl tracking-wide uppercase transition-all bg-purple-500 shadow-md font-headings text-slate-100 rounded-xl hover:bg-purple-600"
+        >
+          <ChartSquareBarIcon className="w-20 mb-4" /> Stats
+        </Link>
+        <Link
+          to="/gpa-admin/questions"
+          className="flex-1 p-8 text-3xl tracking-wide uppercase transition-all bg-purple-500 shadow-md font-headings text-slate-100 rounded-xl hover:bg-purple-600"
+        >
+          <QuestionMarkCircleIcon className="w-20 mb-4" /> Questions
+        </Link>
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import {
   QuestionToUpsert,
   Answer,
   FetchedStats,
+  AdminStats,
 } from "../../../definitions/definitions";
 import { RootState } from "../../app/store";
 
@@ -142,3 +143,15 @@ export const fetchStats = createAsyncThunk("quiz/fetchStats", async () => {
   if (error) throw new Error(error.message);
   return data as FetchedStats;
 });
+
+export const fetchAdminStats = createAsyncThunk(
+  "quiz/fetchAdminStats",
+  async () => {
+    const { data, error, count } = await supabase
+      .from("stats")
+      .select("name, age, completedAt, createdAt, score", { count: "exact" })
+      .neq("name", "Random Test");
+    if (error) throw new Error(error.message);
+    return { data, count } as AdminStats;
+  }
+);

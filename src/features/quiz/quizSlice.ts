@@ -9,6 +9,7 @@ import {
   sendStats,
   reorderQuestions,
   fetchStats,
+  fetchAdminStats,
 } from "./quizThunks";
 
 // UTILS
@@ -219,6 +220,20 @@ export const quizSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(sendStats.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message || "Une erreur est survenue";
+    });
+
+    // FETCH ADMIN STATS
+    builder.addCase(fetchAdminStats.pending, (state) => {
+      state.isLoading = true;
+      state.error = "";
+    });
+    builder.addCase(fetchAdminStats.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.adminStats = action.payload;
+    });
+    builder.addCase(fetchAdminStats.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message || "Une erreur est survenue";
     });
