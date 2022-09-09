@@ -58,11 +58,11 @@ export default () => {
       </CardWrapper>
 
       <CardWrapper large>
-        <table className="table-auto w-full text-sm">
+        <table className="table-fixed sm:table-auto w-full text-xs sm:text-sm">
           <thead className="border-b-2">
             <tr>
               <th className="text-left py-4 px-2">Prénom</th>
-              <th className="text-right">Âge</th>
+              <th className="text-center sm:text-right">Âge</th>
               <th className="text-right">Date</th>
               <th className="text-right">Heure</th>
               <th className="text-right">Adul.</th>
@@ -76,11 +76,11 @@ export default () => {
                 key={stat.id}
               >
                 <td className="py-2 px-1">{stat.name}</td>
-                <td className="text-right">{stat.age}</td>
+                <td className="text-center sm:text-right">{stat.age}</td>
                 <td className="text-right">
                   {new Date(stat.createdAt).toLocaleDateString("fr", {
-                    year: "numeric",
-                    month: "short",
+                    year: "2-digit",
+                    month: "2-digit",
                     day: "numeric",
                   })}
                 </td>
@@ -90,8 +90,12 @@ export default () => {
                     minute: "numeric",
                   })}
                 </td>
-                <td className="text-right">{stat.score.adultScore}</td>
-                <td className="text-right">{stat.score.respScore}</td>
+                <td className="text-right">
+                  {(stat.score.adultScore * 100).toFixed(1)}
+                </td>
+                <td className="text-right">
+                  {(stat.score.respScore * 100).toFixed(1)}
+                </td>
               </tr>
             ))}
           </tbody>
