@@ -89,6 +89,8 @@ export interface AdminStats {
     resp_average: number;
     age_average: number;
     total_answers: number;
+    min_age: number;
+    max_age: number;
   };
 }
 

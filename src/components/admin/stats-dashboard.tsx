@@ -6,6 +6,8 @@ import {
   LightBulbIcon,
   IdentificationIcon,
   ArrowCircleLeftIcon,
+  ArrowCircleDownIcon,
+  ArrowCircleUpIcon,
 } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 
@@ -52,6 +54,16 @@ export default () => {
             name="Moyenne responsable"
             number={adminStats?.totals.resp_average}
             icon={<LightBulbIcon />}
+          />
+          <CardStat
+            name="Âge minimum"
+            number={adminStats?.totals.min_age}
+            icon={<ArrowCircleDownIcon />}
+          />
+          <CardStat
+            name="Âge maximum"
+            number={adminStats?.totals.max_age}
+            icon={<ArrowCircleUpIcon />}
           />
           {/* <CardStat name="Temps moyen" number={12} icon={<UserIcon />} /> */}
         </div>
