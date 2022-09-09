@@ -16,10 +16,6 @@ import { fetchAdminStats } from "../../features/quiz/quizThunks";
 export default () => {
   const dispatch = useAppDispatch();
   const { adminStats } = useAppSelector((state) => state.quiz);
-  console.log(
-    "🚀 ~ file: stats-dashboard.tsx ~ line 13 ~ adminStats",
-    adminStats
-  );
 
   useEffect(() => {
     dispatch(fetchAdminStats());
@@ -61,26 +57,45 @@ export default () => {
         </div>
       </CardWrapper>
 
-      <CardWrapper>
-        <div className="flex flex-col gap-2">
-          {adminStats?.data.map((user) => {
-            return (
-              <div
-                className="flex flex-row justify-between p-2 bg-pink-100 rounded-md"
-                key={user.id}
+      <CardWrapper large>
+        <table className="table-auto w-full text-sm">
+          <thead className="border-b-2">
+            <tr>
+              <th className="text-left py-4 px-2">Prénom</th>
+              <th className="text-right">Âge</th>
+              <th className="text-right">Date</th>
+              <th className="text-right">Heure</th>
+              <th className="text-right">Adul.</th>
+              <th className="text-right">Resp.</th>
+            </tr>
+          </thead>
+          <tbody>
+            {adminStats?.data.map((stat, index) => (
+              <tr
+                className={`${index % 2 ? "bg-purple-100" : ""}`}
+                key={stat.id}
               >
-                <div className="flex flex-row gap-2">
-                  <div>{user.name}</div>
-                  <div>{user.age}</div>
-                </div>
-                <div className="flex flex-row gap-2 text-right">
-                  <div className="flex-1">{user.score.adultScore}</div>
-                  <div className="flex-1">{user.score.respScore}</div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                <td className="py-2 px-1">{stat.name}</td>
+                <td className="text-right">{stat.age}</td>
+                <td className="text-right">
+                  {new Date(stat.createdAt).toLocaleDateString("fr", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </td>
+                <td className="text-right">
+                  {new Date(stat.createdAt).toLocaleTimeString("fr", {
+                    hour: "numeric",
+                    minute: "numeric",
+                  })}
+                </td>
+                <td className="text-right">{stat.score.adultScore}</td>
+                <td className="text-right">{stat.score.respScore}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </CardWrapper>
     </div>
   );
