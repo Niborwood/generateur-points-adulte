@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import { CardWrapper, CardStat } from "../ui";
-import { UserIcon } from "@heroicons/react/outline";
+import {
+  UserIcon,
+  CheckCircleIcon,
+  LightBulbIcon,
+  IdentificationIcon,
+  ArrowCircleLeftIcon,
+} from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 
 // REDUX
@@ -15,50 +21,26 @@ export default () => {
     adminStats
   );
 
-  // Get average of adminStats.data.age
-  const getAverageAge = () => {
-    if (adminStats) {
-      const total = adminStats.data.reduce((acc, curr) => {
-        return acc + curr.age;
-      }, 0);
-      return Math.round(total / adminStats.data.length);
-    }
-  };
-
   useEffect(() => {
-    console.log("here");
     dispatch(fetchAdminStats());
   }, []);
 
-  const getAverageResp = () => {
-    if (adminStats) {
-      const total = adminStats.data.reduce((acc, curr) => {
-        return acc + curr.score.respScore;
-      }, 0);
-      return Math.round((total / adminStats.data.length) * 100) / 100;
-    }
-  };
-
-  const getAverageAdult = () => {
-    if (adminStats) {
-      const total = adminStats.data.reduce((acc, curr) => {
-        return acc + curr.score.adultScore;
-      }, 0);
-      return Math.round((total / adminStats.data.length) * 100) / 100;
-    }
-  };
-
   return (
     <div className="space-y-8">
+      <div className="pl-2 mb-4">
+        <Link
+          className="text-slate-100 inline-flex flex-row gap-2 items-center"
+          to="/gpa-admin"
+        >
+          <ArrowCircleLeftIcon className="w-4" /> Retour
+        </Link>
+      </div>
       <CardWrapper>
         <div className="flex flex-col gap-4">
-          <div className="pl-2 mb-4">
-            <Link to="/gpa-admin">Retour</Link>
-          </div>
           <CardStat
             name="Total de réponses"
             number={adminStats?.totals.total_answers}
-            icon={<UserIcon />}
+            icon={<CheckCircleIcon />}
           />
           <CardStat
             name="Âge moyen"
@@ -68,12 +50,12 @@ export default () => {
           <CardStat
             name="Moyenne adulte"
             number={adminStats?.totals.adult_average}
-            icon={<UserIcon />}
+            icon={<IdentificationIcon />}
           />
           <CardStat
             name="Moyenne responsable"
             number={adminStats?.totals.resp_average}
-            icon={<UserIcon />}
+            icon={<LightBulbIcon />}
           />
           {/* <CardStat name="Temps moyen" number={12} icon={<UserIcon />} /> */}
         </div>
