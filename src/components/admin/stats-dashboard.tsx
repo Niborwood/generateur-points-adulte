@@ -22,7 +22,7 @@ export default () => {
   }, []);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 w-full">
       <div className="pl-2 mb-4">
         <Link
           className="text-slate-100 inline-flex flex-row gap-2 items-center"
@@ -80,7 +80,7 @@ export default () => {
                 <td className="text-right">
                   {new Date(stat.createdAt).toLocaleDateString("fr", {
                     year: "numeric",
-                    month: "long",
+                    month: "short",
                     day: "numeric",
                   })}
                 </td>

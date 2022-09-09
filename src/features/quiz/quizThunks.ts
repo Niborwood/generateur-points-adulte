@@ -147,12 +147,11 @@ export const fetchStats = createAsyncThunk("quiz/fetchStats", async () => {
 export const fetchAdminStats = createAsyncThunk(
   "quiz/fetchAdminStats",
   async () => {
-    const { data, error, count } = await supabase
+    const { data, error } = await supabase
       .from("stats")
-      .select("name, age, completedAt, createdAt, score, id", {
-        count: "exact",
-      })
-      .neq("name", "Random Test");
+      .select("name, age, completedAt, createdAt, score, id")
+      .neq("name", "Random Test")
+      .order("createdAt", { ascending: false });
 
     const {
       data: [totals],
