@@ -22,7 +22,7 @@ export default () => {
   }, []);
 
   return (
-    <div className="space-y-8 w-full">
+    <div className="space-y-8 w-full flex flex-col xl:flex-row gap-8">
       <div className="pl-2 mb-4">
         <Link
           className="text-slate-100 inline-flex flex-row gap-2 items-center"
@@ -31,8 +31,8 @@ export default () => {
           <ArrowCircleLeftIcon className="w-4" /> Retour
         </Link>
       </div>
-      <CardWrapper>
-        <div className="flex flex-col gap-4">
+      <CardWrapper large>
+        <div className="flex flex-col gap-4 w-full">
           <CardStat
             name="Total de réponses"
             number={adminStats?.totals.total_answers}
