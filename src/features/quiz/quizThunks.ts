@@ -147,17 +147,18 @@ export const fetchStats = createAsyncThunk("quiz/fetchStats", async () => {
 export const fetchAdminStats = createAsyncThunk(
   "quiz/fetchAdminStats",
   async () => {
-    const { data, error } = await supabase
-      .from("stats")
-      .select("name, age, completedAt, createdAt, score, id")
-      .neq("name", "Random Test")
-      .order("createdAt", { ascending: false });
+    const [{ data, error }, { data: totals, error: errorTotals }] =
+      await Promise.all([
+        supabase
+          .from("stats")
+          .select("name, age, completedAt, createdAt, score, id")
+          .neq("name", "Random Test")
+          .order("createdAt", { ascending: false }),
+        supabase.rpc("get_admin_stats").select("*").single(),
+      ]);
 
-    const {
-      data: [totals],
-      error: error2,
-    } = await supabase.rpc("get_admin_stats").select("*");
-    if (error) throw new Error(error.message);
+    if (error || errorTotals)
+      throw new Error(error?.message || errorTotals?.message);
     return { data, totals } as AdminStats;
   }
 );
