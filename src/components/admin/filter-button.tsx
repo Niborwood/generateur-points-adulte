@@ -13,7 +13,7 @@ export const FilterButton = ({
 
   return (
     <button
-      className={`flex flex-row justify-${justify} w-full gap-2 font-bold items-center`}
+      className={`flex flex-row justify-${justify} w-full gap-0 sm:gap-2 font-bold items-center`}
       onClick={onClick}
     >
       {label}{" "}

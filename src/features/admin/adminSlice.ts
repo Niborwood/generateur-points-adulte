@@ -54,9 +54,9 @@ export const adminSlice = createSlice({
       state.data = state.data.sort((a, b) => {
         if (action.payload === "name")
           if (state.sortBy[sortIndex].order === "asc") {
-            return a.name.localeCompare(b.name);
+            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
           } else {
-            return b.name.localeCompare(a.name);
+            return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
           }
 
         if (action.payload === "age")

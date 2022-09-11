@@ -111,8 +111,6 @@ export const quizSlice = createSlice({
       state.hasClickedLaunch = true;
     },
     goToNextQuestion: (state, action: PayloadAction<AnswerGiven>) => {
-      console.log(action.payload);
-
       // Tutoiement or vouvoiement
       if (
         state.currentQuestionIndex === 0 &&
