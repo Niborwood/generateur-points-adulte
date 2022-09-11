@@ -43,10 +43,13 @@ export const adminSlice = createSlice({
       if (!state.data) return;
 
       const sortIndex = state.sortBy.findIndex((s) => s.id === action.payload);
-      if (!sortIndex) return;
+      if (sortIndex === -1) return;
 
-      state.sortBy[sortIndex].order =
-        state.sortBy[sortIndex].order === "asc" ? "desc" : "asc";
+      state.sortBy = state.sortBy.map((s) =>
+        s.id === action.payload
+          ? { ...s, order: s.order === "asc" ? "desc" : "asc" }
+          : { ...s, order: "desc" }
+      );
 
       state.data = state.data.sort((a, b) => {
         if (action.payload === "name")
@@ -59,6 +62,16 @@ export const adminSlice = createSlice({
         if (action.payload === "age")
           if (state.sortBy[sortIndex].order === "asc") return a.age - b.age;
           else return b.age - a.age;
+
+        if (action.payload === "adult")
+          if (state.sortBy[sortIndex].order === "asc")
+            return a.score.adultScore - b.score.adultScore;
+          else return b.score.adultScore - a.score.adultScore;
+
+        if (action.payload === "resp")
+          if (state.sortBy[sortIndex].order === "asc")
+            return a.score.respScore - b.score.respScore;
+          else return b.score.respScore - a.score.respScore;
         else return 1;
       });
     },

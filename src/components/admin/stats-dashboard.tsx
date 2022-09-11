@@ -111,7 +111,7 @@ export default () => {
         <table className="w-full text-xs table-fixed sm:table-auto sm:text-sm">
           <thead className="border-b-2">
             <tr>
-              <th className="px-2 py-4 text-left">
+              <th className="px-2 py-4">
                 <FilterButton
                   id="name"
                   label="Prénom"

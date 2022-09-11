@@ -18,9 +18,9 @@ export const FilterButton = ({
     >
       {label}{" "}
       {order === "asc" ? (
-        <ArrowUpIcon className="w-4" />
+        <ArrowUpIcon className="min-w-[16px] w-4" />
       ) : (
-        <ArrowDownIcon className="w-4" />
+        <ArrowDownIcon className="min-w-[16px] w-4" />
       )}
     </button>
   );
