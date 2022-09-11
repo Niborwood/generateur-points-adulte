@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CardWrapper, CardStat, Loading } from "../ui";
 import {
   UserIcon,
@@ -45,16 +45,29 @@ export default () => {
       | "max_age";
     label: string;
     icon: JSX.Element;
+    withPb?: boolean;
   }[] = [
     {
       key: "total_answers",
       label: "Total de réponses",
       icon: <CheckCircleIcon />,
+      withPb: true,
     },
     {
       key: "age_average",
       label: "Âge moyen",
       icon: <UserIcon />,
+    },
+    {
+      key: "min_age",
+      label: "Âge minimum",
+      icon: <ArrowCircleDownIcon />,
+    },
+    {
+      key: "max_age",
+      label: "Âge maximum",
+      icon: <ArrowCircleUpIcon />,
+      withPb: true,
     },
     {
       key: "adult_average",
@@ -63,13 +76,14 @@ export default () => {
     },
     {
       key: "min_adult",
-      label: "Score âge minimum",
+      label: "Score adulte minimum",
       icon: <IdentificationIcon />,
     },
     {
       key: "max_adult",
-      label: "Score âge maximum",
+      label: "Score adulte maximum",
       icon: <IdentificationIcon />,
+      withPb: true,
     },
     {
       key: "resp_average",
@@ -85,16 +99,6 @@ export default () => {
       key: "max_resp",
       label: "Score resp maximum",
       icon: <LightBulbIcon />,
-    },
-    {
-      key: "min_age",
-      label: "Âge minimum",
-      icon: <ArrowCircleDownIcon />,
-    },
-    {
-      key: "max_age",
-      label: "Âge maximum",
-      icon: <ArrowCircleUpIcon />,
     },
   ];
 
@@ -116,6 +120,7 @@ export default () => {
               name={card.label}
               number={totals?.[card.key]}
               icon={card.icon}
+              withPb={!!card.withPb}
             />
           ))}
         </div>
