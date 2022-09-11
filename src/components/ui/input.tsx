@@ -13,6 +13,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       editable = false,
       editableArea = false,
       labelColor = "pink-700",
+      min,
+      max,
+      required = false,
     },
     ref
   ) => {
@@ -52,6 +55,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           name={name}
           id={name}
+          min={min}
+          max={max}
           className={
             editable
               ? "bg-transparent text-slate-100 w-full break-words fond-semibold outline-0"
@@ -64,6 +69,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           autoComplete="on"
           ref={ref}
           defaultValue={defaultValue}
+          required={required}
         />
         {error && (
           <div className="pl-2 mb-2 text-sm text-fuchsia-700">{error}</div>
@@ -83,6 +89,9 @@ interface InputProps {
   defaultValue?: HTMLInputElement["value"];
   editable?: boolean;
   editableArea?: boolean;
+  min?: number;
+  max?: number;
+  required?: boolean;
 }
 
 export default Input;

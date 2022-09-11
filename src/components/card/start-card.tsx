@@ -27,7 +27,8 @@ const StartCard = () => {
     if (!name || !name.toString().trim().length)
       return setError("Merci d'entrer un nom.");
     // Age check
-    if (!age) return setError("Merci d'entrer votre âge");
+    if (!age || age.valueOf() < 0 || age.valueOf() > 100)
+      return setError("Merci d'entrer votre âge");
 
     dispatch(
       beginQuiz({
@@ -47,8 +48,16 @@ const StartCard = () => {
             ref={nameInput}
             error={error}
             label="Quel est votre prénom ?"
+            required
           />
-          <Input type="number" name="age" label="Et votre âge ?" />
+          <Input
+            type="number"
+            name="age"
+            label="Et votre âge ?"
+            min={0}
+            max={100}
+            required
+          />
           <Button text="Commencer" type="submit" full />
         </Form>
       </div>
