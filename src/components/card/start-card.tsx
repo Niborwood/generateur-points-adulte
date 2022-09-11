@@ -46,7 +46,6 @@ const StartCard = () => {
           <Input
             name="name"
             ref={nameInput}
-            error={error}
             label="Quel est votre prénom ?"
             required
           />
@@ -58,6 +57,7 @@ const StartCard = () => {
             max={100}
             required
           />
+          <div className="mb-4 pl-2 text-purple-500 text-sm">{error}</div>
           <Button text="Commencer" type="submit" full />
         </Form>
       </div>
