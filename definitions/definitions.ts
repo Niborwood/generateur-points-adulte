@@ -61,7 +61,6 @@ export interface QuizState {
   startCardTimer: number;
   ages: AgeRange[];
   answersSubjects: AnswerSubjects;
-  adminStats?: AdminStats;
 }
 
 export interface Stats {
@@ -72,8 +71,10 @@ export interface Stats {
   answers: AnswersGiven;
 }
 
-export interface AdminStats {
-  data: {
+export interface AdminState {
+  isLoading: boolean;
+  error: string;
+  data?: {
     id: number;
     name: string;
     age: number;
@@ -84,7 +85,7 @@ export interface AdminStats {
       respScore: number;
     };
   }[];
-  totals: {
+  totals?: {
     adult_average: number;
     resp_average: number;
     age_average: number;

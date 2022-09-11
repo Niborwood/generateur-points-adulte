@@ -9,7 +9,6 @@ import {
   sendStats,
   reorderQuestions,
   fetchStats,
-  fetchAdminStats,
 } from "./quizThunks";
 
 // UTILS
@@ -146,13 +145,6 @@ export const quizSlice = createSlice({
     setStardCardTimer: (state, action: PayloadAction<number>) => {
       state.startCardTimer = action.payload;
     },
-    reorderStatsData: (state, action: PayloadAction<string>) => {
-      if (!state.adminStats) return;
-      state.adminStats = {
-        ...state.adminStats,
-        data: state.adminStats?.data.sort((a, b) => a.age - b.age),
-      };
-    },
   },
   extraReducers: (builder) => {
     // FETCH QUESTIONS
@@ -230,20 +222,6 @@ export const quizSlice = createSlice({
       state.isLoading = false;
       state.error = action.error.message || "Une erreur est survenue";
     });
-
-    // FETCH ADMIN STATS
-    builder.addCase(fetchAdminStats.pending, (state) => {
-      state.isLoading = true;
-      state.error = "";
-    });
-    builder.addCase(fetchAdminStats.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.adminStats = action.payload;
-    });
-    builder.addCase(fetchAdminStats.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.error.message || "Une erreur est survenue";
-    });
   },
 });
 
@@ -256,6 +234,5 @@ export const {
   clearQuiz,
   launchQuiz,
   setStardCardTimer,
-  reorderStatsData,
 } = quizSlice.actions;
 export default quizSlice.reducer;

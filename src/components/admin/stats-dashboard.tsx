@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CardWrapper, CardStat } from "../ui";
+import { CardWrapper, CardStat, Loading } from "../ui";
 import {
   UserIcon,
   CheckCircleIcon,
@@ -14,16 +14,18 @@ import { FilterButton } from "./filter-button";
 
 // REDUX
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
-import { reorderStatsData } from "../../features/quiz/quizSlice";
-import { fetchAdminStats } from "../../features/quiz/quizThunks";
+import { reorderStatsData } from "../../features/admin/adminSlice";
+import { fetchAdminStats } from "../../features/admin/adminThunks";
 
 export default () => {
   const dispatch = useAppDispatch();
-  const { adminStats } = useAppSelector((state) => state.quiz);
+  const { data, totals, isLoading } = useAppSelector((state) => state.admin);
 
   useEffect(() => {
     dispatch(fetchAdminStats());
   }, []);
+
+  if (isLoading) return <Loading />;
 
   const handleOrderData = (order: string) => {
     dispatch(reorderStatsData(order));
@@ -98,7 +100,7 @@ export default () => {
             <CardStat
               key={card.key}
               name={card.label}
-              number={adminStats?.totals[card.key]}
+              number={totals ? totals[card.key] : "N/A"}
               icon={card.icon}
             />
           ))}
@@ -164,7 +166,7 @@ export default () => {
             </tr>
           </thead>
           <tbody>
-            {adminStats?.data.map((stat, index) => (
+            {data?.map((stat, index) => (
               <tr
                 className={`${index % 2 ? "bg-purple-100" : ""}`}
                 key={stat.id}
