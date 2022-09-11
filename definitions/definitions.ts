@@ -74,6 +74,7 @@ export interface Stats {
 export interface AdminState {
   isLoading: boolean;
   error: string;
+  sortBy: FilterAdmin[];
   data?: {
     id: number;
     name: string;
@@ -98,6 +99,11 @@ export interface AdminState {
     min_resp: number;
   };
 }
+
+type FilterAdmin = {
+  id: "name" | "age" | "date" | "adult" | "resp";
+  order: "asc" | "desc";
+};
 
 export interface QuestionToUpsert {
   _id?: number;

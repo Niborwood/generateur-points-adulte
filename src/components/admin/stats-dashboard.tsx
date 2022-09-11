@@ -27,8 +27,8 @@ export default () => {
 
   if (isLoading) return <Loading />;
 
-  const handleOrderData = (order: string) => {
-    dispatch(reorderStatsData(order));
+  const handleOrderData = (id: "name" | "age" | "date" | "adult" | "resp") => {
+    dispatch(reorderStatsData(id));
   };
 
   const statCards = [
@@ -104,36 +104,6 @@ export default () => {
               icon={card.icon}
             />
           ))}
-          {/* <CardStat
-            name="Total de réponses"
-            number={adminStats?.totals.total_answers}
-            icon={<CheckCircleIcon />}
-          />
-          <CardStat
-            name="Âge moyen"
-            number={adminStats?.totals.age_average}
-            icon={<UserIcon />}
-          />
-          <CardStat
-            name="Moyenne adulte"
-            number={adminStats?.totals.adult_average}
-            icon={<IdentificationIcon />}
-          />
-          <CardStat
-            name="Moyenne responsable"
-            number={adminStats?.totals.resp_average}
-            icon={<LightBulbIcon />}
-          />
-          <CardStat
-            name="Âge minimum"
-            number={adminStats?.totals.min_age}
-            icon={<ArrowCircleDownIcon />}
-          />
-          <CardStat
-            name="Âge maximum"
-            number={adminStats?.totals.max_age}
-            icon={<ArrowCircleUpIcon />}
-          /> */}
         </div>
       </CardWrapper>
 
@@ -143,25 +113,40 @@ export default () => {
             <tr>
               <th className="px-2 py-4 text-left">
                 <FilterButton
+                  id="name"
                   label="Prénom"
                   onClick={() => handleOrderData("name")}
                   justify="start"
                 />
               </th>
               <th className="text-center sm:text-right">
-                <FilterButton label="Âge" onClick={() => {}} />
+                <FilterButton
+                  id="age"
+                  label="Âge"
+                  onClick={() => handleOrderData("age")}
+                />
               </th>
               <th className="text-right">
-                <FilterButton label="Date" onClick={() => {}} />
+                <FilterButton
+                  id="date"
+                  label="Date"
+                  onClick={() => handleOrderData("date")}
+                />
+              </th>
+              <th className="text-right">Heure</th>
+              <th className="text-right">
+                <FilterButton
+                  id="adult"
+                  label="Adul."
+                  onClick={() => handleOrderData("adult")}
+                />
               </th>
               <th className="text-right">
-                <FilterButton label="Heure" onClick={() => {}} />
-              </th>
-              <th className="text-right">
-                <FilterButton label="Adul." onClick={() => {}} />
-              </th>
-              <th className="text-right">
-                <FilterButton label="Resp." onClick={() => {}} />
+                <FilterButton
+                  id="resp"
+                  label="Resp."
+                  onClick={() => handleOrderData("resp")}
+                />
               </th>
             </tr>
           </thead>
