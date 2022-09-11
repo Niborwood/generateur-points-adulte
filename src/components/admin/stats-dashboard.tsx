@@ -31,7 +31,21 @@ export default () => {
     dispatch(reorderStatsData(id));
   };
 
-  const statCards = [
+  const statCards: {
+    key:
+      | "total_answers"
+      | "age_average"
+      | "adult_average"
+      | "resp_average"
+      | "min_adult"
+      | "max_adult"
+      | "min_resp"
+      | "max_resp"
+      | "min_age"
+      | "max_age";
+    label: string;
+    icon: JSX.Element;
+  }[] = [
     {
       key: "total_answers",
       label: "Total de réponses",
@@ -100,7 +114,7 @@ export default () => {
             <CardStat
               key={card.key}
               name={card.label}
-              number={totals ? totals[card.key] : "N/A"}
+              number={totals?.[card.key]}
               icon={card.icon}
             />
           ))}
