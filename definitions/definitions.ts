@@ -91,6 +91,10 @@ export interface AdminStats {
     total_answers: number;
     min_age: number;
     max_age: number;
+    max_adult: number;
+    min_adult: number;
+    max_resp: number;
+    min_resp: number;
   };
 }
 

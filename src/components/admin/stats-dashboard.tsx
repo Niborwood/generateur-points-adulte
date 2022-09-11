@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CardWrapper, CardStat } from "../ui";
 import {
   UserIcon,
@@ -10,9 +10,11 @@ import {
   ArrowCircleUpIcon,
 } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
+import { FilterButton } from "./filter-button";
 
 // REDUX
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
+import { reorderStatsData } from "../../features/quiz/quizSlice";
 import { fetchAdminStats } from "../../features/quiz/quizThunks";
 
 export default () => {
@@ -23,19 +25,84 @@ export default () => {
     dispatch(fetchAdminStats());
   }, []);
 
+  const handleOrderData = (order: string) => {
+    dispatch(reorderStatsData(order));
+  };
+
+  const statCards = [
+    {
+      key: "total_answers",
+      label: "Total de réponses",
+      icon: <CheckCircleIcon />,
+    },
+    {
+      key: "age_average",
+      label: "Âge moyen",
+      icon: <UserIcon />,
+    },
+    {
+      key: "adult_average",
+      label: "Moyenne adulte",
+      icon: <IdentificationIcon />,
+    },
+    {
+      key: "min_adult",
+      label: "Score âge minimum",
+      icon: <IdentificationIcon />,
+    },
+    {
+      key: "max_adult",
+      label: "Score âge maximum",
+      icon: <IdentificationIcon />,
+    },
+    {
+      key: "resp_average",
+      label: "Moyenne responsable",
+      icon: <LightBulbIcon />,
+    },
+    {
+      key: "min_resp",
+      label: "Score resp minimum",
+      icon: <LightBulbIcon />,
+    },
+    {
+      key: "max_resp",
+      label: "Score resp maximum",
+      icon: <LightBulbIcon />,
+    },
+    {
+      key: "min_age",
+      label: "Âge minimum",
+      icon: <ArrowCircleDownIcon />,
+    },
+    {
+      key: "max_age",
+      label: "Âge maximum",
+      icon: <ArrowCircleUpIcon />,
+    },
+  ];
+
   return (
-    <div className="space-y-8 w-full flex flex-col xl:flex-row gap-8">
+    <div className="flex flex-col w-full gap-8 space-y-8 xl:flex-row">
       <div className="pl-2 mb-4">
         <Link
-          className="text-slate-100 inline-flex flex-row gap-2 items-center"
+          className="inline-flex flex-row items-center gap-2 text-slate-100"
           to="/gpa-admin"
         >
           <ArrowCircleLeftIcon className="w-4" /> Retour
         </Link>
       </div>
       <CardWrapper large>
-        <div className="flex flex-col gap-4 w-full">
-          <CardStat
+        <div className="flex flex-col w-full gap-4">
+          {statCards.map((card) => (
+            <CardStat
+              key={card.key}
+              name={card.label}
+              number={adminStats?.totals[card.key]}
+              icon={card.icon}
+            />
+          ))}
+          {/* <CardStat
             name="Total de réponses"
             number={adminStats?.totals.total_answers}
             icon={<CheckCircleIcon />}
@@ -64,21 +131,36 @@ export default () => {
             name="Âge maximum"
             number={adminStats?.totals.max_age}
             icon={<ArrowCircleUpIcon />}
-          />
-          {/* <CardStat name="Temps moyen" number={12} icon={<UserIcon />} /> */}
+          /> */}
         </div>
       </CardWrapper>
 
       <CardWrapper large>
-        <table className="table-fixed sm:table-auto w-full text-xs sm:text-sm">
+        <table className="w-full text-xs table-fixed sm:table-auto sm:text-sm">
           <thead className="border-b-2">
             <tr>
-              <th className="text-left py-4 px-2">Prénom</th>
-              <th className="text-center sm:text-right">Âge</th>
-              <th className="text-right">Date</th>
-              <th className="text-right">Heure</th>
-              <th className="text-right">Adul.</th>
-              <th className="text-right">Resp.</th>
+              <th className="px-2 py-4 text-left">
+                <FilterButton
+                  label="Prénom"
+                  onClick={() => handleOrderData("name")}
+                  justify="start"
+                />
+              </th>
+              <th className="text-center sm:text-right">
+                <FilterButton label="Âge" onClick={() => {}} />
+              </th>
+              <th className="text-right">
+                <FilterButton label="Date" onClick={() => {}} />
+              </th>
+              <th className="text-right">
+                <FilterButton label="Heure" onClick={() => {}} />
+              </th>
+              <th className="text-right">
+                <FilterButton label="Adul." onClick={() => {}} />
+              </th>
+              <th className="text-right">
+                <FilterButton label="Resp." onClick={() => {}} />
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -87,7 +169,7 @@ export default () => {
                 className={`${index % 2 ? "bg-purple-100" : ""}`}
                 key={stat.id}
               >
-                <td className="py-2 px-1">{stat.name}</td>
+                <td className="px-1 py-2">{stat.name}</td>
                 <td className="text-center sm:text-right">{stat.age}</td>
                 <td className="text-right">
                   {new Date(stat.createdAt).toLocaleDateString("fr", {

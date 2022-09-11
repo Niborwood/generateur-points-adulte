@@ -146,6 +146,13 @@ export const quizSlice = createSlice({
     setStardCardTimer: (state, action: PayloadAction<number>) => {
       state.startCardTimer = action.payload;
     },
+    reorderStatsData: (state, action: PayloadAction<string>) => {
+      if (!state.adminStats) return;
+      state.adminStats = {
+        ...state.adminStats,
+        data: state.adminStats?.data.sort((a, b) => a.age - b.age),
+      };
+    },
   },
   extraReducers: (builder) => {
     // FETCH QUESTIONS
@@ -249,5 +256,6 @@ export const {
   clearQuiz,
   launchQuiz,
   setStardCardTimer,
+  reorderStatsData,
 } = quizSlice.actions;
 export default quizSlice.reducer;
