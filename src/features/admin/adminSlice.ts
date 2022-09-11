@@ -63,6 +63,16 @@ export const adminSlice = createSlice({
           if (state.sortBy[sortIndex].order === "asc") return a.age - b.age;
           else return b.age - a.age;
 
+        if (action.payload === "date")
+          if (state.sortBy[sortIndex].order === "asc")
+            return (
+              new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf()
+            );
+          else
+            return (
+              new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+            );
+
         if (action.payload === "adult")
           if (state.sortBy[sortIndex].order === "asc")
             return a.score.adultScore - b.score.adultScore;
