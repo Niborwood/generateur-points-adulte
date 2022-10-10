@@ -12,6 +12,7 @@ import Admin from "./components/admin";
 import { CardWrapper } from "./components/ui";
 import QuestionsDashboard from "./components/admin/questions-dashboard";
 import StatsDashboard from "./components/admin/stats-dashboard";
+import AdminWrapper from "./components/admin/admin-wrapper";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,16 +23,32 @@ ReactDOM.render(
             <Route index element={<Quiz />} />
 
             {/* Admin */}
-            <Route path="/gpa-admin" element={<Admin />} />
+            <Route
+              path="/gpa-admin"
+              element={
+                <AdminWrapper>
+                  <Admin />
+                </AdminWrapper>
+              }
+            />
             <Route
               path="/gpa-admin/questions"
               element={
-                <CardWrapper large>
-                  <QuestionsDashboard />
-                </CardWrapper>
+                <AdminWrapper>
+                  <CardWrapper large>
+                    <QuestionsDashboard />
+                  </CardWrapper>
+                </AdminWrapper>
               }
             />
-            <Route path="/gpa-admin/stats" element={<StatsDashboard />} />
+            <Route
+              path="/gpa-admin/stats"
+              element={
+                <AdminWrapper>
+                  <StatsDashboard />
+                </AdminWrapper>
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>

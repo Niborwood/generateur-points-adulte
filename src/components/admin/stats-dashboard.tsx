@@ -125,12 +125,11 @@ export default () => {
           ))}
         </div>
       </CardWrapper>
-
       <CardWrapper large>
         <table className="w-full text-xs table-fixed sm:table-auto sm:text-sm">
           <thead className="border-b-2">
             <tr>
-              <th className="px-0 sm:px-2  py-4">
+              <th className="px-0 py-4 sm:px-2">
                 <FilterButton
                   id="name"
                   label="Prénom"
